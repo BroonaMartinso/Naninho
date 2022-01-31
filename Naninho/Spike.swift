@@ -19,9 +19,11 @@ class Spike {
         self.spikeParent = Parent
         self.radius = Raio
     }
-    func update(deltaTime: TimeInterval) {
-        rotation += deltaTime/10*360
-    }
+    
+//    func update(deltaTime: TimeInterval) {
+//        rotation += deltaTime/10*360
+//    }
+    
     func radial (quantidade : Int){
         let passo = 360/quantidade
         
