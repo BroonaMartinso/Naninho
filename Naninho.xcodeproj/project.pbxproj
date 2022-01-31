@@ -15,6 +15,7 @@
 		56662D2827A8528F00E4D27A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2627A8528F00E4D27A /* Main.storyboard */; };
 		56662D2A27A8529000E4D27A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2927A8529000E4D27A /* Assets.xcassets */; };
 		56662D2D27A8529000E4D27A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */; };
+		56662D3427A85AA300E4D27A /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56662D3327A85AA300E4D27A /* Spike.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		56662D2727A8528F00E4D27A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56662D2927A8529000E4D27A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56662D2C27A8529000E4D27A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		56662D3327A85AA300E4D27A /* Spike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spike.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				56662D1E27A8528F00E4D27A /* GameScene.sks */,
 				56662D2027A8528F00E4D27A /* Actions.sks */,
 				56662D2227A8528F00E4D27A /* GameScene.swift */,
+				56662D3327A85AA300E4D27A /* Spike.swift */,
 				56662D2427A8528F00E4D27A /* GameViewController.swift */,
 				56662D2627A8528F00E4D27A /* Main.storyboard */,
 				56662D2927A8529000E4D27A /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 			files = (
 				56662D2327A8528F00E4D27A /* GameScene.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
+				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
 				56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
