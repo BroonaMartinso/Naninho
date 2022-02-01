@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562DC4F027A9B1B6004268B2 /* Bola.swift */; };
 		56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56662D1C27A8528F00E4D27A /* AppDelegate.swift */; };
 		56662D1F27A8528F00E4D27A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56662D1E27A8528F00E4D27A /* GameScene.sks */; };
 		56662D2127A8528F00E4D27A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2027A8528F00E4D27A /* Actions.sks */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		562DC4F027A9B1B6004268B2 /* Bola.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bola.swift; sourceTree = "<group>"; };
 		56662D1927A8528F00E4D27A /* Naninho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Naninho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56662D1C27A8528F00E4D27A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56662D1E27A8528F00E4D27A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -42,6 +44,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		562DC4F227A9B1BC004268B2 /* Gaming */ = {
+			isa = PBXGroup;
+			children = (
+				56662D2227A8528F00E4D27A /* GameScene.swift */,
+				56662D3327A85AA300E4D27A /* Spike.swift */,
+				562DC4F027A9B1B6004268B2 /* Bola.swift */,
+			);
+			path = Gaming;
+			sourceTree = "<group>";
+		};
 		56662D1027A8528E00E4D27A = {
 			isa = PBXGroup;
 			children = (
@@ -64,8 +76,7 @@
 				56662D1C27A8528F00E4D27A /* AppDelegate.swift */,
 				56662D1E27A8528F00E4D27A /* GameScene.sks */,
 				56662D2027A8528F00E4D27A /* Actions.sks */,
-				56662D2227A8528F00E4D27A /* GameScene.swift */,
-				56662D3327A85AA300E4D27A /* Spike.swift */,
+				562DC4F227A9B1BC004268B2 /* Gaming */,
 				56662D2427A8528F00E4D27A /* GameViewController.swift */,
 				56662D2627A8528F00E4D27A /* Main.storyboard */,
 				56662D2927A8529000E4D27A /* Assets.xcassets */,
@@ -150,6 +161,7 @@
 				56662D2327A8528F00E4D27A /* GameScene.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
+				562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */,
 				56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,7 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8KLVK79M3G;
+				DEVELOPMENT_TEAM = 5Y5SP22QVK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -312,7 +324,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Bruna.Naninho;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.broomartinso.Naninho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -327,7 +339,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8KLVK79M3G;
+				DEVELOPMENT_TEAM = 5Y5SP22QVK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -340,7 +352,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Bruna.Naninho;
+				PRODUCT_BUNDLE_IDENTIFIER = broomartinso.Naninho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
