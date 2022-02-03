@@ -18,6 +18,8 @@
 		56662D2D27A8529000E4D27A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */; };
 		56662D3427A85AA300E4D27A /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56662D3327A85AA300E4D27A /* Spike.swift */; };
 		FA428E0227AC2CFF00E29593 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Menu.swift */; };
+		FA428E0727AC4F2500E29593 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0627AC4F2500E29593 /* Button.swift */; };
+		FA428E0927AC5B2800E29593 /* WinMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0827AC5B2800E29593 /* WinMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		56662D2C27A8529000E4D27A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56662D3327A85AA300E4D27A /* Spike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spike.swift; sourceTree = "<group>"; };
 		FA428E0127AC2CFF00E29593 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		FA428E0627AC4F2500E29593 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		FA428E0827AC5B2800E29593 /* WinMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 				56662D3327A85AA300E4D27A /* Spike.swift */,
 				562DC4F027A9B1B6004268B2 /* Bola.swift */,
 				FA428E0127AC2CFF00E29593 /* Menu.swift */,
+				FA428E0627AC4F2500E29593 /* Button.swift */,
+				FA428E0827AC5B2800E29593 /* WinMenu.swift */,
 			);
 			path = Gaming;
 			sourceTree = "<group>";
@@ -161,8 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA428E0727AC4F2500E29593 /* Button.swift in Sources */,
 				FA428E0227AC2CFF00E29593 /* Menu.swift in Sources */,
 				56662D2327A8528F00E4D27A /* GameScene.swift in Sources */,
+				FA428E0927AC5B2800E29593 /* WinMenu.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
 				562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */,

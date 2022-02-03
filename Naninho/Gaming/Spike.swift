@@ -9,14 +9,14 @@ import SpriteKit
 class Spike {
     
     var spikeModel: SKNode
-    var spikeParent: SKNode
+    var spikeParent: ScreenStateHandler
     var radius: CGFloat {bola.frame.width/2}
     var spikeArray: [SKNode] = []
     var rotation: CGFloat = 0
     var bola: SKNode
     var delegate: SpikeDelegate?
     
-    init (Model: SKNode, Parent: SKNode, Ball: SKNode) {
+    init (Model: SKNode, Parent: ScreenStateHandler, Ball: SKNode) {
         self.spikeModel = Model
         self.spikeParent = Parent
         self.bola = Ball
@@ -116,9 +116,10 @@ class Spike {
                 spikeArray.remove(at: spikeArray.firstIndex(of: spike)!)
                 
                 if spikeArray.isEmpty {
-                    if let delegate = delegate {
-                        delegate.renderVictory()
-                    }
+                    spikeParent.perform(transition: .gameToWin)
+//                    if let delegate = delegate {
+//                        delegate.renderVictory()
+//                    }
                 }
                 
                 return

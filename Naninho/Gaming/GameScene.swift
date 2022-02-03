@@ -8,8 +8,9 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SpikeDelegate {
+class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
     private var menu: Menu!
+    private var winMenu: WinMenu!
     private var bola: Bola!
     private var spike: Spike!
     private var lastUpdate: TimeInterval = 0
@@ -24,6 +25,7 @@ class GameScene: SKScene, SpikeDelegate {
     
         getScreenSize()
         menu = Menu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
+        winMenu = WinMenu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
         setupBall()
         setupSpike()
     }
@@ -54,25 +56,22 @@ class GameScene: SKScene, SpikeDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch status {
         case .intro:
-            status = .transition
-            bola.bola.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2*Double.pi, duration: 1)))
-            menu.transition {
-                self.startGame()
-            }
+            break
         case .transition:
             break
         case .play:
             for t in touches { bola.jogo(click: t.location(in: self)) }
             for t in touches { spike.jogo(click: t.location(in: self)) }
         case .final:
-            backgroundColor = UIColor(named: "bege")!
-            childNode(withName: "vitoria")!.alpha = 0
-            startGame()
+            break
+//            backgroundColor = UIColor(named: "bege")!
+//            childNode(withName: "vitoria")!.alpha = 0
+//            startGame()
         }
     }
     
     private func startGame() {
-        spike.radial(quantidade: 5)
+        spike.radial(quantidade: 10)
         bola.pula()
         bola.bola.removeAllActions()
         status = .play
@@ -96,6 +95,29 @@ class GameScene: SKScene, SpikeDelegate {
         childNode(withName: "vitoria")!.alpha = 1
         status = .final
     }
+    
+    func perform(transition: Transition) {
+        switch transition {
+        case .introToGame:
+            status = .transition
+            bola.bola.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2*Double.pi, duration: 1)))
+            menu.slide() {
+                self.startGame()
+            }
+        case .endScreenToIntro:
+            break
+        case .toNextLevel, .repeatLevel:
+            backgroundColor = UIColor(named: "bege")!
+            childNode(withName: "vitoria")!.alpha = 0
+            winMenu.disappear()
+            self.startGame()
+        case .gameToWin:
+            backgroundColor = UIColor(named: "verde")!
+            childNode(withName: "vitoria")!.alpha = 1
+            status = .final
+            winMenu.appear()
+        }
+    }
 }
 
 enum Status{
@@ -104,3 +126,5 @@ enum Status{
     case play
     case final
 }
+
+typealias ScreenStateHandler = SKScene & TouchableSpriteNodeDelegate
