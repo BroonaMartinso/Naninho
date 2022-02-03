@@ -34,29 +34,41 @@ class Spike {
     }
     
     func radial(quantidade: Int){
-        let passo = 360 / quantidade
-        let passoRadianos = Double(passo) * Double.pi / 180
+        let passo: Double = 360 / Double(quantidade)
+        let passoRadianos = passo * Double.pi / 180
         print(passo)
         
         let ladoSpike = radius * sqrt(2 * (1 - cos(passoRadianos)))
         
         let path = UIBezierPath()
-        path.addArc(withCenter: CGPoint(x: 0, y:-radius), radius: radius, startAngle: 0, endAngle: passoRadianos, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: 0, y:-radius),
+                    radius: radius,
+                    startAngle: 0,
+                    endAngle: passoRadianos,
+                    clockwise: true)
+        
         path.addLine(to:
                         CGPoint(
                             x: radius+ladoSpike*cos(Double.pi/6+passoRadianos/2),
                             y: -radius+ladoSpike*sin(Double.pi/6+passoRadianos/2)
-                        )
-        )
+                        ))
+        
         path.addLine(to: CGPoint(x: radius, y: -radius))
+        path.close()
         
         for i in 1...quantidade {
             
             //Copia
 //            let new = spikeModel.copy() as! SKNode
             let new = SKShapeNode(path: path.cgPath)
+            new.fillColor = UIColor(named: "black")!
+            new.strokeColor = UIColor(named: "black")!
+            new.physicsBody?.linearDamping = 0
+            new.physicsBody?.angularDamping = 0
+            new.physicsBody?.friction = 0
+            new.physicsBody?.restitution = 0
             
-            let angulo = CGFloat (passo*i)
+            let angulo = CGFloat(passo*Double(i))
             print(angulo)
             
             //Posiciona
@@ -66,8 +78,8 @@ class Spike {
             //Rotação
             new.zRotation = -angulo * Double.pi / 180
             
-            spikeArray.append(new)
             //Adiciona
+            spikeArray.append(new)
             spikeParent.addChild(new)
             
         }

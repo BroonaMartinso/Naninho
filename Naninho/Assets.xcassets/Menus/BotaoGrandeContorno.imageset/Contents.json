@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 8.png",
+      "filename" : "BotaoGrandeContorno.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 8-1.png",
+      "filename" : "BotaoGrandeContorno-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 8-2.png",
+      "filename" : "BotaoGrandeContorno-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

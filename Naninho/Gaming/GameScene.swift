@@ -9,6 +9,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SpikeDelegate {
+    private var menu: Menu!
     private var bola: Bola!
     private var spike: Spike!
     private var lastUpdate: TimeInterval = 0
@@ -19,8 +20,10 @@ class GameScene: SKScene, SpikeDelegate {
     
     override func didMove(to view: SKView) {
         scaleMode = .resizeFill
-        
+        backgroundColor = UIColor(named: "bege")!
+    
         getScreenSize()
+        menu = Menu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
         setupBall()
         setupSpike()
     }
@@ -51,19 +54,28 @@ class GameScene: SKScene, SpikeDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch status {
         case .intro:
-            spike.radial(quantidade: 8)
-            bola.pula()
-            status = .play
-        
+            status = .transition
+            bola.bola.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2*Double.pi, duration: 1)))
+            menu.transition {
+                self.startGame()
+            }
+        case .transition:
+            break
         case .play:
             for t in touches { bola.jogo(click: t.location(in: self)) }
             for t in touches { spike.jogo(click: t.location(in: self)) }
-
         case .final:
-            backgroundColor = .black
-            status = .intro
+            backgroundColor = UIColor(named: "bege")!
             childNode(withName: "vitoria")!.alpha = 0
+            startGame()
         }
+    }
+    
+    private func startGame() {
+        spike.radial(quantidade: 5)
+        bola.pula()
+        bola.bola.removeAllActions()
+        status = .play
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -75,12 +87,12 @@ class GameScene: SKScene, SpikeDelegate {
         let deltaTime = currentTime - lastUpdate
         lastUpdate = currentTime
         
-        spike.update(deltaTime: deltaTime)
         bola.update(deltaTime: deltaTime)
+        spike.update(deltaTime: deltaTime)
     }
     
     func renderVictory() {
-        backgroundColor = .green
+        backgroundColor = UIColor(named: "verde")!
         childNode(withName: "vitoria")!.alpha = 1
         status = .final
     }
@@ -88,6 +100,7 @@ class GameScene: SKScene, SpikeDelegate {
 
 enum Status{
     case intro
+    case transition
     case play
     case final
 }
