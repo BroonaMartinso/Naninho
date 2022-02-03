@@ -24,12 +24,11 @@ class Bola {
         bola.physicsBody?.velocity.dy = velocidadey
     }
     
-    func bate (){
-        if bola.frame.minX <= bolaParent.frame.minX
+    private func bate (){
+        if bola.frame.minX <= bolaParent.frame.minX 
         {bola.physicsBody?.velocity.dx = abs((bola.physicsBody?.velocity.dx)!)
             return
         }
-        
         
         else if bola.frame.maxX >= bolaParent.frame.maxX
         {bola.physicsBody?.velocity.dx = -abs((bola.physicsBody?.velocity.dx)!)
@@ -46,6 +45,7 @@ class Bola {
             return
         }
     }
+    
     func update(deltaTime: TimeInterval) {
         bate()
     }
