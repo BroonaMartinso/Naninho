@@ -64,15 +64,12 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
             for t in touches { spike.jogo(click: t.location(in: self)) }
         case .final:
             break
-//            backgroundColor = UIColor(named: "bege")!
-//            childNode(withName: "vitoria")!.alpha = 0
-//            startGame()
         }
     }
     
     private func startGame() {
-        spike.radial(quantidade: 10)
-        bola.pula()
+        spike.radial(quantidade: LevelHandler.shared.numberOfSpikes)
+        bola.pula(velocidade: LevelHandler.shared.levelSpeed)
         bola.bola.removeAllActions()
         status = .play
     }
@@ -106,16 +103,19 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
             }
         case .endScreenToIntro:
             break
-        case .toNextLevel, .repeatLevel:
-            backgroundColor = UIColor(named: "bege")!
-            childNode(withName: "vitoria")!.alpha = 0
-            winMenu.disappear()
-            self.startGame()
         case .gameToWin:
             backgroundColor = UIColor(named: "verde")!
             childNode(withName: "vitoria")!.alpha = 1
             status = .final
             winMenu.appear()
+        case .toNextLevel:
+            LevelHandler.nextLevel()
+            fallthrough
+        case .repeatLevel:
+            backgroundColor = UIColor(named: "bege")!
+            childNode(withName: "vitoria")!.alpha = 0
+            winMenu.disappear()
+            startGame()
         }
     }
 }

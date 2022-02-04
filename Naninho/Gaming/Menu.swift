@@ -21,8 +21,7 @@ class Menu {
         self.parent = parent
                 
         menu = SKSpriteNode()
-        menu.size = CGSize(width: screenWidth, height: 0.4 * screenHeight)
-        menu.position.y = -screenHeight*0.3
+        menu.size = CGSize(width: screenWidth, height: screenHeight)
 
 //        menu.color = .red
         parent.addChild(menu)
@@ -32,15 +31,10 @@ class Menu {
     
     func setupButtons() {
         
-//        let playButton = SKShapeNode(rect: CGRect(x: 0, y: 0, width: screenWidth * 0.4, height: screenWidth * 0.4), cornerRadius: 20)
-//        playButton.strokeColor = UIColor(named: "black")!
-        
-//        let play = SKSpriteNode()
         let play = TouchableSpriteNode(imageNamed: "play")
-//        play.texture = SKTexture(imageNamed: "play")
         play.size = CGSize(width: screenWidth * 0.4, height: screenWidth * 0.4)
         play.position.x = screenWidth * 0.225
-        play.position.y = screenWidth * 0.15
+        play.position.y = -screenHeight * 0.25
         play.name = "play"
         play.delegate = parent
         play.transition = .introToGame
@@ -48,13 +42,30 @@ class Menu {
         menu.addChild(play)
    
         let select = TouchableSpriteNode(imageNamed: "select")
-//        select.texture = SKTexture(imageNamed: "select")
         select.size = CGSize(width: screenWidth * 0.4, height: screenWidth * 0.4)
         select.position.x = -screenWidth * 0.225
-        select.position.y = screenWidth * 0.15
+        select.position.y = -screenHeight * 0.25
         menu.addChild(select)
         
-//        playButton.size = CGSize(width: screenWidth * 0.4, height: screenHeight * 0.4)
+        let pause = TouchableSpriteNode()
+        let pauseImage = UIImage(systemName: "pause.circle.fill")!
+        pause.size = CGSize(width: 40, height: 40)
+        pause.position.x = screenWidth * 1.4
+        pause.position.y = screenHeight * 0.4
+        pause.texture = SKTexture(image: pauseImage)
+        menu.addChild(pause)
+        
+        let contourTimeBar = SKShapeNode(rectOf: CGSize(width: screenWidth, height: screenHeight * 0.01))
+        contourTimeBar.strokeColor = UIColor(named: "black")!
+        contourTimeBar.fillColor = .clear
+        contourTimeBar.position = CGPoint(x: screenWidth, y: screenHeight * 0.495)
+        menu.addChild(contourTimeBar)
+        
+        let timeBar = SKShapeNode(rectOf: CGSize(width: screenWidth, height: screenHeight * 0.01))
+        timeBar.strokeColor = .clear
+        timeBar.fillColor = UIColor(named: "black")!
+        timeBar.position = CGPoint(x: screenWidth, y: screenHeight * 0.495)
+        menu.addChild(timeBar)
         
         menu.zPosition = 1
     }

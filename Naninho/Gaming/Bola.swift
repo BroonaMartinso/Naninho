@@ -16,12 +16,12 @@ class Bola {
         bolaParent = Parent
     }
     
-    func pula(){
-        let velocidadex = Double.random (in: -200 ... 200)
-        let velocidadey = Double.random (in: -200 ... 200)
+    func pula(velocidade: Double){
+        let velocidadex = Double.random (in: -1 ... 1)
+        let velocidadey = sqrt(1-pow(velocidadex, 2))
         
-        bola.physicsBody?.velocity.dx = velocidadex
-        bola.physicsBody?.velocity.dy = velocidadey
+        bola.physicsBody?.velocity.dx = velocidade * velocidadex
+        bola.physicsBody?.velocity.dy = velocidade * velocidadey
     }
     
     private func bate (){

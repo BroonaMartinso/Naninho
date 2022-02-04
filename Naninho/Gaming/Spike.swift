@@ -23,7 +23,7 @@ class Spike {
     }
     
     func update(deltaTime: TimeInterval) {
-        rotation = CGFloat(deltaTime)/5*2*Double.pi
+        rotation = CGFloat(deltaTime)/LevelHandler.shared.timeNeededForAFullCircle*2*Double.pi
         
         for spike in spikeArray {
             spike.zRotation -= rotation
@@ -117,9 +117,6 @@ class Spike {
                 
                 if spikeArray.isEmpty {
                     spikeParent.perform(transition: .gameToWin)
-//                    if let delegate = delegate {
-//                        delegate.renderVictory()
-//                    }
                 }
                 
                 return
