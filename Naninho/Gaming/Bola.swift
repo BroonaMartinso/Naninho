@@ -7,9 +7,11 @@
 
 import Foundation
 import SpriteKit
+
 class Bola {
     var bola: SKNode
     var bolaParent: SKNode
+    var delegate: BallDelegate?
     
     init( Ball: SKNode, Parent: SKNode){
         bola = Ball
@@ -51,10 +53,14 @@ class Bola {
     }
     
     func jogo(click:CGPoint) {
-            if bola.contains(click){
-                print("perdeu")
-                return
-            }
+        if bola.contains(click){
+            delegate?.handleWrongTap()
+            return
+        }
     }
     
+}
+
+protocol BallDelegate {
+    func handleWrongTap()
 }

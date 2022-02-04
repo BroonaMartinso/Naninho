@@ -14,6 +14,7 @@ class Menu {
     private var screenHeight: CGFloat
     private var parent: ScreenStateHandler
     private var menu: SKSpriteNode
+    private var timeBar: SKSpriteNode = SKSpriteNode()
     
     init(screenWidth: CGFloat, screenHeight: CGFloat, parent: ScreenStateHandler) {
         self.screenWidth = screenWidth
@@ -61,9 +62,10 @@ class Menu {
         contourTimeBar.position = CGPoint(x: screenWidth, y: screenHeight * 0.495)
         menu.addChild(contourTimeBar)
         
-        let timeBar = SKShapeNode(rectOf: CGSize(width: screenWidth, height: screenHeight * 0.01))
-        timeBar.strokeColor = .clear
-        timeBar.fillColor = UIColor(named: "black")!
+        timeBar.size = CGSize(width: screenWidth, height: screenHeight * 0.01)
+        timeBar.color = UIColor(named: "black")!
+//        timeBar.strokeColor = .clear
+//        timeBar.fillColor = UIColor(named: "black")!
         timeBar.position = CGPoint(x: screenWidth, y: screenHeight * 0.495)
         menu.addChild(timeBar)
         
@@ -76,6 +78,13 @@ class Menu {
             completion()
         }
     }
+    
+    func update(remainingTime: TimeInterval) {
+        let width = screenWidth * remainingTime / LevelHandler.shared.timeToCompleteCurrLevel
+        timeBar.size = CGSize(width: width, height: screenHeight * 0.01)
+        timeBar.position = CGPoint(x: (screenWidth + width)/2, y: screenHeight * 0.495)
+    }
+    
 }
 
 
@@ -85,52 +94,5 @@ enum Transition {
     case toNextLevel
     case gameToWin
     case repeatLevel
-}
-
-//class Button {
-//    var representation: SKSpriteNode
-//    var transition: Transition
-//
-//    init(representation: SKSpriteNode, transition: Transition) {
-//        self.representation = representation
-//        self.transition = transition
-//    }
-//
-//    func checkTap(atPos pos: CGPoint) -> Transition? {
-//        return representation.contains(pos) ? transition : nil
-//    }
-//}
-
-//protocol MenuProtocol {
-//    var buttons: [Button] { get }
-//    func handleTap(atPos pos: CGPoint) -> Transition?
-//}
-//
-//extension MenuProtocol {
-//    func handleTap(atPos pos: CGPoint) -> Transition? {
-//        for button in buttons {
-//            if let transition = button.checkTap(atPos: pos) {
-//                return transition
-//            }
-//        }
-//
-//        return nil
-//    }
-//}
-
-class TouchableSpriteNode : SKSpriteNode
-{
-    
-    var transition: Transition?
-    var delegate: ScreenStateHandler?
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let delegate = delegate, let transition = transition {
-            delegate.perform(transition: transition)
-        }
-    }
-}
-
-protocol TouchableSpriteNodeDelegate {
-    func perform(transition: Transition)
+    case gameToLose
 }

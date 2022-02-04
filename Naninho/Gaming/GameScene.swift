@@ -8,14 +8,16 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
+class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelegate {
     private var menu: Menu!
     private var winMenu: WinMenu!
+    private var loseMenu: LoseMenu!
     private var bola: Bola!
     private var spike: Spike!
     private var lastUpdate: TimeInterval = 0
     private var screenWidth: CGFloat!
     private var screenHeight: CGFloat!
+    private var levelTime: TimeInterval = 0
     var status: Status = .intro
     
     
@@ -26,6 +28,7 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
         getScreenSize()
         menu = Menu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
         winMenu = WinMenu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
+        loseMenu = LoseMenu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
         setupBall()
         setupSpike()
     }
@@ -41,6 +44,7 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
         let ballNode = childNode(withName: "bola") as! SKSpriteNode
         ballNode.size = CGSize(width: screenWidth * 0.3, height: screenWidth * 0.3)
         bola = Bola (Ball: ballNode, Parent: self)
+        bola.delegate = self
     }
     
     func setupSpike() {
@@ -72,6 +76,7 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
         bola.pula(velocidade: LevelHandler.shared.levelSpeed)
         bola.bola.removeAllActions()
         status = .play
+        levelTime = 60
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -85,6 +90,14 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
         
         bola.update(deltaTime: deltaTime)
         spike.update(deltaTime: deltaTime)
+        
+        if status == .play {
+            levelTime -= deltaTime
+            menu.update(remainingTime: levelTime)
+            if levelTime <= 0 {
+                perform(transition: .gameToLose)
+            }
+        }
     }
     
     func renderVictory() {
@@ -108,14 +121,28 @@ class GameScene: SKScene, SpikeDelegate, TouchableSpriteNodeDelegate {
             childNode(withName: "vitoria")!.alpha = 1
             status = .final
             winMenu.appear()
+        case .gameToLose:
+            backgroundColor = UIColor(named: "red")!
+            childNode(withName: "derrota")!.alpha = 1
+            status = .final
+            loseMenu.appear()
         case .toNextLevel:
             LevelHandler.nextLevel()
             fallthrough
         case .repeatLevel:
             backgroundColor = UIColor(named: "bege")!
             childNode(withName: "vitoria")!.alpha = 0
+            childNode(withName: "derrota")!.alpha = 0
             winMenu.disappear()
+            loseMenu.disappear()
             startGame()
+        }
+    }
+    
+    func handleWrongTap() {
+        levelTime -= 5
+        if levelTime <= 0 {
+            perform(transition: .gameToLose)
         }
     }
 }

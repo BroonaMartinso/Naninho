@@ -22,6 +22,9 @@ class LevelHandler {
     var timeNeededForAFullCircle: Double {
         5 - 0.5 * Double(currentLevel)
     }
+    var timeToCompleteCurrLevel: Double {
+        60
+    }
     
     private init() {}
     

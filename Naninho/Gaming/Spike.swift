@@ -34,6 +34,7 @@ class Spike {
     }
     
     func radial(quantidade: Int){
+        removeAllspikes()
         let passo: Double = 360 / Double(quantidade)
         let passoRadianos = passo * Double.pi / 180
         print(passo)
@@ -83,6 +84,14 @@ class Spike {
             spikeParent.addChild(new)
             
         }
+    }
+    
+    private func removeAllspikes() {
+        for spike in spikeArray {
+            spike.removeFromParent()
+        }
+        
+        spikeArray = []
     }
     
     private func bate() {
