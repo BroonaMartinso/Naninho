@@ -10,8 +10,15 @@ import Foundation
 class LevelHandler {
     
     static var shared: LevelHandler = LevelHandler()
-    private(set) var currentLevel: Int = 1
+    private(set) var currentLevel: Int = 1 {
+        didSet {
+            for listener in listeners {
+                listener.handleLevelChange(to: currentLevel)
+            }
+        }
+    }
     private var maxLevel: Int = 1
+    private var listeners: [LevelChangeListener] = []
     
     var levelSpeed: Double {
         Double(currentLevel) * 50.0
@@ -38,4 +45,12 @@ class LevelHandler {
             shared.currentLevel = level
         }
     }
+    
+    func addListener(_ listener: LevelChangeListener) {
+        listeners.append(listener)
+    }
+}
+
+protocol LevelChangeListener: AnyObject {
+    func handleLevelChange(to newLevel: Int)
 }

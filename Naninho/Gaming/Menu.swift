@@ -32,15 +32,15 @@ class Menu {
     
     func setupButtons() {
         
-        let play = TouchableSpriteNode(imageNamed: "play")
-        play.size = CGSize(width: screenWidth * 0.4, height: screenWidth * 0.4)
-        play.position.x = screenWidth * 0.225
-        play.position.y = -screenHeight * 0.25
-        play.name = "play"
-        play.delegate = parent
-        play.transition = .introToGame
-        play.isUserInteractionEnabled = true
-        menu.addChild(play)
+//        let play = TouchableSpriteNode(imageNamed: "play")
+//        play.size = CGSize(width: screenWidth * 0.4, height: screenWidth * 0.4)
+//        play.position.x = screenWidth * 0.225
+//        play.position.y = -screenHeight * 0.25
+//        play.name = "play"
+//        play.delegate = parent
+//        play.transition = .introToGame
+//        play.isUserInteractionEnabled = true
+//        menu.addChild(play)
    
         let select = TouchableSpriteNode(imageNamed: "select")
         select.size = CGSize(width: screenWidth * 0.4, height: screenWidth * 0.4)
@@ -48,13 +48,13 @@ class Menu {
         select.position.y = -screenHeight * 0.25
         menu.addChild(select)
         
-        let pause = TouchableSpriteNode()
-        let pauseImage = UIImage(systemName: "pause.circle.fill")!
-        pause.size = CGSize(width: 40, height: 40)
-        pause.position.x = screenWidth * 1.4
-        pause.position.y = screenHeight * 0.4
-        pause.texture = SKTexture(image: pauseImage)
-        menu.addChild(pause)
+//        let pause = TouchableSpriteNode()
+//        let pauseImage = UIImage(systemName: "pause.circle.fill")!
+//        pause.size = CGSize(width: 40, height: 40)
+//        pause.position.x = screenWidth * 1.4
+//        pause.position.y = screenHeight * 0.4
+//        pause.texture = SKTexture(image: pauseImage)
+//        menu.addChild(pause)
         
         let contourTimeBar = SKShapeNode(rectOf: CGSize(width: screenWidth, height: screenHeight * 0.01))
         contourTimeBar.strokeColor = UIColor(named: "black")!
@@ -70,6 +70,11 @@ class Menu {
         menu.addChild(timeBar)
         
         menu.zPosition = 1
+    }
+    
+    func add(button: TouchableSpriteNode, atPos pos: CGPoint) {
+        button.position = pos
+        menu.addChild(button)
     }
     
     func slide(_ completion: @escaping ()->Void) {
@@ -91,8 +96,6 @@ class Menu {
 enum Transition {
     case introToGame
     case endScreenToIntro
-    case toNextLevel
     case gameToWin
-    case repeatLevel
     case gameToLose
 }

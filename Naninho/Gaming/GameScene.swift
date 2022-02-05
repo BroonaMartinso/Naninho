@@ -8,12 +8,18 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelegate {
-    private var menu: Menu!
-    private var winMenu: WinMenu!
-    private var loseMenu: LoseMenu!
+class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChangeListener {
+    
+//    private var menu: Menu!
+    private var mainMenu: SKNode!
+    private var winMenu: SKNode!
+    private var loseMenu: SKNode!
+    private var levelPopup: SKNode!
+    private var pausePopup: SKNode!
     private var bola: Bola!
     private var spike: Spike!
+    private var levelIndicatorLabelMainMenu: SKLabelNode!
+    private var levelIndicatorLabelWinMenu: SKLabelNode!
     private var lastUpdate: TimeInterval = 0
     private var screenWidth: CGFloat!
     private var screenHeight: CGFloat!
@@ -22,13 +28,26 @@ class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelega
     
     
     override func didMove(to view: SKView) {
-        scaleMode = .resizeFill
+//        scaleMode = .resizeFill
         backgroundColor = UIColor(named: "bege")!
     
         getScreenSize()
-        menu = Menu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
-        winMenu = WinMenu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
-        loseMenu = LoseMenu(screenWidth: screenWidth, screenHeight: screenHeight, parent: self)
+        mainMenu = childNode(withName: "mainMenu")
+        levelIndicatorLabelMainMenu = childNode(withName: "//mainMenu//Botão Direita/level") as? SKLabelNode
+
+        winMenu = childNode(withName: "winMenu")
+        levelIndicatorLabelWinMenu = childNode(withName: "//winMenu//Botão Direita B/levelb") as? SKLabelNode
+        let winBg = childNode(withName: "//winMenu/bg") as? SKSpriteNode
+        winBg?.color = UIColor(named: "verde")!
+        
+        loseMenu = childNode(withName: "loseMenu")
+        let loseBg = childNode(withName: "//loseMenu/bg") as? SKSpriteNode
+        loseBg?.color = UIColor(named: "red")!
+        
+        levelPopup = childNode(withName: "LEVEL")
+        
+        updateLevelLabels(with: LevelHandler.shared.currentLevel)
+        LevelHandler.shared.addListener(self)
         setupBall()
         setupSpike()
     }
@@ -48,33 +67,79 @@ class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelega
     }
     
     func setupSpike() {
-        let spikeNode = childNode(withName: "spike") as! SKSpriteNode
-        let spikeHeight = screenWidth * 0.2
-        let spikeAspectRatio = spikeNode.frame.width / spikeNode.frame.height
-        
-        spikeNode.size = CGSize(width: spikeHeight * spikeAspectRatio, height: spikeHeight)
-        spike = Spike (Model: spikeNode, Parent: self,Ball: bola.bola)
-        spike.delegate = self
+        spike = Spike (Parent: self, Ball: bola.bola)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         switch status {
         case .intro:
-            break
+            for t in touches { handleMainMenuTap(atPos: t.location(in: self)) }
+        case .levelSelect:
+            for t in touches { handleLevelPopupTap(atPos: t.location(in: self)) }
         case .transition:
             break
         case .play:
             for t in touches { bola.jogo(click: t.location(in: self)) }
             for t in touches { spike.jogo(click: t.location(in: self)) }
-        case .final:
-            break
+        case .win:
+            for t in touches { handleWinMenuTap(atPos: t.location(in: self)) }
+        case .lose:
+            for t in touches { handleLoseMenuTap(atPos: t.location(in: self)) }
+        }
+    }
+    
+    func handleMainMenuTap(atPos pos: CGPoint) {
+        if childNode(withName: "//mainMenu/Botão Esquerda")!.contains(pos) {
+            levelPopup.slideVertically(distance: screenHeight)
+            status = .levelSelect
+        }
+        else if childNode(withName: "//mainMenu/Botão Direita")!.contains(pos) {
+            mainMenu.slideHorizontally(distance: -screenWidth) { self.startGame() }
+        }
+    }
+    
+    func handleLevelPopupTap(atPos pos: CGPoint) {
+        if childNode(withName: "//LEVEL/ok")!.contains(pos) {
+            levelPopup.slideVertically(distance: -screenHeight)
+            status = .intro
+        } else if childNode(withName: "//LEVEL/fechar")!.contains(pos) {
+            levelPopup.slideVertically(distance: -screenHeight)
+            status = .intro
+        }
+    }
+    
+    func handleWinMenuTap(atPos pos: CGPoint) {
+        if childNode(withName: "//winMenu/Botão Direita B")!.contains(pos) {
+            LevelHandler.nextLevel()
+            winMenu.alpha = 0
+            startGame()
+        }
+        else if childNode(withName: "//winMenu/Botão Esquerda B")!.contains(pos) {
+            winMenu.alpha = 0
+            startGame()
+        }
+        else if childNode(withName: "//winMenu/voltar")!.contains(pos) {
+            mainMenu.position.x = 0
+            winMenu.alpha = 0
+            status = .intro
+        }
+    }
+    
+    func handleLoseMenuTap(atPos pos: CGPoint) {
+        if childNode(withName: "//loseMenu/Botão Esquerda B")!.contains(pos) {
+            loseMenu.alpha = 0
+            startGame()
+        }
+        else if childNode(withName: "//winMenu/voltar")!.contains(pos) {
+            mainMenu.position.x = 0
+            loseMenu.alpha = 0
+            status = .intro
         }
     }
     
     private func startGame() {
         spike.radial(quantidade: LevelHandler.shared.numberOfSpikes)
         bola.pula(velocidade: LevelHandler.shared.levelSpeed)
-        bola.bola.removeAllActions()
         status = .play
         levelTime = 60
     }
@@ -93,17 +158,10 @@ class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelega
         
         if status == .play {
             levelTime -= deltaTime
-            menu.update(remainingTime: levelTime)
             if levelTime <= 0 {
                 perform(transition: .gameToLose)
             }
         }
-    }
-    
-    func renderVictory() {
-        backgroundColor = UIColor(named: "verde")!
-        childNode(withName: "vitoria")!.alpha = 1
-        status = .final
     }
     
     func perform(transition: Transition) {
@@ -111,31 +169,15 @@ class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelega
         case .introToGame:
             status = .transition
             bola.bola.run(SKAction.repeatForever(SKAction.rotate(byAngle: -2*Double.pi, duration: 1)))
-            menu.slide() {
-                self.startGame()
-            }
         case .endScreenToIntro:
             break
         case .gameToWin:
-            backgroundColor = UIColor(named: "verde")!
-            childNode(withName: "vitoria")!.alpha = 1
-            status = .final
-            winMenu.appear()
-        case .gameToLose:
-            backgroundColor = UIColor(named: "red")!
-            childNode(withName: "derrota")!.alpha = 1
-            status = .final
-            loseMenu.appear()
-        case .toNextLevel:
             LevelHandler.nextLevel()
-            fallthrough
-        case .repeatLevel:
-            backgroundColor = UIColor(named: "bege")!
-            childNode(withName: "vitoria")!.alpha = 0
-            childNode(withName: "derrota")!.alpha = 0
-            winMenu.disappear()
-            loseMenu.disappear()
-            startGame()
+            status = .win
+            winMenu.alpha = 1
+        case .gameToLose:
+            status = .lose
+            loseMenu.alpha = 1
         }
     }
     
@@ -145,13 +187,39 @@ class GameScene: SKScene, SpikeDelegate, BallDelegate, TouchableSpriteNodeDelega
             perform(transition: .gameToLose)
         }
     }
+    
+    func handleLevelChange(to newLevel: Int) {
+        updateLevelLabels(with: newLevel)
+    }
+    
+    func updateLevelLabels(with newLevel: Int) {
+        levelIndicatorLabelMainMenu.text = "LEVEL \(newLevel)"
+        levelIndicatorLabelWinMenu.text = "LEVEL \(newLevel)"
+    }
 }
 
 enum Status{
     case intro
+    case levelSelect
     case transition
     case play
-    case final
+    case win
+    case lose
 }
 
 typealias ScreenStateHandler = SKScene & TouchableSpriteNodeDelegate
+
+extension SKNode {
+    
+    func slideVertically(distance: CGFloat) {
+        self.run(SKAction.sequence(
+            [SKAction.moveBy(x: 0, y: distance * 1.1, duration: 0.2),
+             SKAction.moveBy(x: 0, y: -distance * 0.1, duration: 0.05)]))
+    }
+    
+    func slideHorizontally(distance: CGFloat, completion: @escaping ()->Void = {}) {
+        self.run(SKAction.moveBy(x: distance, y: 0, duration: 1)) {
+            completion()
+        }
+    }
+}
