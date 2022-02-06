@@ -12,6 +12,7 @@ class Bola {
     var bola: SKNode
     var bolaParent: SKNode
     var delegate: BallDelegate?
+    var velocityCache: CGVector?
     
     init( Ball: SKNode, Parent: SKNode){
         bola = Ball
@@ -24,6 +25,20 @@ class Bola {
         
         bola.physicsBody?.velocity.dx = velocidade * velocidadex
         bola.physicsBody?.velocity.dy = velocidade * velocidadey
+        
+        velocityCache = bola.physicsBody?.velocity
+    }
+    
+    func pause() {
+        bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+    }
+    
+    func resume() {
+        if let velocityCache = velocityCache {
+            bola.physicsBody?.velocity = velocityCache
+        } else {
+            pula(velocidade: LevelHandler.shared.levelSpeed)
+        }
     }
     
     private func bate (){
@@ -42,14 +57,22 @@ class Bola {
             return
         }
         
-        else if bola.frame.maxY >= bolaParent.frame.maxY
+        else if bola.frame.maxY >= GameScene.topBound
         {bola.physicsBody?.velocity.dy = -abs((bola.physicsBody?.velocity.dy)!)
             return
         }
     }
     
+    func reset() {
+        bola.position = CGPoint(x: 0, y: 0)
+        bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+    }
+    
     func update(deltaTime: TimeInterval) {
         bate()
+        if bola.physicsBody?.velocity != CGVector(dx: 0, dy: 0) {
+            velocityCache = bola.physicsBody?.velocity
+        }
     }
     
     func jogo(click:CGPoint) {

@@ -61,6 +61,9 @@ class Spike {
             let new = SKShapeNode(path: path.cgPath)
             new.fillColor = UIColor(named: "black")!
             new.strokeColor = UIColor(named: "black")!
+            new.physicsBody = SKPhysicsBody()
+            new.physicsBody?.affectedByGravity = false
+            new.physicsBody?.allowsRotation = false
             new.physicsBody?.linearDamping = 0
             new.physicsBody?.angularDamping = 0
             new.physicsBody?.friction = 0
@@ -83,7 +86,7 @@ class Spike {
         }
     }
     
-    private func removeAllspikes() {
+    func removeAllspikes() {
         for spike in spikeArray {
             spike.removeFromParent()
         }
@@ -108,7 +111,7 @@ class Spike {
                 return
             }
             
-            else if spike.frame.maxY >= spikeParent.frame.maxY {
+            else if spike.frame.maxY >= GameScene.topBound {
                 bola.physicsBody?.velocity.dy = -abs((bola.physicsBody?.velocity.dy)!)
                 return
             }

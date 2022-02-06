@@ -16,6 +16,14 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
     private var loseMenu: SKNode!
     private var levelPopup: SKNode!
     private var pausePopup: SKNode!
+    private var timeBar: SKNode!
+    private var bar: SKSpriteNode!
+    private var topBar: SKNode!
+    private var soundButton: SKSpriteNode!
+    private var soundButtonDarkImage: UIImage!
+    private var soundButtonRedImage: UIImage!
+    private var soundButtonOnClearImage: UIImage!
+    private var soundButtonOffClearImage: UIImage!
     private var bola: Bola!
     private var spike: Spike!
     private var levelIndicatorLabelMainMenu: SKLabelNode!
@@ -23,15 +31,16 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
     private var lastUpdate: TimeInterval = 0
     private var screenWidth: CGFloat!
     private var screenHeight: CGFloat!
+    static var topBound: CGFloat!
     private var levelTime: TimeInterval = 0
+    private var isSoundOn: Bool = true
     var status: Status = .intro
     
     
     override func didMove(to view: SKView) {
-//        scaleMode = .resizeFill
+        scaleMode = .aspectFill
         backgroundColor = UIColor(named: "bege")!
-    
-        getScreenSize()
+
         mainMenu = childNode(withName: "mainMenu")
         levelIndicatorLabelMainMenu = childNode(withName: "//mainMenu//Botão Direita/level") as? SKLabelNode
 
@@ -45,7 +54,28 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
         loseBg?.color = UIColor(named: "red")!
         
         levelPopup = childNode(withName: "LEVEL")
+        pausePopup = childNode(withName: "Pause")
         
+        timeBar = childNode(withName: "timeBar")
+        let barOutline = childNode(withName: "//timeBar/outline") as? SKShapeNode
+        barOutline?.fillColor = UIColor(named: "black")!
+        bar = childNode(withName: "//timeBar/bar") as? SKSpriteNode
+        bar.color = UIColor(named: "black")!
+        
+        topBar = childNode(withName: "topBar")
+        soundButton = childNode(withName: "//topBar/som") as? SKSpriteNode
+        soundButtonDarkImage = UIImage(systemName: "speaker.wave.2.circle.fill")!.withTintColor(UIColor(named: "black")!)
+        soundButtonRedImage = UIImage(systemName: "speaker.slash.circle.fill")!.withTintColor(UIColor(named: "red")!)
+        soundButtonOnClearImage = UIImage(systemName: "speaker.wave.2.circle.fill")!.withTintColor(UIColor(named: "bege")!)
+        soundButtonOffClearImage = UIImage(systemName: "speaker.slash.circle.fill")!.withTintColor(UIColor(named: "bege")!)
+        refreshSoundButtonAppearence()
+        
+        let pauseButton = childNode(withName: "//topBar/pause") as? SKSpriteNode
+        let pauseImage = UIImage(systemName: "pause.circle.fill")!
+        pauseImage.withTintColor(UIColor(named: "black")!)
+        pauseButton?.texture = SKTexture(image: pauseImage)
+        
+        getScreenSize()
         updateLevelLabels(with: LevelHandler.shared.currentLevel)
         LevelHandler.shared.addListener(self)
         setupBall()
@@ -53,10 +83,13 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
     }
     
     func getScreenSize() {
-        let window = UIApplication.shared.windows[0]
-        let safeFrame = window.safeAreaLayoutGuide.layoutFrame
-        screenWidth = safeFrame.width
-        screenHeight = safeFrame.height
+//        let window = UIApplication.shared.windows[0]
+//        let safeFrame = window.safeAreaLayoutGuide.layoutFrame
+//        screenWidth = safeFrame.width
+//        screenHeight = safeFrame.height
+        screenWidth = scene?.frame.width
+        screenHeight = scene?.frame.height
+        GameScene.topBound = bar.frame.minY
     }
     
     func setupBall() {
@@ -71,13 +104,19 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if status != .pause {
+            for t in touches { handleTopBarTap(atPos: t.location(in: self)) }
+        }
+        
         switch status {
         case .intro:
             for t in touches { handleMainMenuTap(atPos: t.location(in: self)) }
         case .levelSelect:
-            for t in touches { handleLevelPopupTap(atPos: t.location(in: self)) }
+            for t in touches { handleLevelPopupTap(atPos: t.location(in: levelPopup)) }
         case .transition:
             break
+        case .pause:
+            for t in touches { handlePausePopupTap(atPos: t.location(in: pausePopup)) }
         case .play:
             for t in touches { bola.jogo(click: t.location(in: self)) }
             for t in touches { spike.jogo(click: t.location(in: self)) }
@@ -88,12 +127,34 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
         }
     }
     
+    func handleTopBarTap(atPos pos: CGPoint) {
+        if soundButton.contains(pos) {
+            isSoundOn.toggle()
+            refreshSoundButtonAppearence()
+        }
+        else if childNode(withName: "//topBar/pause")!.contains(pos) {
+            pausePopup.slideVertically(distance: screenHeight)
+            bola.pause()
+            status = .pause
+        }
+    }
+    
+    func refreshSoundButtonAppearence() {
+        if status == .lose || status == .win {
+            soundButton.texture = SKTexture(image: isSoundOn ? soundButtonOnClearImage : soundButtonOffClearImage)
+        } else {
+            soundButton.texture = SKTexture(image: isSoundOn ? soundButtonDarkImage : soundButtonRedImage)
+        }
+    }
+    
     func handleMainMenuTap(atPos pos: CGPoint) {
         if childNode(withName: "//mainMenu/Botão Esquerda")!.contains(pos) {
             levelPopup.slideVertically(distance: screenHeight)
             status = .levelSelect
         }
         else if childNode(withName: "//mainMenu/Botão Direita")!.contains(pos) {
+            timeBar.slideHorizontally(distance: -screenWidth)
+            topBar.slideHorizontally(distance: -screenWidth)
             mainMenu.slideHorizontally(distance: -screenWidth) { self.startGame() }
         }
     }
@@ -108,19 +169,41 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
         }
     }
     
+    func handlePausePopupTap(atPos pos: CGPoint) {
+        if childNode(withName: "//Pause/Inicio")!.contains(pos) {
+            spike.removeAllspikes()
+            bola.reset()
+            topBar.position.x = screenWidth
+            timeBar.position.x = screenWidth
+            mainMenu.position.x = 0
+            status = .intro
+            pausePopup.slideVertically(distance: -screenHeight)
+        } else if childNode(withName: "//Pause/Continuar")!.contains(pos) {
+            bola.resume()
+            status = .play
+            pausePopup.slideVertically(distance: -screenHeight)
+        } else if childNode(withName: "//Pause/Reiniciar")!.contains(pos) {
+            startGame()
+            pausePopup.slideVertically(distance: -screenHeight)
+        }
+    }
+    
     func handleWinMenuTap(atPos pos: CGPoint) {
         if childNode(withName: "//winMenu/Botão Direita B")!.contains(pos) {
-            LevelHandler.nextLevel()
             winMenu.alpha = 0
             startGame()
         }
         else if childNode(withName: "//winMenu/Botão Esquerda B")!.contains(pos) {
+            LevelHandler.setLevel(to: LevelHandler.shared.currentLevel - 1)
             winMenu.alpha = 0
             startGame()
         }
         else if childNode(withName: "//winMenu/voltar")!.contains(pos) {
+            timeBar.position.x = screenWidth
+            topBar.position.x = screenWidth
             mainMenu.position.x = 0
             winMenu.alpha = 0
+            bola.reset()
             status = .intro
         }
     }
@@ -131,8 +214,11 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
             startGame()
         }
         else if childNode(withName: "//winMenu/voltar")!.contains(pos) {
+            timeBar.position.x = screenWidth
+            topBar.position.x = screenWidth
             mainMenu.position.x = 0
-            loseMenu.alpha = 0
+            winMenu.alpha = 0
+            bola.reset()
             status = .intro
         }
     }
@@ -153,15 +239,21 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, LevelChange
         let deltaTime = currentTime - lastUpdate
         lastUpdate = currentTime
         
-        bola.update(deltaTime: deltaTime)
         spike.update(deltaTime: deltaTime)
+        bola.update(deltaTime: deltaTime)
         
         if status == .play {
             levelTime -= deltaTime
+//            updateTimeBar()
             if levelTime <= 0 {
                 perform(transition: .gameToLose)
             }
         }
+    }
+    
+    func updateTimeBar() {
+        bar.size.width = screenWidth * levelTime / LevelHandler.shared.timeToCompleteCurrLevel
+        bar.position.x = (screenWidth + bar.size.width) / 2
     }
     
     func perform(transition: Transition) {
@@ -203,6 +295,7 @@ enum Status{
     case levelSelect
     case transition
     case play
+    case pause
     case win
     case lose
 }
