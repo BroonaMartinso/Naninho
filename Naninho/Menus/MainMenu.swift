@@ -1,0 +1,37 @@
+//
+//  MainMenu.swift
+//  Naninho
+//
+//  Created by Marco Zulian on 08/02/22.
+//
+
+import Foundation
+import SpriteKit
+
+class MainMenu: Menu, LevelChangeListener {
+    var representation: SKNode
+    private var levelIndicatorLabel: SKLabelNode
+    
+    init(representation: SKNode) {
+        self.representation = representation
+        levelIndicatorLabel = representation.childNode(withName: "//mainMenu//Botão Direita/level") as! SKLabelNode
+        levelIndicatorLabel.text = "LEVEL \(LevelHandler.shared.currentLevel)"
+        
+        LevelHandler.shared.addListener(self)
+    }
+    
+    func handleTap(atPos pos: CGPoint) -> Transition? {
+        if representation.childNode(withName: "Botão Esquerda")!.contains(pos) {
+            return .toLevelSelect
+        }
+        else if representation.childNode(withName: "Botão Direita")!.contains(pos) {
+            return .introToGame
+
+        }
+        return nil
+    }
+    
+    func handleLevelChange(to newLevel: Int) {
+        levelIndicatorLabel.text = "LEVEL \(newLevel)"
+    }
+}
