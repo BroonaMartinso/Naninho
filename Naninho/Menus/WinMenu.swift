@@ -10,10 +10,12 @@ import SpriteKit
 
 class WinMenu: Menu, LevelChangeListener {
     var representation: SKNode
+    var respondableState: Status
     private var levelIndicatorLabel: SKLabelNode
     
-    init(representation: SKNode) {
+    init(representation: SKNode, respondableState: Status) {
         self.representation = representation
+        self.respondableState = respondableState
         levelIndicatorLabel = representation.childNode(withName: "//Botão Direita B/levelb") as! SKLabelNode
         levelIndicatorLabel.text = "LEVEL \(LevelHandler.shared.currentLevel)"
         

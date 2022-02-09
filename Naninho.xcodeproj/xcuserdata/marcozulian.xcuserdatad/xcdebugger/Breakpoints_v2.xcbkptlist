@@ -30,8 +30,8 @@
             filePath = "Naninho/Gaming/GameScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>

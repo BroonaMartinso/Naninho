@@ -10,9 +10,11 @@ import SpriteKit
 
 class LoseMenu: Menu {
     var representation: SKNode
+    var respondableState: Status
     
-    init(representation: SKNode) {
+    init(representation: SKNode, respondableState: Status) {
         self.representation = representation
+        self.respondableState = respondableState
         
         let loseBg = representation.childNode(withName: "bg") as? SKSpriteNode
         loseBg?.color = UIColor(named: "red")!

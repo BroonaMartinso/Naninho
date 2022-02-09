@@ -10,9 +10,11 @@ import SpriteKit
 
 class LevelPopup: Menu {
     var representation: SKNode
+    var respondableState: Status
     
-    init(representation: SKNode) {
+    init(representation: SKNode, respondableState: Status) {
         self.representation = representation
+        self.respondableState = respondableState
     }
     
     func handleTap(atPos pos: CGPoint) -> Transition? {

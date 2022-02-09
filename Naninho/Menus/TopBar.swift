@@ -10,6 +10,7 @@ import SpriteKit
 
 class TopBar: Menu {
     var representation: SKNode
+    var respondableState: Status
     private var soundButton: SKSpriteNode!
     private var soundButtonDarkImage: UIImage!
     private var soundButtonRedImage: UIImage!
@@ -17,8 +18,9 @@ class TopBar: Menu {
     private var soundButtonOffClearImage: UIImage!
     weak var delegate: TopBarMenuDelegate?
     
-    init(representation: SKNode) {
+    init(representation: SKNode, respondableState: Status) {
         self.representation = representation
+        self.respondableState = respondableState
         
         soundButton = representation.childNode(withName: "som") as? SKSpriteNode
         soundButtonDarkImage = UIImage(systemName: "speaker.wave.2.circle.fill")!.withTintColor(UIColor(named: "black")!)

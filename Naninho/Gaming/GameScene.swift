@@ -30,9 +30,8 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
         gameCenterViewController.dismiss(animated:true)
 
     }
-    
-    
-    //    private var menu: Menu!
+//    private var menu: Menu!
+    private var menus: [Menu] = []
     private var mainMenu: Menu!
     private var winMenu: Menu!
     private var loseMenu: Menu!
@@ -53,15 +52,16 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
     
     
     override func didMove(to view: SKView) {
-        scaleMode = .aspectFill
+        scaleMode = .aspectFit
         backgroundColor = UIColor(named: "bege")!
-        
-        mainMenu = MainMenu(representation: childNode(withName: "mainMenu")!)
-        winMenu = WinMenu(representation: childNode(withName: "winMenu")!)
-        loseMenu = LoseMenu(representation: childNode(withName: "loseMenu")!)
-        levelPopup = LevelPopup(representation: childNode(withName: "LEVEL")!)
-        pausePopup = PausePopup(representation: childNode(withName: "Pause")!)
-        topBar = TopBar(representation: childNode(withName: "topBar")!)
+
+        mainMenu = MainMenu(representation: childNode(withName: "mainMenu")!, respondableState: .intro)
+        winMenu = WinMenu(representation: childNode(withName: "winMenu")!, respondableState: .win)
+        loseMenu = LoseMenu(representation: childNode(withName: "loseMenu")!, respondableState: .lose)
+        levelPopup = LevelPopup(representation: childNode(withName: "LEVEL")!, respondableState: .levelSelect)
+        pausePopup = PausePopup(representation: childNode(withName: "Pause")!, respondableState: .pause)
+        topBar = TopBar(representation: childNode(withName: "topBar")!, respondableState: .play)
+        menus = [mainMenu, winMenu, loseMenu, levelPopup, pausePopup, topBar]
         
         timeBar = childNode(withName: "timeBar")
         let barOutline = childNode(withName: "//timeBar/outline") as? SKShapeNode
@@ -101,40 +101,17 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             }
         }
         
-        switch status {
-        case .intro:
-            for t in touches {
-                if let transition = mainMenu.handleTap(atPos: t.location(in: self)) {
-                    perform(transition: transition)
-                }
-            }
-        case .levelSelect:
-            for t in touches {
-                if let transition = levelPopup.handleTap(atPos: t.location(in: levelPopup.representation)) {
-                    perform(transition: transition)
-                }
-            }
-        case .transition:
-            break
-        case .pause:
-            for t in touches {
-                if let transition = pausePopup.handleTap(atPos: t.location(in: pausePopup.representation)) {
-                    perform(transition: transition)
-                }
-            }
-        case .play:
+        if status == .play {
             for t in touches { bola.jogo(click: t.location(in: self)) }
             for t in touches { spike.jogo(click: t.location(in: self)) }
-        case .win:
-            for t in touches {
-                if let transition = winMenu.handleTap(atPos: t.location(in: self)) {
-                    perform(transition: transition)
-                }
-            }
-        case .lose:
-            for t in touches {
-                if let transition = loseMenu.handleTap(atPos: t.location(in: self)) {
-                    perform(transition: transition)
+        }
+        
+        for menu in menus {
+            if status == menu.respondableState {
+                for t in touches {
+                    if let transition = menu.handleTap(atPos: t.location(in: menu.representation)) {
+                        perform(transition: transition)
+                    }
                 }
             }
         }

@@ -26,13 +26,15 @@ class LevelHandler {
     }
     private var listeners: [LevelChangeListener] = []
     var completedLevels: [Int: Int] = [:] {
-        didSet{
+        didSet {
             let encoder = PropertyListEncoder()
+            
             if let data = try? encoder.encode(completedLevels) {
-                UserDefaults.standard.set(data, forKey: "data")
+                UserDefaults.standard.set(data, forKey: "completedLevels")
             }
         }
     }
+    
     var levelSpeed: Double {
         
         if currentLevel == 0 {
@@ -49,20 +51,23 @@ class LevelHandler {
         
     }
     var timeNeededForAFullCircle: Double {
-        5 - 0.5 * Double(currentLevel)
+        max(1, 5 - 0.5 * (Double(currentLevel.quotientAndRemainder(dividingBy: 3).quotient)))
     }
     var timeToCompleteCurrLevel: Double {
         60
     }
     
     private init() {
+        let decoder = PropertyListDecoder()
+        
+        if let data = UserDefaults.standard.data(forKey: "completedLevels"),
+           let intDictionary = try? decoder.decode([Int : Int].self, from: data) {
+            self.completedLevels = intDictionary
+            print(completedLevels)
+        }
+        
         currentLevel = UserDefaults.standard.integer(forKey: "currentLevel")
         maxLevel = UserDefaults.standard.integer(forKey: "maxLevel")
-        let decoder = PropertyListDecoder()
-        if let data = UserDefaults.standard.data(forKey: "completedLevels"),
-           let intDictionary = try? decoder.decode([Int : Int].self, from: data){
-            completedLevels = intDictionary
-        }
     }
     
     static func nextLevel(timeRemaining: Double) {
