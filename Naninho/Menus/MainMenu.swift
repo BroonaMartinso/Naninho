@@ -28,6 +28,11 @@ class MainMenu: Menu, LevelChangeListener {
             return .introToGame
 
         }
+        
+        else if representation.childNode(withName: "ranking")!.contains(pos)
+        { return .introRanking
+            
+        }
         return nil
     }
     

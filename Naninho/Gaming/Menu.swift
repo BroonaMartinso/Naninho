@@ -21,4 +21,5 @@ enum Transition {
     case pauseToContinue
     case pauseToReplay
     case gameToPause
+    case introRanking
 }

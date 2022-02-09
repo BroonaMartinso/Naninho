@@ -9,12 +9,12 @@ import Foundation
 import SpriteKit
 
 class Bola {
-    var bola: SKNode
+    var bola: SKSpriteNode
     var bolaParent: SKNode
     var delegate: BallDelegate?
     var velocityCache: CGVector?
     
-    init( Ball: SKNode, Parent: SKNode){
+    init( Ball: SKSpriteNode, Parent: SKNode){
         bola = Ball
         bolaParent = Parent
     }
@@ -78,10 +78,16 @@ class Bola {
     func jogo(click:CGPoint) {
         if bola.contains(click){
             delegate?.handleWrongTap()
+            bravo()
             return
         }
     }
-    
+    func bravo(voltar : Bool = true){
+        bola.texture = SKTexture (imageNamed: "Bravo")
+        if voltar {
+            bola.run(SKAction.wait(forDuration: 1), completion: {self.bola.texture = SKTexture (imageNamed: "feliz")})
+        }
+    }
 }
 
 protocol BallDelegate {

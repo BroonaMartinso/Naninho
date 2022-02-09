@@ -10,7 +10,7 @@ class Spike {
     
     var spikeParent: ScreenStateHandler
     var radius: CGFloat {bola.frame.width/2}
-    var spikeArray: [SKNode] = []
+    var spikeArray: [SKShapeNode] = []
     var rotation: CGFloat = 0
     var bola: SKNode
     
@@ -59,8 +59,8 @@ class Spike {
             //Copia
 //            let new = spikeModel.copy() as! SKNode
             let new = SKShapeNode(path: path.cgPath)
-            new.fillColor = UIColor(named: "black")!
-            new.strokeColor = UIColor(named: "black")!
+            new.fillColor = UIColor(named: "verde")!
+            new.strokeColor = UIColor(named: "verde")!
             new.physicsBody = SKPhysicsBody()
             new.physicsBody?.affectedByGravity = false
             new.physicsBody?.allowsRotation = false
@@ -78,6 +78,7 @@ class Spike {
             
             //Rotação
             new.zRotation = -angulo * Double.pi / 180
+            
             
             //Adiciona
             spikeArray.append(new)
@@ -121,9 +122,8 @@ class Spike {
     func jogo(click: CGPoint) {
         for spike in spikeArray {
             if spike.contains(click){
-                spike.removeFromParent()
                 spikeArray.remove(at: spikeArray.firstIndex(of: spike)!)
-                
+                queda(spike: spike)
                 if spikeArray.isEmpty {
                     spikeParent.perform(transition: .gameToWin)
                 }
@@ -133,5 +133,19 @@ class Spike {
             }
         }
     }
-    
+    func madspike () {
+        for spike in spikeArray {
+            spike.fillColor = UIColor(named: "red")!
+            spike.strokeColor = UIColor(named: "red")!
+            spike.run(SKAction.wait(forDuration: 1), completion: {spike.fillColor = UIColor(named: "verde")!
+                spike.strokeColor = UIColor(named: "verde")!})
+        }
+    }
+
+    func queda (spike : SKShapeNode) {
+        
+        spike.physicsBody?.affectedByGravity = true
+        spike.run(SKAction.wait(forDuration: 3), completion: {                spike.removeFromParent()})
+
+    }
 }

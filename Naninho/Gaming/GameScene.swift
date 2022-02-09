@@ -6,27 +6,33 @@
 //
 /*
  Eventos
-    - Começou o nível -> level_start
-    - Perdeu o nível -> level_end
-    - Reiniciou o jogo -> level_restart
-    - Pulou -> player_jump (posicao no eixo y quando pulou)
-        Analytics.logEvent("player_jump", parameters: [
-                     "player_height": node.position.y as NSNumber
-                 ])
-        
-        Analytics.setUserProperty(value, forName: name)
+ - Começou o nível -> level_start
+ - Perdeu o nível -> level_end
+ - Reiniciou o jogo -> level_restart
+ - Pulou -> player_jump (posicao no eixo y quando pulou)
+ Analytics.logEvent("player_jump", parameters: [
+ "player_height": node.position.y as NSNumber
+ ])
+ 
+ Analytics.setUserProperty(value, forName: name)
  
  Propriedade
-    - Tempo que "durou" na última vez que jogou
+ - Tempo que "durou" na última vez que jogou
  */
 
 import SpriteKit
 import GameplayKit
+import GameKit
 //import FirebaseAnalytics
 
-class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuDelegate {
+class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuDelegate, GKGameCenterControllerDelegate {
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated:true)
 
-//    private var menu: Menu!
+    }
+    
+    
+    //    private var menu: Menu!
     private var mainMenu: Menu!
     private var winMenu: Menu!
     private var loseMenu: Menu!
@@ -49,7 +55,7 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
     override func didMove(to view: SKView) {
         scaleMode = .aspectFill
         backgroundColor = UIColor(named: "bege")!
-
+        
         mainMenu = MainMenu(representation: childNode(withName: "mainMenu")!)
         winMenu = WinMenu(representation: childNode(withName: "winMenu")!)
         loseMenu = LoseMenu(representation: childNode(withName: "loseMenu")!)
@@ -174,12 +180,13 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             bola.reset()
             status = .intro
         case .gameToWin:
-            LevelHandler.nextLevel()
+            LevelHandler.nextLevel(timeRemaining: levelTime)
             status = .win
             winMenu.appear()
         case .gameToLose:
             status = .lose
             loseMenu.appear()
+            bola.bravo(voltar: false)
         case .toLevelSelect:
             levelPopup.slideVertically(distance: screenHeight)
             status = .levelSelect
@@ -213,6 +220,12 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             pausePopup.slideVertically(distance: screenHeight)
             bola.pause()
             status = .pause
+        case .introRanking:
+            let GameCenterVC = GKGameCenterViewController(leaderboardID: GameViewController.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
+               GameCenterVC.gameCenterDelegate = self
+            let controller = self.view?.window?.rootViewController as? GameViewController
+            controller?.present (GameCenterVC, animated: true, completion: nil)
+//            self.ViewController(GameCenterVC, animated: true, completion: nil)
         }
     }
     
@@ -221,6 +234,7 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
         bola.pula(velocidade: LevelHandler.shared.levelSpeed)
         status = .play
         levelTime = 60
+        childNode(withName: "tap")?.alpha = LevelHandler.shared.currentLevel == 0 ? 1 : 0
     }
     
     internal func handleWrongTap() {
@@ -228,9 +242,11 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
         animateBarColor()
         if levelTime <= 0 {
             perform(transition: .gameToLose)
+            
         }
+        spike.madspike()
     }
-
+    
     private func animateBarColor() {
         bar.color = UIColor(named: "red")!
         bar.tilt(byAngle: Double.pi/18)

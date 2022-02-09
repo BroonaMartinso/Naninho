@@ -8,9 +8,44 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
 
 class GameViewController: UIViewController {
+  
 
+    static var gcEnabled = Bool() // Check if the user has Game Center enabled
+    static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+    func authenticateLocalPlayer() {
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.local
+
+        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
+            if ((ViewController) != nil) {
+                // Show game center login if player is not logged in
+                self.present(ViewController!, animated: true, completion: nil)
+            }
+            else if (localPlayer.isAuthenticated) {
+                
+                // Player is already authenticated and logged in
+                GameViewController.gcEnabled = true
+
+                // Get the default leaderboard ID
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
+                    if error != nil {
+                        print(error!)
+                    }
+                    else {
+                        GameViewController.gcDefaultLeaderBoard = leaderboardIdentifer!
+                    }
+                 })
+            }
+            else {
+                // Game center is not enabled on the user's device
+                GameViewController.gcEnabled = false
+                print("Local player could not be authenticated!")
+                print(error!)
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +60,7 @@ class GameViewController: UIViewController {
             }
             
             view.ignoresSiblingOrder = true
-            
+            authenticateLocalPlayer ()
             view.showsFPS = true
             view.showsNodeCount = true
         }
