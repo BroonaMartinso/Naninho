@@ -146,6 +146,7 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             topBar.slideHorizontally(distance: -screenWidth)
             mainMenu.slideHorizontally(distance: -screenWidth) {
                 self.startGame()
+//                self.generateNewBall()
                 self.status = .play
             }
         case .endScreenToIntro:
@@ -165,8 +166,10 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             loseMenu.appear()
             bola.bravo(voltar: false)
         case .toLevelSelect:
-            levelPopup.slideVertically(distance: screenHeight)
-            status = .levelSelect
+            let controller = self.view?.window?.rootViewController as? GameViewController
+            controller?.present(LevelMenu(), animated: false)
+//            levelPopup.slideVertically(distance: screenHeight)
+//            status = .levelSelect
         case .winToNextLevel:
             winMenu.disappear()
             startGame()

@@ -18,6 +18,8 @@
 		56662D2A27A8529000E4D27A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2927A8529000E4D27A /* Assets.xcassets */; };
 		56662D2D27A8529000E4D27A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */; };
 		56662D3427A85AA300E4D27A /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56662D3327A85AA300E4D27A /* Spike.swift */; };
+		FA06AE3227B5620E00B6CFA6 /* LevelMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AE3127B5620E00B6CFA6 /* LevelMenuCell.swift */; };
+		FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */; };
 		FA0F1ED627B40D3E0016783C /* LevelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0F1ED527B40D3E0016783C /* LevelMenu.swift */; };
 		FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BA927AD674000837CDB /* LevelHandler.swift */; };
 		FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */; };
@@ -48,6 +50,8 @@
 		5A658555E01DA1C3AAEC92F5 /* Pods_Naninho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Naninho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7BE5D056CF9C3FD353F7FC8 /* Pods-Naninho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Naninho.release.xcconfig"; path = "Target Support Files/Pods-Naninho/Pods-Naninho.release.xcconfig"; sourceTree = "<group>"; };
 		D8533A3A5B84ED2A1DD05909 /* Pods-Naninho.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Naninho.debug.xcconfig"; path = "Target Support Files/Pods-Naninho/Pods-Naninho.debug.xcconfig"; sourceTree = "<group>"; };
+		FA06AE3127B5620E00B6CFA6 /* LevelMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenuCell.swift; sourceTree = "<group>"; };
+		FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesManager.swift; sourceTree = "<group>"; };
 		FA0F1ED527B40D3E0016783C /* LevelMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenu.swift; sourceTree = "<group>"; };
 		FA1E1BA927AD674000837CDB /* LevelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelHandler.swift; sourceTree = "<group>"; };
 		FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSpriteNode.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				FA428E0627AC4F2500E29593 /* Button.swift */,
 				FA1E1BA927AD674000837CDB /* LevelHandler.swift */,
 				FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */,
+				FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */,
 			);
 			path = Gaming;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 				FA29AD4327B2CD810039A575 /* PausePopup.swift */,
 				FA29AD4527B2CF260039A575 /* TopBar.swift */,
 				FA0F1ED527B40D3E0016783C /* LevelMenu.swift */,
+				FA06AE3127B5620E00B6CFA6 /* LevelMenuCell.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -296,9 +302,11 @@
 			files = (
 				FA428E0727AC4F2500E29593 /* Button.swift in Sources */,
 				FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */,
+				FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */,
 				56662D2327A8528F00E4D27A /* GameScene.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */,
+				FA06AE3227B5620E00B6CFA6 /* LevelMenuCell.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,
 				FA29AD4027B2CA320039A575 /* LoseMenu.swift in Sources */,
 				FA29AD3A27B2BB0E0039A575 /* MainMenu.swift in Sources */,

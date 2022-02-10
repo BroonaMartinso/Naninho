@@ -36,23 +36,29 @@ class LevelHandler {
     }
     
     var levelSpeed: Double {
-        
         if currentLevel == 0 {
             return 0
         }
         else {
-            return Double(currentLevel) * 50.0}
+            let minSpeed = 100 + 150 * currentLevel / 4
+            let deltaSpeed = 200 - 20 * currentLevel / 4
+            return Double(minSpeed) + Double(deltaSpeed) * sigmoid(x: Double(currentLevel / 4), beta: 0.5)
+        }
     }
+    
     var numberOfSpikes: Int {
         if currentLevel == 0 {
-            return 3}
+            return 4
+        }
         else {
-            return 5 + currentLevel}
-        
+            return 5 + (currentLevel / 4)
+        }
     }
+    
     var timeNeededForAFullCircle: Double {
-        max(1, 5 - 0.5 * (Double(currentLevel.quotientAndRemainder(dividingBy: 3).quotient)))
+        max(1, 5 - 0.5 * (Double(currentLevel.quotientAndRemainder(dividingBy: 4).quotient)))
     }
+    
     var timeToCompleteCurrLevel: Double {
         60
     }
@@ -121,6 +127,11 @@ class LevelHandler {
             shared.completedLevels[shared.currentLevel] = stars
         }
         print(shared.completedLevels)
+    }
+    
+    func sigmoid(x: Double, beta: Double = 1.0) -> Double {
+        let eulerConstant = 0.577
+        return 1.0 / (1.0 + pow(eulerConstant, beta*x))
     }
 }
 

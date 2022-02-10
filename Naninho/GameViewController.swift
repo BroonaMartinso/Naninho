@@ -15,6 +15,27 @@ class GameViewController: UIViewController {
 
     static var gcEnabled = Bool() // Check if the user has Game Center enabled
     static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "GameScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+            
+            view.ignoresSiblingOrder = true
+            authenticateLocalPlayer ()
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+    }
+    
     func authenticateLocalPlayer() {
         let localPlayer: GKLocalPlayer = GKLocalPlayer.local
 
@@ -44,25 +65,6 @@ class GameViewController: UIViewController {
                 print("Local player could not be authenticated!")
                 print(error!)
             }
-        }
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            view.ignoresSiblingOrder = true
-            authenticateLocalPlayer ()
-            view.showsFPS = true
-            view.showsNodeCount = true
         }
     }
 
