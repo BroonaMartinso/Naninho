@@ -9,15 +9,38 @@ import Foundation
 import UIKit
 
 class LevelMenuCell: UICollectionViewCell {
-
+    
     let label = UILabel()
     let bgImage = UIImageView()
-
+    let starImage = UIImageView()
+    var star : Int = 0 {didSet{estrela()}}
+    var nivel : Int = 0 {didSet{setupLabel()}}
+    
+    func setupimage() {
+        starImage.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(starImage)
+        
+        starImage.widthAnchor.constraint(equalToConstant: 0.75 * frame.width).isActive = true
+        starImage.heightAnchor.constraint(equalToConstant: 0.21 * frame.height).isActive = true
+        starImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        starImage.topAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+    }
+    
+    func estrela() {
+        if self.isSelected{
+            starImage.image = UIImage (named: "\(star)star")}
+        else {
+            starImage.image = UIImage (named: "\(star)starp")
+        }
+        
+    }
+    
     override var bounds: CGRect {
         didSet {
             setupBgImage()
             setupLabel()
-//            backgroundColor = .blue
+            setupimage()
+            //            backgroundColor = .blue
         }
     }
     
@@ -34,12 +57,12 @@ class LevelMenuCell: UICollectionViewCell {
     func setupLabel() {
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
-
+        
         label.font = .systemFont(ofSize: 33)
         label.textColor = UIColor(named: "black")
         label.numberOfLines = 1
         label.textAlignment = .center
-
+        
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 10).isActive = true
     }
@@ -58,7 +81,7 @@ class LevelMenuCell: UICollectionViewCell {
         bgImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
     }
-
+    
     func setupLabels(withText text: Int) {
         label.text = "\(text)"
     }
@@ -66,10 +89,14 @@ class LevelMenuCell: UICollectionViewCell {
     func select() {
         backgroundColor = UIColor(named: "black")
         label.textColor = UIColor(named: "bege")
+        estrela()
+//        LevelHandler.setLevel(to: )
     }
     
     func unselect() {
         backgroundColor = UIColor(named: "bege")
         label.textColor = UIColor(named: "black")
+        estrela()
+        
     }
 }

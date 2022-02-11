@@ -25,6 +25,7 @@ class LevelMenu: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         data = LevelHandler.shared.completedLevels
+        print (data)
         view.backgroundColor = .clear
         setupLevels()
         setupExitButtom()
@@ -97,8 +98,9 @@ extension LevelMenu: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = levels.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelMenuCell
-        cell.setupLabels(withText: indexPath.row)
+        cell.setupLabels(withText: indexPath.row + 1 )
 //        cell.backgroundColor = .red
+        cell.star = data[indexPath.row + 1]!
         return cell
     }
     
