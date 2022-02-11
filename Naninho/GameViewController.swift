@@ -52,7 +52,7 @@ class GameViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             header.topAnchor.constraint(equalTo: view.topAnchor),
-            header.heightAnchor.constraint(equalToConstant: view.frame.height * 0.2),
+            header.heightAnchor.constraint(equalToConstant: view.frame.height * 0.13),
             header.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
@@ -60,7 +60,8 @@ class GameViewController: UIViewController {
     
     func setupLevelSelectionMenu() {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0.0
+        layout.minimumLineSpacing = 3
+//        layout.sectionInset = UIEdgeInsets (top: 3, left: 0, bottom: 3, right: 0)
         
         levelSelectionMenu = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.4, height: view.frame.height * 0.8), collectionViewLayout: layout)
         
@@ -165,13 +166,14 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        
+        let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelMenuCell
+        cell.star = 1
+        cell.nivel = indexPath.row + 1
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: levelSelectionMenu.frame.width, height: levelSelectionMenu.frame.height * 0.1)
+        CGSize(width: levelSelectionMenu.frame.width, height:99)
     }
     
     
