@@ -83,7 +83,7 @@ class Bola {
             return
         }
         
-        else if bola.frame.maxY >= GameScene.topBound
+        else if bola.frame.maxY >= BouncyBallScene.topBound
         {bola.physicsBody?.velocity.dy = -abs((bola.physicsBody?.velocity.dy)!)
             return
         }

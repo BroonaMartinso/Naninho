@@ -127,7 +127,7 @@ class GameViewController: UIViewController {
         ])
         
         levelSelectionMenu.showsVerticalScrollIndicator = false
-        levelSelectionMenu.register(LevelMenuCell.self, forCellWithReuseIdentifier: "Cell")
+        levelSelectionMenu.register(LevelSelectionCell.self, forCellWithReuseIdentifier: "Cell")
         levelSelectionMenu.allowsSelection = true
         levelSelectionMenu.backgroundColor = UIColor(named: "bege")
         
@@ -211,7 +211,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelMenuCell
+        let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
         cell.star = 1
         cell.nivel = indexPath.row + 1
         return cell
@@ -222,7 +222,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = levelSelectionMenu.cellForItem(at: indexPath) as! LevelMenuCell
+        let cell = levelSelectionMenu.cellForItem(at: indexPath) as! LevelSelectionCell
         cell.select()
         
         UIView.animate(withDuration: 0.3, delay: 0) {
@@ -234,7 +234,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = levelSelectionMenu.cellForItem(at: indexPath) as! LevelMenuCell
+        let cell = levelSelectionMenu.cellForItem(at: indexPath) as! LevelSelectionCell
         cell.deselect()
     }
     

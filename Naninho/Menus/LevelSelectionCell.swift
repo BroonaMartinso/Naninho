@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LevelMenuCell: UICollectionViewCell {
+class LevelSelectionCell: UICollectionViewCell {
     
     let label = UILabel()
     let starImage = UIImageView()

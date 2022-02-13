@@ -8,6 +8,8 @@
 import Foundation
 import SpriteKit
 
+typealias ScreenStateHandler = SKScene & TouchableSpriteNodeDelegate
+
 protocol TouchableSpriteNodeDelegate {
     func perform(transition: Transition)
 }

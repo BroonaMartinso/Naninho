@@ -112,7 +112,7 @@ class Spike {
                 return
             }
             
-            else if spike.frame.maxY >= GameScene.topBound {
+            else if spike.frame.maxY >= BouncyBallScene.topBound {
                 bola.physicsBody?.velocity.dy = -abs((bola.physicsBody?.velocity.dy)!)
                 return
             }

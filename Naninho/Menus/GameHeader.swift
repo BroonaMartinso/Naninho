@@ -10,39 +10,111 @@ import UIKit
 
 class GameHeader: UIView {
     
-    private var ranking: UIButton!
-    private var star: UIButton!
-    var box : UIView!
-    
-    func setupbox(){
-        box = UIView ()
-        box.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(box)
-
-        box.widthAnchor.constraint(equalToConstant: 0.77 * frame.width).isActive = true
-        box.heightAnchor.constraint(equalToConstant: 0.312 * frame.height).isActive = true
-        box.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        box.topAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
-        box.backgroundColor =  UIColor(named: "bege")
-    }
+    private var rankingButton: UIButton!
+    private var starButton: UIButton!
+    private var buttonsContainer : UIView!
+    var delegate: GameHeaderDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupbox()
+        setupranking()
+        setupStarButton()
         backgroundColor = UIColor (named: "black")
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setupranking(){
-        ranking = UIButton()
+    
+    func setupbox(){
+        buttonsContainer = UIView ()
+        buttonsContainer.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(buttonsContainer)
+
+        buttonsContainer.heightAnchor.constraint(equalToConstant: max(39, 0.312 *  frame.height)).isActive = true
+        buttonsContainer.widthAnchor.constraint(equalTo: buttonsContainer.heightAnchor, multiplier: 8.07).isActive = true
+        buttonsContainer.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        buttonsContainer.topAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        addSubview(ranking)
-        ranking.translatesAutoresizingMaskIntoConstraints = false
-        
-        ranking.widthAnchor.constraint(equalToConstant: 128).isActive = true
-        ranking.heightAnchor.constraint(equalToConstant: 39).isActive = true
-                
+        buttonsContainer.backgroundColor =  UIColor(named: "black")
     }
+    
+    func setupranking(){
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseForegroundColor = UIColor(named: "bege")
+        configuration.baseBackgroundColor = UIColor(named: "black")
+        configuration.attributedTitle = AttributedString("ranking", attributes: AttributeContainer([
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light),
+        ]))
+        configuration.image = UIImage(systemName: "chart.bar.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+        configuration.imagePlacement = .trailing
+        configuration.cornerStyle = .capsule
+        configuration.background.strokeColor = UIColor(named: "bege")
+        configuration.background.strokeWidth = 1
+        configuration.imagePadding = 10
+        
+        rankingButton = UIButton(configuration: configuration, primaryAction: nil)
+        
+        buttonsContainer.addSubview(rankingButton)
+        rankingButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate(
+            [rankingButton.heightAnchor.constraint(equalTo: buttonsContainer.heightAnchor),
+             rankingButton.widthAnchor.constraint(equalTo: rankingButton.heightAnchor, multiplier: 3.28),
+             rankingButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
+             rankingButton.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)]
+        )
+        
+        
+        rankingButton.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    func rankingButtonTapped() {
+        if let delegate = delegate {
+            delegate.handleRankingButtonTapped()
+        }
+    }
+    
+    func setupStarButton() {
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseForegroundColor = UIColor(named: "bege")
+        configuration.baseBackgroundColor = UIColor(named: "black")
+        configuration.attributedTitle = AttributedString("star \(LevelHandler.shared.obtainedStars) | \(LevelHandler.shared.maxAchieavableStars)", attributes: AttributeContainer([
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light),
+        ]))
+        configuration.image = UIImage(systemName: "star.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+        configuration.imagePlacement = .leading
+        configuration.cornerStyle = .capsule
+        configuration.background.strokeColor = UIColor(named: "bege")
+        configuration.background.strokeWidth = 1
+        configuration.imagePadding = 10
+        
+        starButton = UIButton(configuration: configuration, primaryAction: nil)
+        
+        buttonsContainer.addSubview(starButton)
+        starButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate(
+            [starButton.heightAnchor.constraint(equalTo: buttonsContainer.heightAnchor),
+             starButton.widthAnchor.constraint(equalTo: starButton.heightAnchor, multiplier: 4.56),
+             starButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor),
+             starButton.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)]
+        )
+        
+        starButton.addTarget(self, action: #selector(starsButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    func starsButtonTapped() {
+        if let delegate = delegate {
+            delegate.handleRankingButtonTapped()
+        }
+    }
+}
+
+protocol GameHeaderDelegate {
+    func handleRankingButtonTapped()
+    func handleStarsButtonTapped()
 }

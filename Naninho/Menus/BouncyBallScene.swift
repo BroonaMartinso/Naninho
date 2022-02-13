@@ -134,7 +134,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     func getScreenSize() {
         screenWidth = scene?.frame.width
         screenHeight = scene?.frame.height
-        GameScene.topBound = bar.frame.minY
+        BouncyBallScene.topBound = bar.frame.minY
     }
     
     func startGame() {
