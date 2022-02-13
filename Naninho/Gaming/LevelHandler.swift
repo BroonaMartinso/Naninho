@@ -24,8 +24,9 @@ class LevelHandler {
             UserDefaults.standard.set(maxLevel, forKey: "maxLevel")
         }
     }
+
     private var listeners: [LevelChangeListener] = []
-    var completedLevels: [Int: Int] = [:] {
+    private(set) var completedLevels: [Int: Int] = [:] {
         didSet {
             let encoder = PropertyListEncoder()
             
@@ -33,6 +34,18 @@ class LevelHandler {
                 UserDefaults.standard.set(data, forKey: "completedLevels")
             }
         }
+    }
+    
+    var maxAchieavableStars: Int {
+        return (maxLevel) * 3
+    }
+    
+    var obtainedStars: Int {
+        var totalStars = 0
+        for level in completedLevels {
+            totalStars += level.value
+        }
+        return totalStars
     }
     
     var levelSpeed: Double {
@@ -97,9 +110,11 @@ class LevelHandler {
         { GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: [GameViewController.gcDefaultLeaderBoard], completionHandler: {error in})
         }
     }
-    static func setLevel(to level: Int) {
-        if level > 0 && level <= shared.maxLevel {
-            shared.currentLevel = level
+    
+    func setLevel(to level: Int) {
+        currentLevel = level
+        if level > 0 && level <= maxLevel {
+            currentLevel = level
         }
     }
     

@@ -98,7 +98,6 @@ extension LevelMenu: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = levels.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelMenuCell
-        cell.setupLabels(withText: indexPath.row + 1 )
 //        cell.backgroundColor = .red
         cell.star = data[indexPath.row + 1]!
         return cell
@@ -115,6 +114,6 @@ extension LevelMenu: UICollectionViewDataSource, UICollectionViewDelegate, UICol
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? LevelMenuCell
-        cell?.unselect() // <----- this can be null here, and the cell can still come back on screen!
+        cell?.deselect()
     }
 }

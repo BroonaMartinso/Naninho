@@ -15,8 +15,10 @@ protocol Menu {
 }
 
 extension Menu {
-    func slideVertically(distance: CGFloat) {
-        self.representation.slideVertically(distance: distance)
+    func slideVertically(distance: CGFloat, completion: @escaping ()->Void = {}) {
+        self.representation.slideVertically(distance: distance) {
+            completion()
+        }
     }
     
     func slideHorizontally(distance: CGFloat, completion: @escaping ()->Void = {}) {

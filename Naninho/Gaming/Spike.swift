@@ -119,7 +119,7 @@ class Spike {
         }
     }
     
-    func jogo(click: CGPoint) {
+    func jogo(click: CGPoint) -> Bool {
         for spike in spikeArray {
             if spike.contains(click){
                 spikeArray.remove(at: spikeArray.firstIndex(of: spike)!)
@@ -127,11 +127,11 @@ class Spike {
                 if spikeArray.isEmpty {
                     spikeParent.perform(transition: .gameToWin)
                 }
-                
-                return
-                
+                return true
             }
         }
+        
+        return false
     }
     func madspike () {
         for spike in spikeArray {
@@ -145,7 +145,9 @@ class Spike {
     func queda (spike : SKShapeNode) {
         
         spike.physicsBody?.affectedByGravity = true
-        spike.run(SKAction.wait(forDuration: 3), completion: {                spike.removeFromParent()})
+        spike.run(SKAction.wait(forDuration: 3), completion: {
+            spike.removeFromParent()
+        })
 
     }
 }

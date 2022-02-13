@@ -102,7 +102,7 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
         }
         
         if status == .play {
-            for t in touches { bola.jogo(click: t.location(in: self)) }
+            for t in touches { bola.handleTapDuringGame(atPos: t.location(in: self)) }
             for t in touches { spike.jogo(click: t.location(in: self)) }
         }
         
@@ -174,7 +174,7 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             winMenu.disappear()
             startGame()
         case .repeatLevel:
-            LevelHandler.setLevel(to: LevelHandler.shared.currentLevel - 1)
+            LevelHandler.shared.setLevel(to: LevelHandler.shared.currentLevel - 1)
             winMenu.disappear()
             loseMenu.disappear()
             startGame()
@@ -201,10 +201,11 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
             bola.pause()
             status = .pause
         case .introRanking:
-            let GameCenterVC = GKGameCenterViewController(leaderboardID: GameViewController.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
-               GameCenterVC.gameCenterDelegate = self
-            let controller = self.view?.window?.rootViewController as? GameViewController
-            controller?.present (GameCenterVC, animated: true, completion: nil)
+            break
+//            let GameCenterVC = GKGameCenterViewController(leaderboardID: GameViewController.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
+//               GameCenterVC.gameCenterDelegate = self
+//            let controller = self.view?.window?.rootViewController as? GameViewController
+//            controller?.present (GameCenterVC, animated: true, completion: nil)
 //            self.ViewController(GameCenterVC, animated: true, completion: nil)
         }
     }
@@ -245,24 +246,16 @@ class GameScene: SKScene, BallDelegate, TouchableSpriteNodeDelegate, TopBarMenuD
     
 }
 
-
-enum Status{
-    case intro
-    case levelSelect
-    case transition
-    case play
-    case pause
-    case win
-    case lose
-}
-
 typealias ScreenStateHandler = SKScene & TouchableSpriteNodeDelegate
 
 extension SKNode {
-    func slideVertically(distance: CGFloat) {
+    //TODO: Limpar código, não precisa de duas extensões, provavelmente
+    func slideVertically(distance: CGFloat, completion: @escaping ()->Void = {}) {
         self.run(SKAction.sequence(
             [SKAction.moveBy(x: 0, y: distance * 1.1, duration: 0.2),
-             SKAction.moveBy(x: 0, y: -distance * 0.1, duration: 0.05)]))
+             SKAction.moveBy(x: 0, y: -distance * 0.1, duration: 0.05)])) {
+                 completion()
+             }
     }
     
     func slideHorizontally(distance: CGFloat, completion: @escaping ()->Void = {}) {
