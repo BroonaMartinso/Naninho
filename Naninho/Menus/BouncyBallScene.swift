@@ -44,6 +44,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             animateGameEnd(withResult: .lose)
         } else if transition == .gameToWin {
             status = .win
+            LevelHandler.nextLevel(timeRemaining: levelTime)
             animateGameEnd(withResult: .win)
         }
             

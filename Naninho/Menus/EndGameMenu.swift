@@ -164,6 +164,10 @@ class EndGameMenu: UIViewController {
 
     @objc
     func replayButtonTapped() {
+        if status == .win {
+            LevelHandler.shared.setLevel(to: LevelHandler.shared.currentLevel - 1)
+        }
+        
         if let delegate = delegate {
             delegate.replayLevel()
         }

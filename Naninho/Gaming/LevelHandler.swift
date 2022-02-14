@@ -19,7 +19,7 @@ class LevelHandler {
             UserDefaults.standard.set(currentLevel, forKey: "currentLevel")
         }
     }
-    private var maxLevel: Int = 0{
+    var maxLevel: Int = 0{
         didSet {
             UserDefaults.standard.set(maxLevel, forKey: "maxLevel")
         }
@@ -104,6 +104,10 @@ class LevelHandler {
     
     }
     
+    func getStarsFor(level: Int) -> Int? {
+        return completedLevels[level]
+    }
+    
     func updateScore(with value:Int)
     {
         if (GameViewController.gcEnabled)
@@ -121,6 +125,7 @@ class LevelHandler {
     func addListener(_ listener: LevelChangeListener) {
         listeners.append(listener)
     }
+    
     private static func getStarsForCurrentLevel(timeRemaining: Double) -> Int{
         var starsGained: Int = 0
         

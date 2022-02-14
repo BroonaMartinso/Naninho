@@ -76,7 +76,7 @@ class LevelSelectionCell: UICollectionViewCell {
     }
     
     func configureStarImage() {
-            starImage.image = UIImage (named: "\(star)star")
+        starImage.image = UIImage (named: "\(star)star")
     }
     
     func select() {

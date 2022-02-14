@@ -19,7 +19,6 @@ class GameViewController: UIViewController {
     
     private var header: GameHeader!
     private var levelSelectionMenu: UICollectionView!
-    private var levelData: [(Int, Int)] = []
     private var bouncyCharView: SKView!
     private var levelPopup: BeginLevelPopup!
     private var animatableLevelSelectionMenuConstraint: NSLayoutConstraint!
@@ -56,17 +55,16 @@ class GameViewController: UIViewController {
     static var gcEnabled = Bool() // Check if the user has Game Center enabled
     static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     
+    override func viewWillAppear(_ animated: Bool) {
+        levelSelectionMenu.reloadData()
+        
+        levelSelectionMenu.indexPathsForSelectedItems?.forEach { levelSelectionMenu.deselectItem(at: $0, animated: false) }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         authenticateLocalPlayer()
-        
-        for levelInfo in LevelHandler.shared.completedLevels {
-            levelData.append((levelInfo.key, levelInfo.value))
-        }
-        
-        levelData.sort(by: { $0.0 > $1.0 })
-        print(levelData)
-        
+
         setupHeader()
         setupLevelSelectionMenu()
         setupBouncyCharView()
@@ -207,13 +205,20 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        4
+        LevelHandler.shared.maxLevel + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
-        cell.star = 1
-        cell.nivel = indexPath.row + 1
+        let currLevel = LevelHandler.shared.maxLevel + 1 - indexPath.row
+        
+        if let data = LevelHandler.shared.getStarsFor(level: currLevel) {
+            cell.star = data
+        } else {
+            cell.star = 0
+        }
+        
+        cell.nivel = currLevel
         return cell
     }
     
