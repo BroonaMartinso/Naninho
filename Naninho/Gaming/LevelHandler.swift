@@ -89,16 +89,16 @@ class LevelHandler {
         maxLevel = UserDefaults.standard.integer(forKey: "maxLevel")
     }
     
-    static func nextLevel(timeRemaining: Double) {
-        if shared.currentLevel != 0 {
+    func nextLevel(timeRemaining: Double) {
+        if currentLevel != 0 {
             let startsGained = getStarsForCurrentLevel(timeRemaining: timeRemaining)
             registerStarsForCurrentLevel(amount: startsGained)
         }
         
-        shared.currentLevel += 1
-        if  shared.maxLevel < shared.currentLevel {
-            shared.maxLevel =  shared.currentLevel
-            shared.updateScore (with: shared.maxLevel)
+        currentLevel += 1
+        if  maxLevel < currentLevel {
+            maxLevel =  currentLevel
+            updateScore (with: maxLevel)
             
         }
     
@@ -126,12 +126,12 @@ class LevelHandler {
         listeners.append(listener)
     }
     
-    private static func getStarsForCurrentLevel(timeRemaining: Double) -> Int{
+    private func getStarsForCurrentLevel(timeRemaining: Double) -> Int{
         var starsGained: Int = 0
         
-        if timeRemaining > shared.timeToCompleteCurrLevel * 0.5 {
+        if timeRemaining > timeToCompleteCurrLevel * 0.5 {
             starsGained = 3
-        } else if timeRemaining > shared.timeToCompleteCurrLevel * 0.25 {
+        } else if timeRemaining > timeToCompleteCurrLevel * 0.25 {
             starsGained = 2
         } else {
             starsGained = 1
@@ -140,13 +140,13 @@ class LevelHandler {
         return starsGained
     }
     
-    private static func registerStarsForCurrentLevel(amount stars: Int) {
-        if let previousStars = shared.completedLevels[shared.currentLevel] {
-            shared.completedLevels[shared.currentLevel] = max(previousStars, stars)
+    private func registerStarsForCurrentLevel(amount stars: Int) {
+        if let previousStars = completedLevels[currentLevel] {
+            completedLevels[currentLevel] = max(previousStars, stars)
         } else {
-            shared.completedLevels[shared.currentLevel] = stars
+            completedLevels[currentLevel] = stars
         }
-        print(shared.completedLevels)
+        print(completedLevels)
     }
     
     func sigmoid(x: Double, beta: Double = 1.0) -> Double {

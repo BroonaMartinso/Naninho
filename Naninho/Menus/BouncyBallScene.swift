@@ -10,75 +10,10 @@ import UIKit
 import SpriteKit
 
 class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
-    func handleWrongTap() {
-        levelTime -= 5
-        animateBarColor()
-        if levelTime <= 0 {
-            perform(transition: .gameToLose)
-        } else {
-            spike.madspike()
-            ball.bravo()
-        }
-    }
-    
-    func perform(transition: Transition) {
-        if transition == .gameToPause {
-            pausePopup.slideVertically(distance: screenHeight)
-            ball.pause()
-            status = .pause
-        } else if transition == .pauseToReplay {
-            startGame()
-            pausePopup.slideVertically(distance: -screenHeight)
-        } else if transition == .pauseToContinue {
-            ball.resume()
-            status = .play
-            pausePopup.slideVertically(distance: -screenHeight)
-        } else if transition == .pauseToMainMenu {
-            pausePopup.slideVertically(distance: -screenHeight)
-            if let delegate = self.del {
-                delegate.goToMenu()
-            }
-            self.status = .intro
-        } else if transition == .gameToLose {
-            status = .lose
-            animateGameEnd(withResult: .lose)
-        } else if transition == .gameToWin {
-            status = .win
-            LevelHandler.nextLevel(timeRemaining: levelTime)
-            animateGameEnd(withResult: .win)
-        }
-            
-    }
-    
-    //TODO: Repensar tela de final e transições (talvez uma generalização para única VC capaz
-    // de se configurar de acordo com o estado passado
-    func animateGameEnd(withResult result: EndGameStatus) {
-        isUserInteractionEnabled = false
-        ball.bola.removeAllActions()
-        ball.bola.texture = SKTexture(imageNamed: result == .win ? "bolaVerde" : "bolaVermelha")
-        topBar.representation.isHidden = true
-        timeBar.isHidden = true
-        ball.bola.run(SKAction.scale(by: 30, duration: 0.4)) {
-            if let delegate = self.del {
-                if result == .win {
-                    delegate.win()
-                } else if result == .lose {
-                    delegate.lose()
-                }
-            }
-            self.ball.bola.run(SKAction.wait(forDuration: 0.5)) {
-                self.ball.bola.run(SKAction.scale(by: 1/30, duration: 0))
-                self.topBar.representation.isHidden = false
-                self.timeBar.isHidden = false
-                self.isUserInteractionEnabled = true
-            }
-        }
-    }
-    
     private var ball: Bola!
     private var spike: Spike!
     private var pausePopup: Menu!
-    private var topBar: TopBar!
+    private var topBar: Menu!
     private var timeBar: SKNode!
     private var bar: SKSpriteNode!
     private var screenWidth: CGFloat!
@@ -217,6 +152,71 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         bar.color = UIColor(named: "red")!
         bar.tilt(byAngle: Double.pi/18)
         bar.run(SKAction.wait(forDuration: 0.2)) { self.bar.color = UIColor(named: "black")! }
+    }
+    
+    func handleWrongTap() {
+        levelTime -= 5
+        animateBarColor()
+        if levelTime <= 0 {
+            perform(transition: .gameToLose)
+        } else {
+            spike.madspike()
+            ball.bravo()
+        }
+    }
+    
+    func perform(transition: Transition) {
+        if transition == .gameToPause {
+            pausePopup.slideVertically(distance: screenHeight)
+            ball.pause()
+            status = .pause
+        } else if transition == .pauseToReplay {
+            startGame()
+            pausePopup.slideVertically(distance: -screenHeight)
+        } else if transition == .pauseToContinue {
+            ball.resume()
+            status = .play
+            pausePopup.slideVertically(distance: -screenHeight)
+        } else if transition == .pauseToMainMenu {
+            pausePopup.slideVertically(distance: -screenHeight)
+            if let delegate = self.del {
+                delegate.goToMenu()
+            }
+            self.status = .intro
+        } else if transition == .gameToLose {
+            status = .lose
+            animateGameEnd(withResult: .lose)
+        } else if transition == .gameToWin {
+            status = .win
+            LevelHandler.shared.nextLevel(timeRemaining: levelTime)
+            animateGameEnd(withResult: .win)
+        }
+            
+    }
+    
+    //TODO: Repensar tela de final e transições (talvez uma generalização para única VC capaz
+    // de se configurar de acordo com o estado passado
+    func animateGameEnd(withResult result: EndGameStatus) {
+        isUserInteractionEnabled = false
+        ball.bola.removeAllActions()
+        ball.bola.texture = SKTexture(imageNamed: result == .win ? "bolaVerde" : "bolaVermelha")
+        topBar.representation.isHidden = true
+        timeBar.isHidden = true
+        ball.bola.run(SKAction.scale(by: 30, duration: 0.4)) {
+            if let delegate = self.del {
+                if result == .win {
+                    delegate.win()
+                } else if result == .lose {
+                    delegate.lose()
+                }
+            }
+            self.ball.bola.run(SKAction.wait(forDuration: 0.5)) {
+                self.ball.bola.run(SKAction.scale(by: 1/30, duration: 0))
+                self.topBar.representation.isHidden = false
+                self.timeBar.isHidden = false
+                self.isUserInteractionEnabled = true
+            }
+        }
     }
 
 }

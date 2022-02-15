@@ -70,21 +70,6 @@ class GameViewController: UIViewController {
         setupBouncyCharView()
         setupLevelPopup()
         
-//        if let view = self.view as! SKView? {
-//            // Load the SKScene from 'GameScene.sks'
-//            if let scene = SKScene(fileNamed: "GameScene") {
-//                // Set the scale mode to scale to fit the window
-//                scene.scaleMode = .aspectFill
-//
-//                // Present the scene
-//                view.presentScene(scene)
-//            }
-//
-//            view.ignoresSiblingOrder = true
-//            authenticateLocalPlayer ()
-//            view.showsFPS = true
-//            view.showsNodeCount = true
-//        }
         view.backgroundColor = UIColor(named: "bege")
     }
     
@@ -219,6 +204,9 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         cell.nivel = currLevel
+        if currLevel != LevelHandler.shared.currentLevel {
+            cell.deselect()
+        }
         return cell
     }
     

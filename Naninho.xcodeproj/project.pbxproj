@@ -59,6 +59,7 @@
 		FA29AD3B27B2BB1A0039A575 /* MenuProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProtocol.swift; sourceTree = "<group>"; };
 		FA29AD4327B2CD810039A575 /* PausePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PausePopup.swift; sourceTree = "<group>"; };
 		FA29AD4527B2CF260039A575 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		FA2B660127BBDABB00CE3486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameMenu.swift; sourceTree = "<group>"; };
@@ -120,6 +121,7 @@
 		56662D1B27A8528F00E4D27A /* Naninho */ = {
 			isa = PBXGroup;
 			children = (
+				FA2B660127BBDABB00CE3486 /* Info.plist */,
 				56662D1C27A8528F00E4D27A /* AppDelegate.swift */,
 				FA267B7227B6D05C00191017 /* BouncyBall.sks */,
 				56662D1E27A8528F00E4D27A /* GameScene.sks */,
@@ -468,6 +470,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8KLVK79M3G;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Naninho/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -500,6 +503,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8KLVK79M3G;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Naninho/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

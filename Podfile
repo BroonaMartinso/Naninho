@@ -8,5 +8,6 @@ target 'Naninho' do
   # Pods for Naninho
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
-
+  pod 'Google-Mobile-Ads-SDK'
+  
 end
