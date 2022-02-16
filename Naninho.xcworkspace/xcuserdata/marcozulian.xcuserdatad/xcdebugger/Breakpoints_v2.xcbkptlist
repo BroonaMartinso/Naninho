@@ -240,7 +240,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "177"
             endingLineNumber = "177"
-            landmarkName = "replayButtonTapped()"
+            landmarkName = "nextLevelButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
