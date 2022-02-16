@@ -53,8 +53,8 @@ class LevelHandler {
             return 0
         }
         else {
-            let minSpeed = 100 + 150 * currentLevel / 4
-            let deltaSpeed = 200 - 20 * currentLevel / 4
+            let minSpeed = 100 + 25 * currentLevel / 4
+            let deltaSpeed = max(0, 200 - 20 * currentLevel / 4)
             return Double(minSpeed) + Double(deltaSpeed) * sigmoid(x: Double(currentLevel / 4), beta: 0.5)
         }
     }
@@ -64,16 +64,16 @@ class LevelHandler {
             return 4
         }
         else {
-            return 5 + (currentLevel / 4)
+            return min(8, 5 + (currentLevel / 4))
         }
     }
     
     var timeNeededForAFullCircle: Double {
-        max(1, 5 - 0.5 * (Double(currentLevel.quotientAndRemainder(dividingBy: 4).quotient)))
+        max(1, 10 - 0.25 * (Double(currentLevel.quotientAndRemainder(dividingBy: 4).quotient)))
     }
     
     var timeToCompleteCurrLevel: Double {
-        60
+        50 + 0.15 * Double(currentLevel)
     }
     
     private init() {

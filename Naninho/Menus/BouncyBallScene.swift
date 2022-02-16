@@ -88,7 +88,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             self.topBar.appear()
             self.timeBar.alpha = 1
             self.bar.alpha = 1
-            self.levelTime = 60
+            self.levelTime = LevelHandler.shared.timeToCompleteCurrLevel
         }
     }
     
