@@ -27,6 +27,8 @@ class LevelSelectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(named: "black")
+        layer.borderWidth = 2
+        layer.borderColor = UIColor(named: "bege")?.cgColor
     }
     
     required init?(coder: NSCoder) {

@@ -30,6 +30,7 @@
 		FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4527B2CF260039A575 /* TopBar.swift */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
 		FA5058D027B18E0B0083E90C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */; };
+		FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA516A1E27BC7795000EC432 /* UIViewExtension.swift */; };
 		FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */; };
 		FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		FA2B660127BBDABB00CE3486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA516A1E27BC7795000EC432 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameMenu.swift; sourceTree = "<group>"; };
 		FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginLevelPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 				FA267B7427B6D3F400191017 /* BouncyBallScene.swift */,
 				FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */,
 				FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */,
+				FA516A1E27BC7795000EC432 /* UIViewExtension.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */,
 				56662D2327A8528F00E4D27A /* SKNodeExtension.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
+				FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */,
 				FA06AE3227B5620E00B6CFA6 /* LevelSelectionCell.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,

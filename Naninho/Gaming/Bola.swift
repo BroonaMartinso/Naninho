@@ -20,10 +20,32 @@ class Bola {
     }
     
     func startGame(completion: @escaping () -> Void = {}) {
-        bola.physicsBody?.affectedByGravity = false
-        bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+//        bola.physicsBody?.affectedByGravity = false
+//        bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+//
+//        bola.run(SKAction.moveTo(y: 0, duration: 1)) {
+//            self.bola.texture = SKTexture(image: UIImage(named: "expandir")!)
+//            self.bola.run(SKAction.sequence(
+//                [
+//                    SKAction.scale(by: 0.5, duration: 0.2),
+//                    SKAction.repeat(
+//                        SKAction.sequence([
+//                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
+//                            SKAction.rotate(byAngle: Double.pi/5, duration: 0.12),
+//                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
+//                        ]), count: 3),
+//                    SKAction.scale(by: 2, duration: 0.0)
+//                ])
+//            ) {
+//                self.bola.texture = SKTexture(image: UIImage(named: "Naninho")!)
+//                self.pula(velocidade: LevelHandler.shared.levelSpeed)
+//                completion()
+//            }
+//        }
         
-        bola.run(SKAction.moveTo(y: 0, duration: 1)) {
+        bola.run(SKAction.wait(forDuration: timeUntilReachZeroOnYAxis())) {
+            self.bola.physicsBody?.affectedByGravity = false
+            self.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             self.bola.texture = SKTexture(image: UIImage(named: "expandir")!)
             self.bola.run(SKAction.sequence(
                 [
@@ -32,7 +54,7 @@ class Bola {
                         SKAction.sequence([
                             SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
                             SKAction.rotate(byAngle: Double.pi/5, duration: 0.12),
-                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
+                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06)
                         ]), count: 3),
                     SKAction.scale(by: 2, duration: 0.0)
                 ])
@@ -40,9 +62,34 @@ class Bola {
                 self.bola.texture = SKTexture(image: UIImage(named: "Naninho")!)
                 self.pula(velocidade: LevelHandler.shared.levelSpeed)
                 completion()
-                //TODO: Start game
             }
         }
+    }
+    
+    private func timeUntilReachZeroOnYAxis() -> Double {
+        let v0 = bola.physicsBody!.velocity.dy / 150
+        let s0 = bola.position.y / 150
+        let g = 2.5
+        let velocidadeNoSolo = sqrt(2*g*240/150)
+        let velocidadeNoCentro = sqrt(2*g)
+        
+        if v0 > 0 && s0 > 0 {
+            print(v0/g + sqrt(2*s0/g))
+            return v0/g + sqrt(2*s0/g)
+        } else if v0 > 0 && s0 < 0 {
+            print((v0 - velocidadeNoCentro) / 2.5)
+            return (v0 - velocidadeNoCentro) / 2.5
+        } else if v0 < 0 && s0 > 0 {
+            print((velocidadeNoCentro + v0) / 2.5)
+            return (velocidadeNoCentro + v0) / 2.5
+        } else if v0 < 0 && s0 < 0 {
+            let tempoAteChao = (velocidadeNoSolo + v0) / 2.5
+            let tempoDeSubida = (velocidadeNoCentro - v0) / 2.5
+            print(tempoAteChao + tempoDeSubida)
+            return tempoAteChao + tempoDeSubida
+        }
+        
+        return 0
     }
     
     func pula(velocidade: Double){
@@ -117,6 +164,7 @@ class Bola {
     
     func handleTapDuringMenu(atPos pos: CGPoint) {
         if bola.contains(pos) {
+            bolaParent.isUserInteractionEnabled = false
             bola.texture = SKTexture(imageNamed: "Naninho")
             bola.run(SKAction.repeat(
                 SKAction.sequence(
@@ -125,6 +173,7 @@ class Bola {
                      SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06)]
                 ), count: 4)) {
                     self.bola.texture = SKTexture(imageNamed: "feliz")
+                    self.bolaParent.isUserInteractionEnabled = true
                 }
         }
     }

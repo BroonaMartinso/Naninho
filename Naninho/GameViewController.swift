@@ -9,6 +9,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import GameKit
+import GoogleMobileAds
 
 class GameViewController: UIViewController {
   
@@ -17,6 +18,9 @@ class GameViewController: UIViewController {
         case game
     }
     
+    var bannerView: GADBannerView!
+    private var levelsWon: Int = 0
+    private var interstitial: GADInterstitialAd?
     private var header: GameHeader!
     private var levelSelectionMenu: UICollectionView!
     private var bouncyCharView: SKView!
@@ -28,6 +32,7 @@ class GameViewController: UIViewController {
         didSet {
             if displayStatus == .game {
                 self.disableBackgroundInteractions()
+                bannerView.alpha = 0
                 UIView.animate(withDuration: 1, delay: 0, animations: {
                     self.animatableLevelSelectionMenuConstraint.constant = -self.view.frame.width * 0.375
                     self.animatableHeaderConstraint.constant = -self.view.frame.height * 0.13
@@ -42,6 +47,7 @@ class GameViewController: UIViewController {
             }
             else if displayStatus == .menu {
                 self.disableBackgroundInteractions()
+                bannerView.alpha = 1
                 UIView.animate(withDuration: 0, delay: 0, animations: {
                     self.animatableLevelSelectionMenuConstraint.constant = 0
                     self.animatableHeaderConstraint.constant = 0
@@ -71,6 +77,54 @@ class GameViewController: UIViewController {
         setupLevelPopup()
         
         view.backgroundColor = UIColor(named: "bege")
+        
+        let freeSpace = view.frame.width * 0.575
+        let adSize = GADAdSizeFromCGSize(CGSize(width: freeSpace, height: 50))
+        bannerView = GADBannerView(adSize: adSize)
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+
+        requestIntersticial()
+    }
+    
+    func requestIntersticial() {
+        // Intersticial
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+                               request: request,
+                               completionHandler: { [self] ad, error in
+            if let error = error {
+                print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                return
+            }
+            interstitial = ad
+            interstitial?.fullScreenContentDelegate = self
+        }
+        )
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: bottomLayoutGuide,
+                                attribute: .top,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .trailing,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .trailing,
+                                multiplier: 1,
+                                constant: -view.frame.width * 0.025)
+            ])
     }
     
     func setupHeader() {
@@ -93,7 +147,8 @@ class GameViewController: UIViewController {
     
     func setupLevelSelectionMenu() {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets (top: 2, left: 0, bottom: 2, right: 0)
+        layout.minimumLineSpacing = 0
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: -2, bottom: 0, right: -2)
         
         levelSelectionMenu = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width * 0.375, height: view.frame.height * 0.8), collectionViewLayout: layout)
         
@@ -112,7 +167,7 @@ class GameViewController: UIViewController {
         levelSelectionMenu.showsVerticalScrollIndicator = false
         levelSelectionMenu.register(LevelSelectionCell.self, forCellWithReuseIdentifier: "Cell")
         levelSelectionMenu.allowsSelection = true
-        levelSelectionMenu.backgroundColor = UIColor(named: "bege")
+        levelSelectionMenu.backgroundColor = UIColor(named: "black")
         
         levelSelectionMenu.delegate = self
         levelSelectionMenu.dataSource = self
@@ -190,12 +245,12 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        LevelHandler.shared.maxLevel + 1
+        max(1, LevelHandler.shared.maxLevel)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
-        let currLevel = LevelHandler.shared.maxLevel + 1 - indexPath.row
+        let currLevel = max(1, LevelHandler.shared.maxLevel - indexPath.row)
         
         if let data = LevelHandler.shared.getStarsFor(level: currLevel) {
             cell.star = data
@@ -211,7 +266,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: levelSelectionMenu.frame.width, height:99)
+        CGSize(width: levelSelectionMenu.frame.width + 4, height:99)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -301,12 +356,23 @@ extension GameViewController: BeginLevelPopupDelegate {
 
 extension GameViewController: BouncyBallSceneDelegate {
     func win() {
-        let endVC = EndGameMenu(gameResult: .win)
-        endVC.view.isUserInteractionEnabled = false
-        endVC.delegate = self
+        levelsWon += 1
         
-        present(endVC, animated: true) {
-            endVC.view.isUserInteractionEnabled = true
+        if levelsWon == 3 {
+            if let interstitial = interstitial{
+                interstitial.present(fromRootViewController: self)
+            } else {
+                print("Ad wasn`t ready")
+            }
+            levelsWon = 0
+        } else {
+            let endVC = EndGameMenu(gameResult: .win)
+            endVC.view.isUserInteractionEnabled = false
+            endVC.delegate = self
+            
+            present(endVC, animated: true) {
+                endVC.view.isUserInteractionEnabled = true
+            }
         }
     }
     
@@ -324,13 +390,14 @@ extension GameViewController: BouncyBallSceneDelegate {
 extension GameViewController: EndGameMenuDelegate {
     func replayLevel() {
         if let scene = bouncyCharView.scene as? BouncyBallScene {
-            scene.resetScene()
+            scene.prepareForNextGame()
             scene.startGame()
         }
     }
     
     func goToNextLevel() {
         if let scene = bouncyCharView.scene as? BouncyBallScene {
+            scene.prepareForNextGame()
             scene.startGame()
         }
     }
@@ -344,4 +411,36 @@ extension GameViewController: EndGameMenuDelegate {
     }
     
     
+}
+
+extension GameViewController: GADFullScreenContentDelegate {
+    /// Tells the delegate that the ad failed to present full screen content.
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        print("Ad did fail to present full screen content.")
+        let endVC = EndGameMenu(gameResult: .win)
+        endVC.view.isUserInteractionEnabled = false
+        endVC.delegate = self
+        
+        present(endVC, animated: true) {
+            endVC.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    /// Tells the delegate that the ad presented full screen content.
+    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad did present full screen content.")
+    }
+    
+    /// Tells the delegate that the ad dismissed full screen content.
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        requestIntersticial()
+        let endVC = EndGameMenu(gameResult: .win)
+        endVC.view.isUserInteractionEnabled = false
+        endVC.delegate = self
+        
+        present(endVC, animated: true) {
+            endVC.view.isUserInteractionEnabled = true
+        }
+//        scene.reset()
+    }
 }

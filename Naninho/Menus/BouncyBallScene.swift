@@ -110,6 +110,11 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         
         status = .intro
     }
+    
+    func prepareForNextGame() {
+        ball.bola.position = CGPoint(x: 0, y: 0)
+        spike.removeAllspikes()
+    }
 
     func setupBall() {
         let ballNode = childNode(withName: "ball") as! SKSpriteNode
@@ -171,6 +176,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             ball.pause()
             status = .pause
         } else if transition == .pauseToReplay {
+            spike.removeAllspikes()
             startGame()
             pausePopup.slideVertically(distance: -screenHeight)
         } else if transition == .pauseToContinue {
@@ -194,8 +200,6 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             
     }
     
-    //TODO: Repensar tela de final e transições (talvez uma generalização para única VC capaz
-    // de se configurar de acordo com o estado passado
     func animateGameEnd(withResult result: EndGameStatus) {
         isUserInteractionEnabled = false
         ball.bola.removeAllActions()

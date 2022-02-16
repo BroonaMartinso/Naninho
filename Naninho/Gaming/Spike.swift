@@ -20,6 +20,11 @@ class Spike {
     }
     
     func update(deltaTime: TimeInterval) {
+        // Se a bola não está se movimentando, o jogo está pausado e os spikes não devem rotacionar
+        if bola.physicsBody?.velocity.dy == 0 {
+            return
+        }
+        
         rotation = CGFloat(deltaTime)/LevelHandler.shared.timeNeededForAFullCircle*2*Double.pi
         
         for spike in spikeArray {
