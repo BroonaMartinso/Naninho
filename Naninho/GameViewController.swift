@@ -390,14 +390,12 @@ extension GameViewController: BouncyBallSceneDelegate {
 extension GameViewController: EndGameMenuDelegate {
     func replayLevel() {
         if let scene = bouncyCharView.scene as? BouncyBallScene {
-            scene.prepareForNextGame()
             scene.startGame()
         }
     }
     
     func goToNextLevel() {
         if let scene = bouncyCharView.scene as? BouncyBallScene {
-            scene.prepareForNextGame()
             scene.startGame()
         }
     }

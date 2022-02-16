@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAnalytics
 
 class EndGameMenu: UIViewController {
     
@@ -172,6 +173,10 @@ class EndGameMenu: UIViewController {
             delegate.replayLevel()
         }
         dismiss(animated: true)
+        
+        Analytics.logEvent("Replay_From_End_Screen", parameters:
+                            ["Level": LevelHandler.shared.currentLevel as NSObject,
+                             "Status": status.rawValue as NSObject])
     }
     
     @objc
@@ -192,9 +197,9 @@ class EndGameMenu: UIViewController {
     
 }
 
-enum EndGameStatus {
-    case win
-    case lose
+enum EndGameStatus: String {
+    case win = "Ganhou"
+    case lose = "Perdeu"
 }
 
 protocol EndGameMenuDelegate {

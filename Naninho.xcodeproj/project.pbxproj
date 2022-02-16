@@ -22,6 +22,10 @@
 		FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */; };
 		FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BA927AD674000837CDB /* LevelHandler.swift */; };
 		FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */; };
+		FA260C1727BD333A002C3614 /* NaninhosHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA260C1627BD333A002C3614 /* NaninhosHandler.swift */; };
+		FA260C1927BD3459002C3614 /* Spike2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA260C1827BD3459002C3614 /* Spike2.swift */; };
+		FA260C1B27BD38B7002C3614 /* Naninho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA260C1A27BD38B7002C3614 /* Naninho.swift */; };
+		FA260C1D27BD3979002C3614 /* Bola2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA260C1C27BD3979002C3614 /* Bola2.swift */; };
 		FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA267B7027B6CB7200191017 /* GameHeader.swift */; };
 		FA267B7327B6D05C00191017 /* BouncyBall.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA267B7227B6D05C00191017 /* BouncyBall.sks */; };
 		FA267B7527B6D3F400191017 /* BouncyBallScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA267B7427B6D3F400191017 /* BouncyBallScene.swift */; };
@@ -54,6 +58,10 @@
 		FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesManager.swift; sourceTree = "<group>"; };
 		FA1E1BA927AD674000837CDB /* LevelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelHandler.swift; sourceTree = "<group>"; };
 		FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSpriteNode.swift; sourceTree = "<group>"; };
+		FA260C1627BD333A002C3614 /* NaninhosHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaninhosHandler.swift; sourceTree = "<group>"; };
+		FA260C1827BD3459002C3614 /* Spike2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spike2.swift; sourceTree = "<group>"; };
+		FA260C1A27BD38B7002C3614 /* Naninho.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Naninho.swift; sourceTree = "<group>"; };
+		FA260C1C27BD3979002C3614 /* Bola2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bola2.swift; sourceTree = "<group>"; };
 		FA267B7027B6CB7200191017 /* GameHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeader.swift; sourceTree = "<group>"; };
 		FA267B7227B6D05C00191017 /* BouncyBall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BouncyBall.sks; sourceTree = "<group>"; };
 		FA267B7427B6D3F400191017 /* BouncyBallScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyBallScene.swift; sourceTree = "<group>"; };
@@ -93,11 +101,15 @@
 			children = (
 				56662D2227A8528F00E4D27A /* SKNodeExtension.swift */,
 				56662D3327A85AA300E4D27A /* Spike.swift */,
+				FA260C1827BD3459002C3614 /* Spike2.swift */,
 				562DC4F027A9B1B6004268B2 /* Bola.swift */,
+				FA260C1C27BD3979002C3614 /* Bola2.swift */,
 				FA428E0127AC2CFF00E29593 /* Transition.swift */,
 				FA1E1BA927AD674000837CDB /* LevelHandler.swift */,
 				FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */,
 				FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */,
+				FA260C1627BD333A002C3614 /* NaninhosHandler.swift */,
+				FA260C1A27BD38B7002C3614 /* Naninho.swift */,
 			);
 			path = Gaming;
 			sourceTree = "<group>";
@@ -123,11 +135,11 @@
 		56662D1B27A8528F00E4D27A /* Naninho */ = {
 			isa = PBXGroup;
 			children = (
+				56662D2027A8528F00E4D27A /* Actions.sks */,
 				FA2B660127BBDABB00CE3486 /* Info.plist */,
 				56662D1C27A8528F00E4D27A /* AppDelegate.swift */,
 				FA267B7227B6D05C00191017 /* BouncyBall.sks */,
 				56662D1E27A8528F00E4D27A /* GameScene.sks */,
-				56662D2027A8528F00E4D27A /* Actions.sks */,
 				562DC4F227A9B1BC004268B2 /* Gaming */,
 				FA29AD3827B2BAF80039A575 /* Menus */,
 				56662D2427A8528F00E4D27A /* GameViewController.swift */,
@@ -304,18 +316,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */,
+				FA260C1B27BD38B7002C3614 /* Naninho.swift in Sources */,
 				FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */,
 				FA267B7527B6D3F400191017 /* BouncyBallScene.swift in Sources */,
 				FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */,
 				56662D2327A8528F00E4D27A /* SKNodeExtension.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
 				FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */,
+				FA260C1D27BD3979002C3614 /* Bola2.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */,
 				FA06AE3227B5620E00B6CFA6 /* LevelSelectionCell.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
 				FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */,
 				FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */,
+				FA260C1927BD3459002C3614 /* Spike2.swift in Sources */,
+				FA260C1727BD333A002C3614 /* NaninhosHandler.swift in Sources */,
 				FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */,
 				FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */,
 				562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */,

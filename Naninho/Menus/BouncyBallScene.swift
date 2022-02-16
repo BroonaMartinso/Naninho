@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SpriteKit
+import Firebase
 
 class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     private var ball: Bola!
@@ -18,7 +19,11 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     private var bar: SKSpriteNode!
     private var screenWidth: CGFloat!
     private var screenHeight: CGFloat!
+    private var naninhosHandler: NaninhosHandler!
     static var topBound: CGFloat!
+    static var bottomBound: CGFloat!
+    static var leftBound: CGFloat!
+    static var rightBound: CGFloat!
     
     private var lastUpdate: TimeInterval = 0
     private var levelTime: TimeInterval = 0
@@ -43,6 +48,8 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         getScreenSize()
         setupBall()
         setupSpike()
+        
+        naninhosHandler = NaninhosHandler(reference: childNode(withName: "ball") as! SKSpriteNode, parent: self)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -57,6 +64,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
                 if !spike.jogo(click: t.location(in: self)) {
                     ball.handleTapDuringGame(atPos: t.location(in: self))
                 }
+                for t in touches { naninhosHandler.handleTapDuringGame(atPos: t.location(in: self)) }
             }
         } else if status == .pause {
             for t in touches {
@@ -71,10 +79,16 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         screenWidth = scene?.frame.width
         screenHeight = scene?.frame.height
         BouncyBallScene.topBound = bar.frame.minY
+        BouncyBallScene.bottomBound = -screenHeight / 2
+        BouncyBallScene.leftBound = -screenWidth / 2
+        BouncyBallScene.rightBound = screenWidth / 2
     }
     
     func startGame() {
         status = .transition
+        //TODO: Remover depois
+        levelTime = 800
+        status = .play
         let shadow = childNode(withName: "shadow")!
         shadow.removeAllActions()
         shadow.alpha = 0
@@ -83,13 +97,18 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         floor.position.y = -screenHeight - 240
         
         ball.startGame {
-            self.spike.radial(quantidade: LevelHandler.shared.numberOfSpikes)
+//            self.spike.radial(quantidade: LevelHandler.shared.numberOfSpikes)
             self.status = .play
             self.topBar.appear()
             self.timeBar.alpha = 1
             self.bar.alpha = 1
             self.levelTime = 60
+            self.ball.bola.position = CGPoint(x: 0, y: 0)
+            Analytics.logEvent("level_start", parameters: ["Level": LevelHandler.shared.currentLevel as NSObject])
+            self.ball.bola.removeFromParent()
+            self.naninhosHandler.startGame(with: 2)
         }
+        
     }
     
     func resetScene() {
@@ -113,6 +132,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     
     func prepareForNextGame() {
         ball.bola.position = CGPoint(x: 0, y: 0)
+        ball.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         spike.removeAllspikes()
     }
 
@@ -138,6 +158,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         
         spike.update(deltaTime: deltaTime)
         ball.update(deltaTime: deltaTime)
+        naninhosHandler.update(deltaTime: deltaTime)
         
         if status == .play {
             levelTime -= deltaTime
@@ -175,7 +196,9 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             pausePopup.slideVertically(distance: screenHeight)
             ball.pause()
             status = .pause
+            Analytics.logEvent("Pause", parameters: [:])
         } else if transition == .pauseToReplay {
+            Analytics.logEvent("Replay_From_Pause_Menu", parameters: ["Level": LevelHandler.shared.currentLevel as NSObject])
             spike.removeAllspikes()
             startGame()
             pausePopup.slideVertically(distance: -screenHeight)
@@ -189,12 +212,17 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
                 delegate.goToMenu()
             }
             self.status = .intro
+            Analytics.logEvent("Pause_To_Menu", parameters: [:])
         } else if transition == .gameToLose {
+            Analytics.logEvent("level_end", parameters: ["Level": LevelHandler.shared.currentLevel as NSObject,
+                                                         "Stars": 0 as NSObject])
             status = .lose
             animateGameEnd(withResult: .lose)
         } else if transition == .gameToWin {
             status = .win
             LevelHandler.shared.nextLevel(timeRemaining: levelTime)
+            Analytics.logEvent("level_end", parameters: ["Level": LevelHandler.shared.currentLevel - 1 as NSObject,
+                                                         "Stars": LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1] ?? -1 as NSObject])
             animateGameEnd(withResult: .win)
         }
             
@@ -215,7 +243,9 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
                 }
             }
             self.ball.bola.run(SKAction.wait(forDuration: 0.5)) {
-                self.ball.bola.run(SKAction.scale(by: 1/30, duration: 0))
+                self.ball.bola.run(SKAction.scale(by: 1/30, duration: 0)) {
+                    self.prepareForNextGame()
+                }
                 self.topBar.representation.isHidden = false
                 self.timeBar.isHidden = false
                 self.isUserInteractionEnabled = true

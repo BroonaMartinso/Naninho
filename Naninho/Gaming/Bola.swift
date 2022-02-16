@@ -42,10 +42,10 @@ class Bola {
 //                completion()
 //            }
 //        }
-        
         bola.run(SKAction.wait(forDuration: timeUntilReachZeroOnYAxis())) {
             self.bola.physicsBody?.affectedByGravity = false
             self.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            self.bola.position = CGPoint(x: 0, y: 0)
             self.bola.texture = SKTexture(image: UIImage(named: "expandir")!)
             self.bola.run(SKAction.sequence(
                 [
