@@ -74,7 +74,14 @@ class LevelSelectionCell: UICollectionViewCell {
     
     }
     func configureLabels() {
-        label.text = "\(nivel)"
+        if nivel == 0 {
+            label.text = ""
+            levelLabel.text = "TUTORIAL"
+            starImage.image = nil
+        }
+        else {
+            label.text = "\(nivel)"
+        }
     }
     
     func configureStarImage() {

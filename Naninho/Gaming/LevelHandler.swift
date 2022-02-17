@@ -19,7 +19,7 @@ class LevelHandler {
             UserDefaults.standard.set(currentLevel, forKey: "currentLevel")
         }
     }
-    var maxLevel: Int = 0{
+    var maxLevel: Int = 0 {
         didSet {
             UserDefaults.standard.set(maxLevel, forKey: "maxLevel")
         }

@@ -257,12 +257,12 @@ class GameViewController: UIViewController {
 
 extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        max(1, LevelHandler.shared.maxLevel)
+        max(2, LevelHandler.shared.maxLevel + 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
-        let currLevel = max(1, LevelHandler.shared.maxLevel - indexPath.row)
+        let currLevel = max(1, LevelHandler.shared.maxLevel) - indexPath.row
         
         if let data = LevelHandler.shared.getStarsFor(level: currLevel) {
             cell.star = data

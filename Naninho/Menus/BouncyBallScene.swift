@@ -203,9 +203,11 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         } else if transition == .gameToWin {
             status = .win
             LevelHandler.shared.nextLevel(timeRemaining: levelTime)
-            Analytics.logEvent("ganhou", parameters:
-                                ["level": LevelHandler.shared.currentLevel-1 as NSObject,
-                                 "estrelas": LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel-1]! as NSObject])
+            if let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel-1] {
+                Analytics.logEvent("ganhou", parameters:
+                                    ["level": LevelHandler.shared.currentLevel-1 as NSObject,
+                                     "estrelas": stars as NSObject])
+            }
             animateGameEnd(withResult: .win)
         }
             

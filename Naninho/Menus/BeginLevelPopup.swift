@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFAudio
 
 class BeginLevelPopup: UIView, LevelChangeListener {
     
@@ -157,7 +158,11 @@ class BeginLevelPopup: UIView, LevelChangeListener {
     }
     
     func configureLevelLabel() {
-        levelLabel.text = "LEVEL \(level)"
+        if level == 0 {
+            levelLabel.text = "TUTORIAL"
+        } else {
+            levelLabel.text = "LEVEL \(level)"
+        }
     }
     
     func configureStars() {
