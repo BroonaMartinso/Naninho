@@ -26,6 +26,9 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     
     private var status: Status = .intro
     var del: BouncyBallSceneDelegate?
+    var shouldPauseWhenGoingToBg: Bool {
+        status == .play
+    }
     
     override func didMove(to view: SKView) {
         scaleMode = .aspectFill

@@ -40,6 +40,7 @@ class GameViewController: UIViewController {
                     self.view.layoutIfNeeded()
                 }) {_ in
                     if let scene = self.bouncyCharView.scene as? BouncyBallScene {
+                        AppDelegate.game = scene
                         self.enableInteractions()
                         scene.startGame()
                     }

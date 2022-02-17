@@ -12,6 +12,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static var game: BouncyBallScene?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -31,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if let game = AppDelegate.game,
+           game.shouldPauseWhenGoingToBg {
+            game.perform(transition: .gameToPause)
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
