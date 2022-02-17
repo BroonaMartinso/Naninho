@@ -57,10 +57,28 @@ class EndGameMenu: UIViewController {
         
         messageLabel.text = status == .win ? "GOOD JOB!" : "MEH! FAIL"
         messageLabel.textColor = UIColor(named: "bege")
-        messageLabel.font = .systemFont(ofSize: 144, weight: .bold)
+        let fontSize = getFontSize(forMessage: messageLabel.text!)
+        messageLabel.font = .systemFont(ofSize: fontSize, weight: .bold)
         
         
         messageLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        messageLabel.sizeToFit()
+        messageLabel.adjustsFontSizeToFitWidth = true
+        messageLabel.minimumScaleFactor = 10
+    }
+    
+    func getFontSize(forMessage message: String) -> CGFloat {
+        let possibleWidths: [CGFloat] = [144, 130, 122, 96, 84]
+        var index = 0
+        
+        while index < possibleWidths.count {
+            if message.width(withConstrainedHeight: 1000, font: .systemFont(ofSize: possibleWidths[index])) <= view.frame.height {
+                return possibleWidths[index]
+            }
+            index += 1
+        }
+        
+        return 80
     }
     
     func setupContainerView() {

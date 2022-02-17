@@ -22,6 +22,7 @@
 		FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */; };
 		FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BA927AD674000837CDB /* LevelHandler.swift */; };
 		FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */; };
+		FA260C2327BE7E6E002C3614 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA260C2227BE7E6E002C3614 /* StringExtension.swift */; };
 		FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA267B7027B6CB7200191017 /* GameHeader.swift */; };
 		FA267B7327B6D05C00191017 /* BouncyBall.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA267B7227B6D05C00191017 /* BouncyBall.sks */; };
 		FA267B7527B6D3F400191017 /* BouncyBallScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA267B7427B6D3F400191017 /* BouncyBallScene.swift */; };
@@ -54,6 +55,7 @@
 		FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesManager.swift; sourceTree = "<group>"; };
 		FA1E1BA927AD674000837CDB /* LevelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelHandler.swift; sourceTree = "<group>"; };
 		FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSpriteNode.swift; sourceTree = "<group>"; };
+		FA260C2227BE7E6E002C3614 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FA267B7027B6CB7200191017 /* GameHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeader.swift; sourceTree = "<group>"; };
 		FA267B7227B6D05C00191017 /* BouncyBall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BouncyBall.sks; sourceTree = "<group>"; };
 		FA267B7427B6D3F400191017 /* BouncyBallScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyBallScene.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				FA1E1BA927AD674000837CDB /* LevelHandler.swift */,
 				FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */,
 				FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */,
+				FA260C2227BE7E6E002C3614 /* StringExtension.swift */,
 			);
 			path = Gaming;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */,
 				FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */,
 				562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */,
+				FA260C2327BE7E6E002C3614 /* StringExtension.swift in Sources */,
 				56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */,
 				FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */,
 			);
@@ -482,7 +486,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,7 +519,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

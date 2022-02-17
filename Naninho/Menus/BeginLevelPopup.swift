@@ -142,6 +142,9 @@ class BeginLevelPopup: UIView, LevelChangeListener {
         acceptButton.layer.cornerRadius = 25
         acceptButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         acceptButton.clipsToBounds = true
+        acceptButton.titleLabel?.numberOfLines = 1
+        acceptButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        acceptButton.titleLabel?.minimumScaleFactor = 0.6
         
         acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
     }
@@ -167,8 +170,7 @@ class BeginLevelPopup: UIView, LevelChangeListener {
         if let stars = LevelHandler.shared.completedLevels[newLevel] {
             self.stars = stars
         } else {
-            //TODO: Arrumar para 0 quando adicionar o asset
-            stars = 1
+            stars = 0
         }
     }
 }

@@ -35,7 +35,7 @@ class GameHeader: UIView {
         buttonsContainer.heightAnchor.constraint(equalToConstant: max(39, 0.312 *  frame.height)).isActive = true
         buttonsContainer.widthAnchor.constraint(equalTo: buttonsContainer.heightAnchor, multiplier: 8.07).isActive = true
         buttonsContainer.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        buttonsContainer.topAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        buttonsContainer.topAnchor.constraint(equalTo: centerYAnchor, constant: -5).isActive = true
         
         buttonsContainer.backgroundColor =  UIColor(named: "black")
     }

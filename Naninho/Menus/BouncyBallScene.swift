@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SpriteKit
+import FirebaseAnalytics
 
 class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     private var ball: Bola!
@@ -90,6 +91,8 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             self.bar.alpha = 1
             self.levelTime = LevelHandler.shared.timeToCompleteCurrLevel
         }
+        
+        Analytics.logEvent("comecou", parameters: ["level": LevelHandler.shared.currentLevel as NSObject])
     }
     
     func resetScene() {
@@ -179,6 +182,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             spike.removeAllspikes()
             startGame()
             pausePopup.slideVertically(distance: -screenHeight)
+            Analytics.logEvent("restart", parameters: ["level": LevelHandler.shared.currentLevel as NSObject])
         } else if transition == .pauseToContinue {
             ball.resume()
             status = .play
@@ -192,9 +196,13 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         } else if transition == .gameToLose {
             status = .lose
             animateGameEnd(withResult: .lose)
+            Analytics.logEvent("perdeu", parameters: ["level": LevelHandler.shared.currentLevel as NSObject])
         } else if transition == .gameToWin {
             status = .win
             LevelHandler.shared.nextLevel(timeRemaining: levelTime)
+            Analytics.logEvent("ganhou", parameters:
+                                ["level": LevelHandler.shared.currentLevel-1 as NSObject,
+                                 "estrelas": LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel-1]! as NSObject])
             animateGameEnd(withResult: .win)
         }
             
