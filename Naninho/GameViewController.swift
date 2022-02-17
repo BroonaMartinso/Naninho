@@ -378,7 +378,10 @@ extension GameViewController: BouncyBallSceneDelegate {
             }
             levelsWon = 0
         } else {
-            let endVC = EndGameMenu(gameResult: .win)
+            let level = LevelHandler.shared.currentLevel - 1
+            let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
+            
+            let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
             endVC.view.isUserInteractionEnabled = false
             endVC.delegate = self
             
@@ -389,7 +392,10 @@ extension GameViewController: BouncyBallSceneDelegate {
     }
     
     func lose() {
-        let endVC = EndGameMenu(gameResult: .lose)
+        let level = LevelHandler.shared.currentLevel
+        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel]
+        
+        let endVC = EndGameMenu(gameResult: .lose, level: level, stars: stars)
         endVC.view.isUserInteractionEnabled = false
         endVC.delegate = self
         
@@ -429,7 +435,10 @@ extension GameViewController: GADFullScreenContentDelegate {
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("Ad did fail to present full screen content.")
-        let endVC = EndGameMenu(gameResult: .win)
+        let level = LevelHandler.shared.currentLevel - 1
+        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
+        
+        let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
         endVC.view.isUserInteractionEnabled = false
         endVC.delegate = self
         
@@ -446,7 +455,10 @@ extension GameViewController: GADFullScreenContentDelegate {
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         requestIntersticial()
-        let endVC = EndGameMenu(gameResult: .win)
+        let level = LevelHandler.shared.currentLevel - 1
+        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
+        
+        let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
         endVC.view.isUserInteractionEnabled = false
         endVC.delegate = self
         

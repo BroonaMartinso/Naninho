@@ -18,11 +18,21 @@ class EndGameMenu: UIViewController {
     private var firstButton: UIButton!
     private var secondButton: UIButton!
     private var thirdButton: UIButton!
+    private var starImage: UIImageView!
+    private var levelLabel: UILabel!
     private var status: EndGameStatus
     var delegate: EndGameMenuDelegate?
+    private var level: Int
+    private var stars: Int
     
-    init(gameResult: EndGameStatus) {
+    init(gameResult: EndGameStatus, level: Int, stars: Int?) {
         status = gameResult
+        self.level = level
+        if let stars = stars {
+            self.stars = stars
+        } else {
+            self.stars = 0
+        }
         
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .fullScreen
@@ -38,6 +48,11 @@ class EndGameMenu: UIViewController {
         setupContainerView()
         setupFirstButton()
         setupSecondButton()
+        
+        if level != 0 {
+            setupStarImage()
+        }
+        setupLevelLabel()
         
         if status == .win {
             setupThirdButton()
@@ -168,7 +183,7 @@ class EndGameMenu: UIViewController {
         thirdButton = UIButton(configuration: configuration, primaryAction: nil)
         
         thirdButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(thirdButton)
+        containerView.addSubview(thirdButton)
         
         NSLayoutConstraint.activate([
             thirdButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
@@ -178,6 +193,40 @@ class EndGameMenu: UIViewController {
         )
         
         thirdButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+    }
+    
+    func setupStarImage() {
+        starImage = UIImageView(image: UIImage(named: "\(stars)star"))
+        
+        starImage.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(starImage)
+        
+        NSLayoutConstraint.activate(
+            [
+                starImage.bottomAnchor.constraint(equalTo: firstButton.topAnchor, constant: -30),
+                starImage.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ]
+        )
+    }
+    
+    func setupLevelLabel() {
+        levelLabel = UILabel()
+        
+        levelLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(levelLabel)
+        
+        levelLabel.text = level == 0 ? "TUTORIAL" : "LEVEL \(level)"
+        levelLabel.textColor = UIColor(named: "bege")
+        levelLabel.adjustsFontSizeToFitWidth = true
+        levelLabel.minimumScaleFactor = 0.5
+        levelLabel.font = .systemFont(ofSize: 36, weight: .regular)
+        
+        NSLayoutConstraint.activate(
+            [
+                levelLabel.bottomAnchor.constraint(equalTo: level == 0 ? firstButton.topAnchor : starImage.topAnchor, constant: -10),
+                levelLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ]
+        )
     }
 
     @objc
