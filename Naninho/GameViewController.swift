@@ -186,12 +186,23 @@ class GameViewController: UIViewController {
             bouncyCharView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        if let scene = SKScene(fileNamed: "BouncyBall") as? BouncyBallScene {
-            scene.scaleMode = .aspectFill
-            scene.backgroundColor = UIColor(named: "bege")!
-            scene.del = self
-            
-            bouncyCharView.presentScene(scene)
+        let aspectRatio = (view.frame.height / view.frame.width)
+        if aspectRatio > 2 {
+            if let scene = SKScene(fileNamed: "BouncyBall") as? BouncyBallScene {
+                scene.scaleMode = .aspectFill
+                scene.backgroundColor = UIColor(named: "bege")!
+                scene.del = self
+                
+                bouncyCharView.presentScene(scene)
+            }
+        } else {
+            if let scene = SKScene(fileNamed: "GameScene") as? BouncyBallScene {
+                scene.scaleMode = .aspectFill
+                scene.backgroundColor = UIColor(named: "bege")!
+                scene.del = self
+                
+                bouncyCharView.presentScene(scene)
+            }
         }
     }
 
