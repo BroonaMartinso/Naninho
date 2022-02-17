@@ -92,6 +92,9 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
             self.topBar.appear()
             self.timeBar.alpha = 1
             self.bar.alpha = 1
+            if LevelHandler.shared.currentLevel == 0 {
+                self.childNode(withName: "tutorialText")!.alpha = 1
+            }
             self.levelTime = LevelHandler.shared.timeToCompleteCurrLevel
         }
         
@@ -103,6 +106,8 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         
         let floor = childNode(withName: "floor")!
         floor.position.y = -240
+        
+        childNode(withName: "tutorialText")!.alpha = 0
         
         spike.removeAllspikes()
         
@@ -166,7 +171,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     }
     
     func handleWrongTap() {
-        levelTime -= 5
+        levelTime -= LevelHandler.shared.timePenalty
         animateBarColor()
         if levelTime <= 0 {
             perform(transition: .gameToLose)
@@ -219,6 +224,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         ball.bola.texture = SKTexture(imageNamed: result == .win ? "bolaVerde" : "bolaVermelha")
         topBar.representation.isHidden = true
         timeBar.isHidden = true
+        childNode(withName: "tutorialText")!.alpha = 0
         ball.bola.run(SKAction.scale(by: 30, duration: 0.4)) {
             if let delegate = self.del {
                 if result == .win {

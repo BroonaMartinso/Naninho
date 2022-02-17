@@ -75,18 +75,18 @@ class Bola {
         
         if v0 > 0 && s0 > 0 {
             print(v0/g + sqrt(2*s0/g))
-            return v0/g + sqrt(2*s0/g)
+            return max(0, v0/g + sqrt(2*s0/g))
         } else if v0 > 0 && s0 < 0 {
-            print((v0 - velocidadeNoCentro) / 2.5)
-            return (v0 - velocidadeNoCentro) / 2.5
+            print((v0 - velocidadeNoCentro) / g)
+            return max(0, (v0 - velocidadeNoCentro) / g)
         } else if v0 < 0 && s0 > 0 {
-            print((velocidadeNoCentro + v0) / 2.5)
-            return (velocidadeNoCentro + v0) / 2.5
+            print((velocidadeNoCentro + v0) / g)
+            return max(0, (velocidadeNoCentro + v0) / g)
         } else if v0 < 0 && s0 < 0 {
-            let tempoAteChao = (velocidadeNoSolo + v0) / 2.5
-            let tempoDeSubida = (velocidadeNoCentro - v0) / 2.5
+            let tempoAteChao = (velocidadeNoSolo + v0) / g
+            let tempoDeSubida = (velocidadeNoCentro - v0) / g
             print(tempoAteChao + tempoDeSubida)
-            return tempoAteChao + tempoDeSubida
+            return max(0, tempoAteChao + tempoDeSubida)
         }
         
         return 0

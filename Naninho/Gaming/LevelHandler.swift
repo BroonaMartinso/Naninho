@@ -76,6 +76,10 @@ class LevelHandler {
         50 + 0.15 * Double(currentLevel)
     }
     
+    var timePenalty: Double {
+        5 + 0.05 * Double(currentLevel)
+    }
+    
     private init() {
         let decoder = PropertyListDecoder()
         
