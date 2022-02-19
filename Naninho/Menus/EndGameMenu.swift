@@ -21,7 +21,7 @@ class EndGameMenu: UIViewController {
     private var starImage: UIImageView!
     private var levelLabel: UILabel!
     private var status: EndGameStatus
-    var delegate: EndGameMenuDelegate?
+    weak var delegate: EndGameMenuDelegate?
     private var level: Int
     private var stars: Int
     
@@ -264,7 +264,7 @@ enum EndGameStatus {
     case lose
 }
 
-protocol EndGameMenuDelegate {
+protocol EndGameMenuDelegate: AnyObject {
     func replayLevel()
     func goToNextLevel()
     func goToMenu()

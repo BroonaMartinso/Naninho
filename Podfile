@@ -9,5 +9,6 @@ target 'Naninho' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'FBSDKCoreKit'
   
 end

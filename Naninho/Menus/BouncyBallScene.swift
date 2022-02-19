@@ -25,7 +25,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     private var levelTime: TimeInterval = 0
     
     private var status: Status = .intro
-    var del: BouncyBallSceneDelegate?
+    weak var del: BouncyBallSceneDelegate?
     var shouldPauseWhenGoingToBg: Bool {
         status == .play
     }
@@ -254,7 +254,7 @@ enum Status{
     case lose
 }
 
-protocol BouncyBallSceneDelegate {
+protocol BouncyBallSceneDelegate: AnyObject {
     func win()
     func lose()
     func goToMenu()

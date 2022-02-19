@@ -13,7 +13,7 @@ class GameHeader: UIView {
     private var rankingButton: UIButton!
     private var starButton: UIButton!
     private var buttonsContainer : UIView!
-    var delegate: GameHeaderDelegate?
+    weak var delegate: GameHeaderDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,7 +114,7 @@ class GameHeader: UIView {
     }
 }
 
-protocol GameHeaderDelegate {
+protocol GameHeaderDelegate: AnyObject {
     func handleRankingButtonTapped()
     func handleStarsButtonTapped()
 }

@@ -15,7 +15,7 @@ class BeginLevelPopup: UIView, LevelChangeListener {
     private var starsImage = UIImageView()
     private var acceptButton: UIButton!
     private var declineButton = UIButton()
-    var delegate: BeginLevelPopupDelegate?
+    weak var delegate: BeginLevelPopupDelegate?
     
     private var level: Int = 0 {
         didSet {
@@ -180,7 +180,7 @@ class BeginLevelPopup: UIView, LevelChangeListener {
     }
 }
 
-protocol BeginLevelPopupDelegate {
+protocol BeginLevelPopupDelegate: AnyObject {
     func handleAcceptance()
     func handleDenial()
 }

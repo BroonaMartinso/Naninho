@@ -29,6 +29,8 @@
 		FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD3B27B2BB1A0039A575 /* MenuProtocol.swift */; };
 		FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4327B2CD810039A575 /* PausePopup.swift */; };
 		FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4527B2CF260039A575 /* TopBar.swift */; };
+		FA34D53327C01826001069EF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53227C01826001069EF /* AdSupport.framework */; };
+		FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
 		FA5058D027B18E0B0083E90C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */; };
 		FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA516A1E27BC7795000EC432 /* UIViewExtension.swift */; };
@@ -63,6 +65,8 @@
 		FA29AD4327B2CD810039A575 /* PausePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PausePopup.swift; sourceTree = "<group>"; };
 		FA29AD4527B2CF260039A575 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FA2B660127BBDABB00CE3486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FA34D53227C01826001069EF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA516A1E27BC7795000EC432 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -75,7 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */,
 				16E2F5A0969AB49CD10E16EA /* Pods_Naninho.framework in Frameworks */,
+				FA34D53327C01826001069EF /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +91,8 @@
 		559BD55795D0387CF93FB8CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */,
+				FA34D53227C01826001069EF /* AdSupport.framework */,
 				5A658555E01DA1C3AAEC92F5 /* Pods_Naninho.framework */,
 			);
 			name = Frameworks;

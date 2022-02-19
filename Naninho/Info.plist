@@ -155,5 +155,29 @@
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
 	</array>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb1154439958630825</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>1154439958630825</string>
+    <key>FacebookDisplayName</key>
+    <string>Naninho</string>
+    
+    <key>FacebookAdvertiserIDCollectionEnabled</key>
+    <string>FALSE</string>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <string>FALSE</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>Need tracking for analytics and to deliver custom ads</string>
+    
+    <key>GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED</key>
+        <false/>
 </dict>
 </plist>

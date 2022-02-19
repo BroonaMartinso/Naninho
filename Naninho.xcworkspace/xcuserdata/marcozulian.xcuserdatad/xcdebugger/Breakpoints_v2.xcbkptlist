@@ -14,9 +14,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -30,9 +30,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +46,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +94,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,9 +110,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,9 +126,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -142,9 +142,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -158,9 +158,9 @@
             filePath = "Naninho/Gaming/Bola.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "timeUntilReachZeroOnYAxis()"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "startGame(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

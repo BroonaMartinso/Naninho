@@ -19,30 +19,7 @@ class Bola {
         bolaParent = Parent
     }
     
-    func startGame(completion: @escaping () -> Void = {}) {
-//        bola.physicsBody?.affectedByGravity = false
-//        bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-//
-//        bola.run(SKAction.moveTo(y: 0, duration: 1)) {
-//            self.bola.texture = SKTexture(image: UIImage(named: "expandir")!)
-//            self.bola.run(SKAction.sequence(
-//                [
-//                    SKAction.scale(by: 0.5, duration: 0.2),
-//                    SKAction.repeat(
-//                        SKAction.sequence([
-//                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
-//                            SKAction.rotate(byAngle: Double.pi/5, duration: 0.12),
-//                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
-//                        ]), count: 3),
-//                    SKAction.scale(by: 2, duration: 0.0)
-//                ])
-//            ) {
-//                self.bola.texture = SKTexture(image: UIImage(named: "Naninho")!)
-//                self.pula(velocidade: LevelHandler.shared.levelSpeed)
-//                completion()
-//            }
-//        }
-        
+    func startGame(completion: @escaping () -> Void = {}) {        
         bola.run(SKAction.wait(forDuration: timeUntilReachZeroOnYAxis())) {
             self.bola.physicsBody?.affectedByGravity = false
             self.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
