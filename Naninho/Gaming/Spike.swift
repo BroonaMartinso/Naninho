@@ -13,6 +13,8 @@ class Spike {
     var spikeArray: [SKShapeNode] = []
     var rotation: CGFloat = 0
     var bola: SKNode
+    var streakCount: Int = 0
+    var lastCorrectTap: TimeInterval = 0
     
     init (Parent: ScreenStateHandler, Ball: SKNode) {
         self.spikeParent = Parent
@@ -33,6 +35,11 @@ class Spike {
             spike.position.x = bola.frame.midX+radius * sin(-spike.zRotation)
         }
         bate()
+        
+        lastCorrectTap -= deltaTime
+        if lastCorrectTap <= 0 {
+            streakCount = 0
+        }
     }
     
     func radial(quantidade: Int){
@@ -131,6 +138,22 @@ class Spike {
                 queda(spike: spike)
                 if spikeArray.isEmpty {
                     spikeParent.perform(transition: .gameToWin)
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+                    return true
+                }
+                
+                streakCount += 1
+                lastCorrectTap = TimeInterval(5 - streakCount)
+                if streakCount == 1 {
+                    let generator = UIImpactFeedbackGenerator(style: .light)
+                    generator.impactOccurred()
+                } else if streakCount == 2 {
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
+                } else if streakCount >= 3 {
+                    let generator = UIImpactFeedbackGenerator(style: .heavy)
+                    generator.impactOccurred()
                 }
                 return true
             }

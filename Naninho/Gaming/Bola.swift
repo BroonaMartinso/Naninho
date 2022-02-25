@@ -127,6 +127,8 @@ class Bola {
     
     func handleTapDuringGame(atPos pos: CGPoint) {
         if bola.contains(pos){
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.warning)
             delegate?.handleWrongTap()
             return
         }

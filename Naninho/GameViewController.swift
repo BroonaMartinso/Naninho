@@ -83,7 +83,7 @@ class GameViewController: UIViewController {
         let adSize = GADAdSizeFromCGSize(CGSize(width: freeSpace, height: 50))
         bannerView = GADBannerView(adSize: adSize)
         addBannerViewToView(bannerView)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-5315052887814879/5865435151"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         
@@ -94,7 +94,7 @@ class GameViewController: UIViewController {
     func requestIntersticial() {
         // Intersticial
         let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-5315052887814879/9011485006",
                                request: request,
                                completionHandler: { [self] ad, error in
             if let error = error {
@@ -373,21 +373,22 @@ extension GameViewController: BouncyBallSceneDelegate {
         if levelsWon == 3 {
             if let interstitial = interstitial{
                 interstitial.present(fromRootViewController: self)
+                return
             } else {
                 print("Ad wasn`t ready")
             }
             levelsWon = 0
-        } else {
-            let level = LevelHandler.shared.currentLevel - 1
-            let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
+        }
             
-            let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
-            endVC.view.isUserInteractionEnabled = false
-            endVC.delegate = self
-            
-            present(endVC, animated: true) {
-                endVC.view.isUserInteractionEnabled = true
-            }
+        let level = LevelHandler.shared.currentLevel - 1
+        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
+        
+        let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
+        endVC.view.isUserInteractionEnabled = false
+        endVC.delegate = self
+        
+        present(endVC, animated: true) {
+            endVC.view.isUserInteractionEnabled = true
         }
     }
     
@@ -450,6 +451,7 @@ extension GameViewController: GADFullScreenContentDelegate {
     /// Tells the delegate that the ad presented full screen content.
     func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("Ad did present full screen content.")
+        
     }
     
     /// Tells the delegate that the ad dismissed full screen content.
