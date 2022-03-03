@@ -11,6 +11,21 @@ import GameplayKit
 import GameKit
 import GoogleMobileAds
 
+protocol MainSceneShopInteractor: AnyObject {
+    func openShop()
+    func closeShop()
+}
+
+
+extension GameViewController: ShopViewControlling {
+    func openShop() {
+        animatableLevelSelectionMenuConstraint.constant
+    }
+    
+    func closeShop() {
+    }
+}
+
 class GameViewController: UIViewController {
   
     enum DisplayStatus {
@@ -59,18 +74,14 @@ class GameViewController: UIViewController {
         }
     }
     
-    static var gcEnabled = Bool() // Check if the user has Game Center enabled
-    static var gcDefaultLeaderBoard = String() // Check the default leaderboardID
-    
     override func viewWillAppear(_ animated: Bool) {
         levelSelectionMenu.reloadData()
-        
         levelSelectionMenu.indexPathsForSelectedItems?.forEach { levelSelectionMenu.deselectItem(at: $0, animated: false) }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        authenticateLocalPlayer()
+//        authenticateLocalPlayer()
 
         setupHeader()
         setupLevelSelectionMenu()
@@ -143,7 +154,10 @@ class GameViewController: UIViewController {
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         
-        header.delegate = self
+        let presenter = RankingPresenter(viewController: self)
+        let worker = RankingWorker()
+        let interactor = RankingInteractor(presenter: presenter, worker: worker)
+        header.interactor = interactor
     }
     
     func setupLevelSelectionMenu() {
@@ -300,54 +314,16 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-extension GameViewController: GameHeaderDelegate {
-    func handleRankingButtonTapped() {
-        let GameCenterVC = GKGameCenterViewController(leaderboardID: GameViewController.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
-        GameCenterVC.gameCenterDelegate = self
-        present(GameCenterVC, animated: true, completion: nil)
-    }
-    
-    func handleStarsButtonTapped() {
-        //TODO: Implementar comportamento da loja
+extension GameViewController: GKGameCenterControllerDelegate {
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated:true)
     }
 }
 
-extension GameViewController: GKGameCenterControllerDelegate {
-    
-    func authenticateLocalPlayer() {
-        let localPlayer: GKLocalPlayer = GKLocalPlayer.local
-
-        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
-            if ((ViewController) != nil) {
-                // Show game center login if player is not logged in
-                self.present(ViewController!, animated: true, completion: nil)
-            }
-            else if (localPlayer.isAuthenticated) {
-                
-                // Player is already authenticated and logged in
-                GameViewController.gcEnabled = true
-
-                // Get the default leaderboard ID
-                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
-                    if error != nil {
-                        print(error!)
-                    }
-                    else {
-                        GameViewController.gcDefaultLeaderBoard = leaderboardIdentifer!
-                    }
-                 })
-            }
-            else {
-                // Game center is not enabled on the user's device
-                GameViewController.gcEnabled = false
-                print("Local player could not be authenticated!")
-                print(error!)
-            }
-        }
-    }
-    
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismiss(animated:true)
+extension GameViewController: RankingViewControlling {
+    func showRanking(_ vc: GKGameCenterViewController) {
+        vc.gameCenterDelegate = self
+        present(vc, animated: true)
     }
 }
 

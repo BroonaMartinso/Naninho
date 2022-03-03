@@ -13,7 +13,7 @@ class GameHeader: UIView {
     private var rankingButton: UIButton!
     private var starButton: UIButton!
     private var buttonsContainer : UIView!
-    weak var delegate: GameHeaderDelegate?
+    var interactor: RankingInteracting?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,9 +72,7 @@ class GameHeader: UIView {
     
     @objc
     func rankingButtonTapped() {
-        if let delegate = delegate {
-            delegate.handleRankingButtonTapped()
-        }
+        interactor?.handleRankingButtonTapped()
     }
     
     func setupStarButton() {
@@ -108,13 +106,6 @@ class GameHeader: UIView {
     
     @objc
     func starsButtonTapped() {
-        if let delegate = delegate {
-            delegate.handleRankingButtonTapped()
-        }
+        interactor?.handleStarsButtonTapped()
     }
-}
-
-protocol GameHeaderDelegate: AnyObject {
-    func handleRankingButtonTapped()
-    func handleStarsButtonTapped()
 }

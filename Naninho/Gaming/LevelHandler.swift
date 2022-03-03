@@ -114,9 +114,7 @@ class LevelHandler {
     
     func updateScore(with value:Int)
     {
-        if (GameViewController.gcEnabled)
-//        { GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: [GameViewController.gcDefaultLeaderBoard], completionHandler: {error in}) }
-        { GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: ["maiorNivel"], completionHandler: {error in}) }
+        GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: ["maiorNivel"], completionHandler: {error in})
     }
     
     func setLevel(to level: Int) {
@@ -151,9 +149,7 @@ class LevelHandler {
             completedLevels[currentLevel] = stars
         }
         
-        if (GameViewController.gcEnabled) {
-            GKLeaderboard.submitScore(obtainedStars, context:0, player: GKLocalPlayer.local, leaderboardIDs: ["maisEstrelas"], completionHandler: {error in})
-        }
+        GKLeaderboard.submitScore(obtainedStars, context:0, player: GKLocalPlayer.local, leaderboardIDs: ["maisEstrelas"], completionHandler: {error in})
     }
     
     func sigmoid(x: Double, beta: Double = 1.0) -> Double {

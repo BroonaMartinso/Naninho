@@ -29,13 +29,23 @@
 		FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD3B27B2BB1A0039A575 /* MenuProtocol.swift */; };
 		FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4327B2CD810039A575 /* PausePopup.swift */; };
 		FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4527B2CF260039A575 /* TopBar.swift */; };
+		FA2A758627C9582E0043DE4E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */; };
 		FA34D53327C01826001069EF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53227C01826001069EF /* AdSupport.framework */; };
 		FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
-		FA5058D027B18E0B0083E90C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */; };
 		FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA516A1E27BC7795000EC432 /* UIViewExtension.swift */; };
 		FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */; };
 		FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */; };
+		FACFE1D027D015F4001F5342 /* ShopInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1CF27D015F4001F5342 /* ShopInteractor.swift */; };
+		FACFE1D227D01670001F5342 /* ShopPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D127D01670001F5342 /* ShopPresenter.swift */; };
+		FACFE1D427D01A0D001F5342 /* LevelSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */; };
+		FACFE1D627D01FB5001F5342 /* RankingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */; };
+		FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D727D02ADB001F5342 /* RankingWorker.swift */; };
+		FACFE1DA27D0378A001F5342 /* RankingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D927D0378A001F5342 /* RankingPresenter.swift */; };
+		FACFE1E027D04220001F5342 /* AdsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1DF27D04220001F5342 /* AdsInteractor.swift */; };
+		FACFE1E327D04277001F5342 /* RankingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1E227D04277001F5342 /* RankingProtocols.swift */; };
+		FACFE1E527D042B6001F5342 /* AdsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1E427D042B6001F5342 /* AdsProtocols.swift */; };
+		FACFE1E727D04422001F5342 /* AdsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1E627D04422001F5342 /* AdsWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,14 +74,24 @@
 		FA29AD3B27B2BB1A0039A575 /* MenuProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProtocol.swift; sourceTree = "<group>"; };
 		FA29AD4327B2CD810039A575 /* PausePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PausePopup.swift; sourceTree = "<group>"; };
 		FA29AD4527B2CF260039A575 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA2B660127BBDABB00CE3486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FA34D53227C01826001069EF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
-		FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA516A1E27BC7795000EC432 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameMenu.swift; sourceTree = "<group>"; };
 		FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginLevelPopup.swift; sourceTree = "<group>"; };
+		FACFE1CF27D015F4001F5342 /* ShopInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopInteractor.swift; sourceTree = "<group>"; };
+		FACFE1D127D01670001F5342 /* ShopPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopPresenter.swift; sourceTree = "<group>"; };
+		FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionMenu.swift; sourceTree = "<group>"; };
+		FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingInteractor.swift; sourceTree = "<group>"; };
+		FACFE1D727D02ADB001F5342 /* RankingWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingWorker.swift; sourceTree = "<group>"; };
+		FACFE1D927D0378A001F5342 /* RankingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPresenter.swift; sourceTree = "<group>"; };
+		FACFE1DF27D04220001F5342 /* AdsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsInteractor.swift; sourceTree = "<group>"; };
+		FACFE1E227D04277001F5342 /* RankingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingProtocols.swift; sourceTree = "<group>"; };
+		FACFE1E427D042B6001F5342 /* AdsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsProtocols.swift; sourceTree = "<group>"; };
+		FACFE1E627D04422001F5342 /* AdsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +154,8 @@
 		56662D1B27A8528F00E4D27A /* Naninho */ = {
 			isa = PBXGroup;
 			children = (
-				FA2B660127BBDABB00CE3486 /* Info.plist */,
+				FACFE1DE27D0420E001F5342 /* Ads */,
+				FACFE1DD27D03FFE001F5342 /* Ranking */,
 				56662D1C27A8528F00E4D27A /* AppDelegate.swift */,
 				FA267B7227B6D05C00191017 /* BouncyBall.sks */,
 				56662D1E27A8528F00E4D27A /* GameScene.sks */,
@@ -142,10 +163,13 @@
 				562DC4F227A9B1BC004268B2 /* Gaming */,
 				FA29AD3827B2BAF80039A575 /* Menus */,
 				56662D2427A8528F00E4D27A /* GameViewController.swift */,
+				FACFE1CF27D015F4001F5342 /* ShopInteractor.swift */,
+				FACFE1D127D01670001F5342 /* ShopPresenter.swift */,
 				56662D2627A8528F00E4D27A /* Main.storyboard */,
 				56662D2927A8529000E4D27A /* Assets.xcassets */,
 				56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */,
-				FA5058CF27B18E0B0083E90C /* GoogleService-Info.plist */,
+				FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */,
+				FA2B660127BBDABB00CE3486 /* Info.plist */,
 			);
 			path = Naninho;
 			sourceTree = "<group>";
@@ -171,8 +195,30 @@
 				FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */,
 				FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */,
 				FA516A1E27BC7795000EC432 /* UIViewExtension.swift */,
+				FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */,
 			);
 			path = Menus;
+			sourceTree = "<group>";
+		};
+		FACFE1DD27D03FFE001F5342 /* Ranking */ = {
+			isa = PBXGroup;
+			children = (
+				FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */,
+				FACFE1D727D02ADB001F5342 /* RankingWorker.swift */,
+				FACFE1D927D0378A001F5342 /* RankingPresenter.swift */,
+				FACFE1E227D04277001F5342 /* RankingProtocols.swift */,
+			);
+			path = Ranking;
+			sourceTree = "<group>";
+		};
+		FACFE1DE27D0420E001F5342 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				FACFE1DF27D04220001F5342 /* AdsInteractor.swift */,
+				FACFE1E627D04422001F5342 /* AdsWorker.swift */,
+				FACFE1E427D042B6001F5342 /* AdsProtocols.swift */,
+			);
+			path = Ads;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,11 +283,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				56662D2827A8528F00E4D27A /* Main.storyboard in Resources */,
+				FA2A758627C9582E0043DE4E /* GoogleService-Info.plist in Resources */,
 				56662D1F27A8528F00E4D27A /* GameScene.sks in Resources */,
 				56662D2A27A8529000E4D27A /* Assets.xcassets in Resources */,
 				56662D2D27A8529000E4D27A /* LaunchScreen.storyboard in Resources */,
 				56662D2127A8528F00E4D27A /* Actions.sks in Resources */,
-				FA5058D027B18E0B0083E90C /* GoogleService-Info.plist in Resources */,
 				FA267B7327B6D05C00191017 /* BouncyBall.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,25 +360,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACFE1DA27D0378A001F5342 /* RankingPresenter.swift in Sources */,
 				FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */,
+				FACFE1E527D042B6001F5342 /* AdsProtocols.swift in Sources */,
 				FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */,
 				FA267B7527B6D3F400191017 /* BouncyBallScene.swift in Sources */,
 				FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */,
+				FACFE1D027D015F4001F5342 /* ShopInteractor.swift in Sources */,
 				56662D2327A8528F00E4D27A /* SKNodeExtension.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
 				FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */,
 				FA06AE3227B5620E00B6CFA6 /* LevelSelectionCell.swift in Sources */,
+				FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
 				FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */,
 				FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */,
 				FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */,
+				FACFE1E727D04422001F5342 /* AdsWorker.swift in Sources */,
 				FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */,
+				FACFE1D427D01A0D001F5342 /* LevelSelectionMenu.swift in Sources */,
+				FACFE1D627D01FB5001F5342 /* RankingInteractor.swift in Sources */,
 				562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */,
 				FA260C2327BE7E6E002C3614 /* StringExtension.swift in Sources */,
+				FACFE1E327D04277001F5342 /* RankingProtocols.swift in Sources */,
 				56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */,
 				FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */,
+				FACFE1D227D01670001F5342 /* ShopPresenter.swift in Sources */,
+				FACFE1E027D04220001F5342 /* AdsInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
