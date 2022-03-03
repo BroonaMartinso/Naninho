@@ -33,7 +33,9 @@ class GameViewController: UIViewController {
         case game
     }
     
-    var bannerView: GADBannerView!
+    private var adsRouter: AdsRouting?
+    private var adsInteractor: AdsInteracting?
+    private var intestitialDelegate: GADFullScreenContentDelegate?
     private var levelsWon: Int = 0
     private var interstitial: GADInterstitialAd?
     private var header: GameHeader!
@@ -47,7 +49,7 @@ class GameViewController: UIViewController {
         didSet {
             if displayStatus == .game {
                 self.disableBackgroundInteractions()
-                bannerView.alpha = 0
+                adsInteractor?.hideBanner()
                 UIView.animate(withDuration: 1, delay: 0, animations: {
                     self.animatableLevelSelectionMenuConstraint.constant = -self.view.frame.width * 0.375
                     self.animatableHeaderConstraint.constant = -self.view.frame.height * 0.13
@@ -63,7 +65,7 @@ class GameViewController: UIViewController {
             }
             else if displayStatus == .menu {
                 self.disableBackgroundInteractions()
-                bannerView.alpha = 1
+                adsInteractor?.showBanner()
                 UIView.animate(withDuration: 0, delay: 0, animations: {
                     self.animatableLevelSelectionMenuConstraint.constant = 0
                     self.animatableHeaderConstraint.constant = 0
@@ -81,7 +83,6 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        authenticateLocalPlayer()
 
         setupHeader()
         setupLevelSelectionMenu()
@@ -90,16 +91,16 @@ class GameViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: "bege")
         
-        let freeSpace = view.frame.width * 0.575
-        let adSize = GADAdSizeFromCGSize(CGSize(width: freeSpace, height: 50))
-        bannerView = GADBannerView(adSize: adSize)
-        addBannerViewToView(bannerView)
-        bannerView.adUnitID = "ca-app-pub-5315052887814879/5865435151"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+        let adsPresenter = AdsPresenter(viewController: self)
+        let adsWorker = AdsWorker()
+        adsInteractor = AdsInteractor(presenter: adsPresenter, worker: adsWorker)
+        adsRouter = AdsRouter(vc: self)
         
+        let freeSpace = view.frame.width * 0.575
+        adsInteractor?.insertBanner(withSize: CGSize(width: freeSpace, height: 50))
 
-        requestIntersticial()
+//        intestitialDelegate = IntestitialAdsDelegate(vc: self, worker: adsWorker)
+//        requestIntersticial()
     }
     
     func requestIntersticial() {
@@ -118,27 +119,6 @@ class GameViewController: UIViewController {
         )
     }
     
-    func addBannerViewToView(_ bannerView: GADBannerView) {
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bannerView)
-        view.addConstraints(
-            [NSLayoutConstraint(item: bannerView,
-                                attribute: .bottom,
-                                relatedBy: .equal,
-                                toItem: bottomLayoutGuide,
-                                attribute: .top,
-                                multiplier: 1,
-                                constant: 0),
-             NSLayoutConstraint(item: bannerView,
-                                attribute: .trailing,
-                                relatedBy: .equal,
-                                toItem: view,
-                                attribute: .trailing,
-                                multiplier: 1,
-                                constant: -view.frame.width * 0.025)
-            ])
-    }
-    
     func setupHeader() {
         header = GameHeader()
         
@@ -154,10 +134,11 @@ class GameViewController: UIViewController {
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         
-        let presenter = RankingPresenter(viewController: self)
-        let worker = RankingWorker()
-        let interactor = RankingInteractor(presenter: presenter, worker: worker)
-        header.interactor = interactor
+        let rankingPresenter = RankingPresenter(viewController: self)
+        let rankingWorker = RankingWorker()
+        let rankingInteractor = RankingInteractor(presenter: rankingPresenter, worker: rankingWorker)
+        header.interactor = rankingInteractor
+        
     }
     
     func setupLevelSelectionMenu() {
@@ -327,6 +308,18 @@ extension GameViewController: RankingViewControlling {
     }
 }
 
+extension GameViewController: AdsViewControlling {
+    func presentBanner(_ bannerView: GADBannerView) {
+        bannerView.rootViewController = self
+        adsRouter?.insertBanner(bannerView)
+    }
+    
+    func presentIntestitial(_ intestitial: GADInterstitialAd) {
+//        intestitial.fullScreenContentDelegate = intestitialDelegate
+        adsRouter?.presentIntestitial(intestitial)
+    }
+}
+
 extension GameViewController: BeginLevelPopupDelegate {
     func handleAcceptance() {
         displayStatus = .game
@@ -347,12 +340,13 @@ extension GameViewController: BouncyBallSceneDelegate {
         levelsWon += 1
         
         if levelsWon == 3 {
-            if let interstitial = interstitial{
-                interstitial.present(fromRootViewController: self)
-                return
-            } else {
-                print("Ad wasn`t ready")
-            }
+            adsInteractor?.showInterstitial()
+//            if let interstitial = interstitial{
+//                interstitial.present(fromRootViewController: self)
+//                return
+//            } else {
+//                print("Ad wasn`t ready")
+//            }
             levelsWon = 0
         }
             

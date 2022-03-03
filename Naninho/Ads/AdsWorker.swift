@@ -17,9 +17,11 @@ class AdsWorker: AdsWorking {
     private var interstitial: GADInterstitialAd?
     private var banner: GADBannerView!
     
+    init() {
+        requestInterstitial()
+    }
+    
     func getInterstitial() -> GADInterstitialAd? {
-        let interstitial = interstitial?.copy() as? GADInterstitialAd
-        requestIntersticial()
         return interstitial
     }
     
@@ -28,7 +30,7 @@ class AdsWorker: AdsWorking {
         return banner
     }
     
-    private func requestIntersticial() {
+    func requestInterstitial() {
         let request = GADRequest()
         GADInterstitialAd.load(withAdUnitID: AdsUnitIds.interstitial.rawValue,
                                request: request,
@@ -46,10 +48,15 @@ class AdsWorker: AdsWorking {
     private func loadBanner(withSize size: CGSize) {
         let adSize = GADAdSizeFromCGSize(size)
         banner = GADBannerView(adSize: adSize)
-//        addBannerViewToView(bannerView)
         banner.adUnitID = AdsUnitIds.banner.rawValue
-//        bannerView.rootViewController = self
         banner.load(GADRequest())
     }
     
+    func hideBanner() {
+        banner.alpha = 0
+    }
+    
+    func showBanner() {
+        banner.alpha = 1
+    }
 }
