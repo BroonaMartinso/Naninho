@@ -11,6 +11,9 @@ import GameKit
 protocol RankingInteracting: AnyObject {
     func handleRankingButtonTapped()
     func handleStarsButtonTapped()
+    func registerLevelRecord()
+    func registerStarRecord()
+    func updateRecords()
 }
 
 protocol RankingPresenting: AnyObject {
@@ -19,6 +22,7 @@ protocol RankingPresenting: AnyObject {
 
 protocol RankingWorking: AnyObject {
     func getLeaderboardWith(id: String) -> GKGameCenterViewController?
+    func setRecord(value: Int, toLeaderbordWithId id: String)
 }
 
 protocol RankingViewControlling: AnyObject {

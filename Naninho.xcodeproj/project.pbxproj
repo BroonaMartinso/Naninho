@@ -37,6 +37,9 @@
 		FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */; };
 		FA2E8C2B27D106A200FA5E4E /* PopUpFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */; };
 		FA2E8C2D27D10B8500FA5E4E /* GetMoreTimePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */; };
+		FA2E8C3027D11F4C00FA5E4E /* PersistenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */; };
+		FA2E8C3227D11F8000FA5E4E /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */; };
+		FA2E8C3427D11F8D00FA5E4E /* PersistenceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C3327D11F8D00FA5E4E /* PersistenceProtocols.swift */; };
 		FA34D53327C01826001069EF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53227C01826001069EF /* AdSupport.framework */; };
 		FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
@@ -92,6 +95,9 @@
 		FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsRouter.swift; sourceTree = "<group>"; };
 		FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpFactory.swift; sourceTree = "<group>"; };
 		FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoreTimePopup.swift; sourceTree = "<group>"; };
+		FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceInteractor.swift; sourceTree = "<group>"; };
+		FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
+		FA2E8C3327D11F8D00FA5E4E /* PersistenceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceProtocols.swift; sourceTree = "<group>"; };
 		FA34D53227C01826001069EF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 		56662D1B27A8528F00E4D27A /* Naninho */ = {
 			isa = PBXGroup;
 			children = (
+				FA2E8C2E27D11F3800FA5E4E /* Persistence */,
 				FA2E8C1F27D0FEBF00FA5E4E /* PopUps */,
 				FACFE1DE27D0420E001F5342 /* Ads */,
 				FACFE1DD27D03FFE001F5342 /* Ranking */,
@@ -230,6 +237,16 @@
 				FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */,
 			);
 			path = PopUps;
+			sourceTree = "<group>";
+		};
+		FA2E8C2E27D11F3800FA5E4E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */,
+				FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */,
+				FA2E8C3327D11F8D00FA5E4E /* PersistenceProtocols.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		FACFE1DD27D03FFE001F5342 /* Ranking */ = {
@@ -412,10 +429,12 @@
 				FA2E8C2D27D10B8500FA5E4E /* GetMoreTimePopup.swift in Sources */,
 				FA2E8C2327D1002F00FA5E4E /* PopUpsProtocols.swift in Sources */,
 				FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */,
+				FA2E8C3427D11F8D00FA5E4E /* PersistenceProtocols.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
 				FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */,
 				FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */,
+				FA2E8C3027D11F4C00FA5E4E /* PersistenceInteractor.swift in Sources */,
 				FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */,
 				FACFE1E727D04422001F5342 /* AdsWorker.swift in Sources */,
 				FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */,
@@ -430,6 +449,7 @@
 				FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */,
 				FACFE1D227D01670001F5342 /* ShopPresenter.swift in Sources */,
 				FACFE1E027D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift in Sources */,
+				FA2E8C3227D11F8000FA5E4E /* UserDefaultsWorker.swift in Sources */,
 				FACFE1E927D0573F001F5342 /* AdsRouter.swift in Sources */,
 				FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */,
 				FA2E8C2527D1017700FA5E4E /* PopUpsPresenting.swift in Sources */,

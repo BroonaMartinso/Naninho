@@ -16,25 +16,13 @@ class LevelHandler {
             for listener in listeners {
                 listener.handleLevelChange(to: currentLevel)
             }
-            UserDefaults.standard.set(currentLevel, forKey: "currentLevel")
         }
     }
-    var maxLevel: Int = 0 {
-        didSet {
-            UserDefaults.standard.set(maxLevel, forKey: "maxLevel")
-        }
-    }
-
+    var maxLevel: Int = 0
+    private var rankingInteractor: RankingInteracting
+    private var persistenceInteractor: PersistenceInteracting
     private var listeners: [LevelChangeListener] = []
-    private(set) var completedLevels: [Int: Int] = [:] {
-        didSet {
-            let encoder = PropertyListEncoder()
-            
-            if let data = try? encoder.encode(completedLevels) {
-                UserDefaults.standard.set(data, forKey: "completedLevels")
-            }
-        }
-    }
+    private(set) var completedLevels: [Int: Int] = [:]
     
     var maxAchieavableStars: Int {
         return (maxLevel) * 3
@@ -81,16 +69,18 @@ class LevelHandler {
     }
     
     private init() {
-        let decoder = PropertyListDecoder()
+        rankingInteractor = RankingInteractor(worker: RankingWorker())
+        persistenceInteractor = PersistenceInteractor(worker: UserDefaultsWorker())
         
-        if let data = UserDefaults.standard.data(forKey: "completedLevels"),
-           let intDictionary = try? decoder.decode([Int : Int].self, from: data) {
-            self.completedLevels = intDictionary
-            print(completedLevels)
+        if let completed = persistenceInteractor.retrieveCompletedLevels() {
+            completedLevels = completed
         }
-        
-        currentLevel = UserDefaults.standard.integer(forKey: "currentLevel")
-        maxLevel = UserDefaults.standard.integer(forKey: "maxLevel")
+        if let maxLevel = persistenceInteractor.retrieveMaxLevel() {
+            self.maxLevel = maxLevel
+        }
+        if let currLevel = persistenceInteractor.retrieveCurrentLevel() {
+            self.currentLevel = currLevel
+        }
     }
     
     func nextLevel(timeRemaining: Double) {
@@ -102,19 +92,14 @@ class LevelHandler {
         currentLevel += 1
         if  maxLevel < currentLevel {
             maxLevel =  currentLevel
-            updateScore (with: maxLevel)
-            
         }
     
+        persistenceInteractor.saveCurrentState()
+        rankingInteractor.updateRecords()
     }
     
     func getStarsFor(level: Int) -> Int {
         return completedLevels[level] ?? 0
-    }
-    
-    func updateScore(with value:Int)
-    {
-        GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: ["maiorNivel"], completionHandler: {error in})
     }
     
     func setLevel(to level: Int) {
@@ -148,8 +133,6 @@ class LevelHandler {
         } else {
             completedLevels[currentLevel] = stars
         }
-        
-        GKLeaderboard.submitScore(obtainedStars, context:0, player: GKLocalPlayer.local, leaderboardIDs: ["maisEstrelas"], completionHandler: {error in})
     }
     
     func sigmoid(x: Double, beta: Double = 1.0) -> Double {

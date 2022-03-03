@@ -36,6 +36,7 @@ class GameViewController: UIViewController {
     private var adsRouter: AdsRouting?
     private var adsInteractor: NonRewardingAdsInteracting?
     private var rewardedAdsInteractor: RewardingAdsInteracting?
+    private var rankingInteractor: RankingInteracting?
     private var levelsWon: Int = 0
     private var header: GameHeader!
     private var levelSelectionMenu: UICollectionView!
@@ -130,7 +131,7 @@ class GameViewController: UIViewController {
         
         let rankingPresenter = RankingPresenter(viewController: self)
         let rankingWorker = RankingWorker()
-        let rankingInteractor = RankingInteractor(presenter: rankingPresenter, worker: rankingWorker)
+        rankingInteractor = RankingInteractor(presenter: rankingPresenter, worker: rankingWorker)
         header.interactor = rankingInteractor
         
     }

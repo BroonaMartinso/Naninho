@@ -9,7 +9,6 @@ import Foundation
 import GameKit
 
 class RankingInteractor: RankingInteracting {
-    
     enum GameViewControllerLeaderboards: String {
         case MAIOR_NIVEL = "maiorNivel"
         case MAIS_ESTRELAS = "maisEstrelas"
@@ -23,6 +22,10 @@ class RankingInteractor: RankingInteracting {
         self.worker = worker
     }
     
+    init(worker: RankingWorker) {
+        self.worker = worker
+    }
+    
     func handleRankingButtonTapped() {
         if let ranking = worker?.getLeaderboardWith(id: GameViewControllerLeaderboards.MAIOR_NIVEL.rawValue) {
             presenter?.showRanking(GameCenterVC: ranking)
@@ -33,5 +36,20 @@ class RankingInteractor: RankingInteracting {
         if let starsRankng = worker?.getLeaderboardWith(id: GameViewControllerLeaderboards.MAIS_ESTRELAS.rawValue) {
             presenter?.showRanking(GameCenterVC: starsRankng)
         }
+    }
+    
+    internal func registerLevelRecord() {
+        let maxLevel = LevelHandler.shared.maxLevel
+        worker?.setRecord(value: maxLevel, toLeaderbordWithId: GameViewControllerLeaderboards.MAIOR_NIVEL.rawValue)
+    }
+    
+    internal func registerStarRecord() {
+        let totalStars = LevelHandler.shared.obtainedStars
+        worker?.setRecord(value: totalStars, toLeaderbordWithId: GameViewControllerLeaderboards.MAIS_ESTRELAS.rawValue)
+    }
+    
+    func updateRecords() {
+        registerLevelRecord()
+        registerStarRecord()
     }
 }

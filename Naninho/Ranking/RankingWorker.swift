@@ -23,4 +23,9 @@ class RankingWorker: RankingWorking {
     func getLeaderboardWith(id: String) -> GKGameCenterViewController? {
         return GKGameCenterViewController(leaderboardID: id, playerScope: .global, timeScope: .allTime)
     }
+    
+    func setRecord(value: Int, toLeaderbordWithId id: String) {
+        GKLeaderboard.submitScore(value, context:0, player: GKLocalPlayer.local, leaderboardIDs: [id], completionHandler: {error in})
+    }
+    
 }
