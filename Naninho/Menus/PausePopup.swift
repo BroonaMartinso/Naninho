@@ -28,6 +28,4 @@ class PausePopup: Menu {
         
         return nil
     }
-    
-    
 }

@@ -57,13 +57,9 @@ extension LevelSelectionMenu: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = menu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
         let currLevel = max(1, LevelHandler.shared.maxLevel) - indexPath.row
         
-        if let data = LevelHandler.shared.getStarsFor(level: currLevel) {
-            cell.star = data
-        } else {
-            cell.star = 0
-        }
-        
+        cell.star = LevelHandler.shared.getStarsFor(level: currLevel)
         cell.nivel = currLevel
+        
         if currLevel != LevelHandler.shared.currentLevel {
             cell.deselect()
         }

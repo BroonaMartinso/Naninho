@@ -34,17 +34,20 @@ class GameViewController: UIViewController {
     }
     
     private var adsRouter: AdsRouting?
-    private var adsInteractor: AdsInteracting?
-    private var intestitialDelegate: GADFullScreenContentDelegate?
+    private var adsInteractor: NonRewardingAdsInteracting?
+    private var rewardedAdsInteractor: RewardingAdsInteracting?
     private var levelsWon: Int = 0
-    private var interstitial: GADInterstitialAd?
     private var header: GameHeader!
     private var levelSelectionMenu: UICollectionView!
     private var bouncyCharView: SKView!
     private var levelPopup: BeginLevelPopup!
+    private var beginLevelPopUpsRouter: PopUpRouting?
+    private var rewardAdPopUp: GetMoreTimePopup!
+    private var rewardAdPopUpRouter: PopUpRouting?
     private var animatableLevelSelectionMenuConstraint: NSLayoutConstraint!
     private var animatableHeaderConstraint: NSLayoutConstraint!
     private var animatablePopupConstraint: NSLayoutConstraint!
+    private var animatableRewardAdConstraint: NSLayoutConstraint!
     private var displayStatus: GameViewController.DisplayStatus = .menu {
         didSet {
             if displayStatus == .game {
@@ -53,7 +56,7 @@ class GameViewController: UIViewController {
                 UIView.animate(withDuration: 1, delay: 0, animations: {
                     self.animatableLevelSelectionMenuConstraint.constant = -self.view.frame.width * 0.375
                     self.animatableHeaderConstraint.constant = -self.view.frame.height * 0.13
-                    self.animatablePopupConstraint.constant = self.view.frame.height
+//                    self.animatablePopupConstraint.constant = self.view.frame.height
                     self.view.layoutIfNeeded()
                 }) {_ in
                     if let scene = self.bouncyCharView.scene as? BouncyBallScene {
@@ -88,35 +91,26 @@ class GameViewController: UIViewController {
         setupLevelSelectionMenu()
         setupBouncyCharView()
         setupLevelPopup()
+        setupRewardAdPopup()
         
         view.backgroundColor = UIColor(named: "bege")
         
         let adsPresenter = AdsPresenter(viewController: self)
         let adsWorker = AdsWorker()
-        adsInteractor = AdsInteractor(presenter: adsPresenter, worker: adsWorker)
+        adsInteractor = BannerAndInterstitialAdsInteractor(presenter: adsPresenter, worker: adsWorker)
         adsRouter = AdsRouter(vc: self)
+        
+        rewardedAdsInteractor = RewardedAdsInteractor(presenter: adsPresenter, worker: adsWorker)
         
         let freeSpace = view.frame.width * 0.575
         adsInteractor?.insertBanner(withSize: CGSize(width: freeSpace, height: 50))
-
-//        intestitialDelegate = IntestitialAdsDelegate(vc: self, worker: adsWorker)
-//        requestIntersticial()
-    }
-    
-    func requestIntersticial() {
-        // Intersticial
-        let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-5315052887814879/9011485006",
-                               request: request,
-                               completionHandler: { [self] ad, error in
-            if let error = error {
-                print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                return
-            }
-            interstitial = ad
-            interstitial?.fullScreenContentDelegate = self
+        
+        beginLevelPopUpsRouter = PopUpsRouter(source: self, constraint: animatablePopupConstraint)
+        rewardAdPopUpRouter = PopUpsRouter(source: self, constraint: animatableRewardAdConstraint)
+        
+        if let scene = bouncyCharView.scene as? BouncyBallScene {
+            scene.router = rewardAdPopUpRouter
         }
-        )
     }
     
     func setupHeader() {
@@ -196,6 +190,7 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .aspectFill
                 scene.backgroundColor = UIColor(named: "bege")!
                 scene.del = self
+                scene.router = self.rewardAdPopUpRouter
                 
                 bouncyCharView.presentScene(scene)
             }
@@ -218,6 +213,24 @@ class GameViewController: UIViewController {
         ])
         
         levelPopup.delegate = self
+    }
+    
+    func setupRewardAdPopup() {
+        rewardAdPopUp = GetMoreTimePopup()
+        
+        rewardAdPopUp.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rewardAdPopUp)
+        
+        animatableRewardAdConstraint = rewardAdPopUp.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: view.frame.height)
+        
+        NSLayoutConstraint.activate([
+            rewardAdPopUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animatableRewardAdConstraint,
+            rewardAdPopUp.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            rewardAdPopUp.heightAnchor.constraint(equalTo: rewardAdPopUp.widthAnchor, multiplier: 0.65)
+        ])
+        
+        rewardAdPopUp.delegate = self
     }
     
     func disableBackgroundInteractions() {
@@ -259,12 +272,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = levelSelectionMenu.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
         let currLevel = max(1, LevelHandler.shared.maxLevel) - indexPath.row
         
-        if let data = LevelHandler.shared.getStarsFor(level: currLevel) {
-            cell.star = data
-        } else {
-            cell.star = 0
-        }
-        
+        cell.star = LevelHandler.shared.getStarsFor(level: currLevel)
         cell.nivel = currLevel
         if currLevel != LevelHandler.shared.currentLevel {
             cell.deselect()
@@ -280,11 +288,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = levelSelectionMenu.cellForItem(at: indexPath) as! LevelSelectionCell
         cell.select()
         
-        UIView.animate(withDuration: 0.3, delay: 0) {
-            self.animatablePopupConstraint.constant = 0
-            self.view.layoutIfNeeded()
-        }
-        
+//        UIView.animate(withDuration: 0.3, delay: 0) {
+//            self.animatablePopupConstraint.constant = 0
+//            self.view.layoutIfNeeded()
+//        }
+        beginLevelPopUpsRouter?.show()
         disableBackgroundInteractions()
     }
     
@@ -318,20 +326,50 @@ extension GameViewController: AdsViewControlling {
 //        intestitial.fullScreenContentDelegate = intestitialDelegate
         adsRouter?.presentIntestitial(intestitial)
     }
+    
+    func presentRewardedAd(_ rewardedAd: GADRewardedAd) {
+        rewardedAd.present(fromRootViewController: self) {
+            if let scene = self.bouncyCharView.scene as? BouncyBallScene {
+                scene.setTime(TimeInterval(30))
+            }
+        }
+    }
+    
+    func endInterstitial() {
+        let level = LevelHandler.shared.currentLevel - 1
+        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
+        
+        let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
+        endVC.view.isUserInteractionEnabled = false
+        endVC.delegate = self
+        
+        present(endVC, animated: false) {
+            endVC.view.isUserInteractionEnabled = true
+        }
+    }
 }
 
 extension GameViewController: BeginLevelPopupDelegate {
     func handleAcceptance() {
+        beginLevelPopUpsRouter?.hide()
         displayStatus = .game
     }
     
     func handleDenial() {
-        UIView.animate(withDuration: 0.3, delay: 0) {
-            self.animatablePopupConstraint.constant = self.view.frame.height
-            self.view.layoutIfNeeded()
-        }
-        
+        beginLevelPopUpsRouter?.hide()
         enableInteractions()
+    }
+}
+
+extension GameViewController: GetMoreTimePopupDelegate {
+    func playVideo() {
+        rewardedAdsInteractor?.showRewardedAd(for: .lose)
+    }
+    
+    func dontPlayVideo() {
+        if let scene = self.bouncyCharView.scene as? BouncyBallScene {
+            scene.dontAddTime()
+        }
     }
 }
 
@@ -341,13 +379,8 @@ extension GameViewController: BouncyBallSceneDelegate {
         
         if levelsWon == 3 {
             adsInteractor?.showInterstitial()
-//            if let interstitial = interstitial{
-//                interstitial.present(fromRootViewController: self)
-//                return
-//            } else {
-//                print("Ad wasn`t ready")
-//            }
             levelsWon = 0
+            return
         }
             
         let level = LevelHandler.shared.currentLevel - 1
@@ -397,46 +430,5 @@ extension GameViewController: EndGameMenuDelegate {
         if let scene = bouncyCharView.scene as? BouncyBallScene {
             scene.resetScene()
         }
-    }
-    
-    
-}
-
-extension GameViewController: GADFullScreenContentDelegate {
-    /// Tells the delegate that the ad failed to present full screen content.
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        print("Ad did fail to present full screen content.")
-        let level = LevelHandler.shared.currentLevel - 1
-        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
-        
-        let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
-        endVC.view.isUserInteractionEnabled = false
-        endVC.delegate = self
-        
-        present(endVC, animated: true) {
-            endVC.view.isUserInteractionEnabled = true
-        }
-    }
-    
-    /// Tells the delegate that the ad presented full screen content.
-    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad did present full screen content.")
-        
-    }
-    
-    /// Tells the delegate that the ad dismissed full screen content.
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        requestIntersticial()
-        let level = LevelHandler.shared.currentLevel - 1
-        let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel - 1]
-        
-        let endVC = EndGameMenu(gameResult: .win, level: level, stars: stars)
-        endVC.view.isUserInteractionEnabled = false
-        endVC.delegate = self
-        
-        present(endVC, animated: true) {
-            endVC.view.isUserInteractionEnabled = true
-        }
-//        scene.reset()
     }
 }

@@ -30,6 +30,13 @@
 		FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4327B2CD810039A575 /* PausePopup.swift */; };
 		FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4527B2CF260039A575 /* TopBar.swift */; };
 		FA2A758627C9582E0043DE4E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */; };
+		FA2E8C1A27D0F0F600FA5E4E /* RewardedAdsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C1927D0F0F600FA5E4E /* RewardedAdsInteractor.swift */; };
+		FA2E8C2127D0FED300FA5E4E /* PopUpsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2027D0FED300FA5E4E /* PopUpsInteractor.swift */; };
+		FA2E8C2327D1002F00FA5E4E /* PopUpsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2227D1002F00FA5E4E /* PopUpsProtocols.swift */; };
+		FA2E8C2527D1017700FA5E4E /* PopUpsPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2427D1017600FA5E4E /* PopUpsPresenting.swift */; };
+		FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */; };
+		FA2E8C2B27D106A200FA5E4E /* PopUpFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */; };
+		FA2E8C2D27D10B8500FA5E4E /* GetMoreTimePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */; };
 		FA34D53327C01826001069EF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53227C01826001069EF /* AdSupport.framework */; };
 		FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
@@ -42,7 +49,7 @@
 		FACFE1D627D01FB5001F5342 /* RankingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */; };
 		FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D727D02ADB001F5342 /* RankingWorker.swift */; };
 		FACFE1DA27D0378A001F5342 /* RankingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D927D0378A001F5342 /* RankingPresenter.swift */; };
-		FACFE1E027D04220001F5342 /* AdsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1DF27D04220001F5342 /* AdsInteractor.swift */; };
+		FACFE1E027D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1DF27D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift */; };
 		FACFE1E327D04277001F5342 /* RankingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1E227D04277001F5342 /* RankingProtocols.swift */; };
 		FACFE1E527D042B6001F5342 /* AdsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1E427D042B6001F5342 /* AdsProtocols.swift */; };
 		FACFE1E727D04422001F5342 /* AdsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1E627D04422001F5342 /* AdsWorker.swift */; };
@@ -78,6 +85,13 @@
 		FA29AD4527B2CF260039A575 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA2B660127BBDABB00CE3486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FA2E8C1927D0F0F600FA5E4E /* RewardedAdsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdsInteractor.swift; sourceTree = "<group>"; };
+		FA2E8C2027D0FED300FA5E4E /* PopUpsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsInteractor.swift; sourceTree = "<group>"; };
+		FA2E8C2227D1002F00FA5E4E /* PopUpsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsProtocols.swift; sourceTree = "<group>"; };
+		FA2E8C2427D1017600FA5E4E /* PopUpsPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsPresenting.swift; sourceTree = "<group>"; };
+		FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsRouter.swift; sourceTree = "<group>"; };
+		FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpFactory.swift; sourceTree = "<group>"; };
+		FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoreTimePopup.swift; sourceTree = "<group>"; };
 		FA34D53227C01826001069EF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
@@ -90,7 +104,7 @@
 		FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingInteractor.swift; sourceTree = "<group>"; };
 		FACFE1D727D02ADB001F5342 /* RankingWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingWorker.swift; sourceTree = "<group>"; };
 		FACFE1D927D0378A001F5342 /* RankingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPresenter.swift; sourceTree = "<group>"; };
-		FACFE1DF27D04220001F5342 /* AdsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsInteractor.swift; sourceTree = "<group>"; };
+		FACFE1DF27D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAndInterstitialAdsInteractor.swift; sourceTree = "<group>"; };
 		FACFE1E227D04277001F5342 /* RankingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingProtocols.swift; sourceTree = "<group>"; };
 		FACFE1E427D042B6001F5342 /* AdsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsProtocols.swift; sourceTree = "<group>"; };
 		FACFE1E627D04422001F5342 /* AdsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsWorker.swift; sourceTree = "<group>"; };
@@ -158,6 +172,7 @@
 		56662D1B27A8528F00E4D27A /* Naninho */ = {
 			isa = PBXGroup;
 			children = (
+				FA2E8C1F27D0FEBF00FA5E4E /* PopUps */,
 				FACFE1DE27D0420E001F5342 /* Ads */,
 				FACFE1DD27D03FFE001F5342 /* Ranking */,
 				56662D1C27A8528F00E4D27A /* AppDelegate.swift */,
@@ -192,16 +207,29 @@
 			children = (
 				FA29AD3B27B2BB1A0039A575 /* MenuProtocol.swift */,
 				FA29AD4327B2CD810039A575 /* PausePopup.swift */,
+				FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */,
 				FA29AD4527B2CF260039A575 /* TopBar.swift */,
 				FA06AE3127B5620E00B6CFA6 /* LevelSelectionCell.swift */,
 				FA267B7027B6CB7200191017 /* GameHeader.swift */,
 				FA267B7427B6D3F400191017 /* BouncyBallScene.swift */,
 				FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */,
+				FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */,
 				FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */,
 				FA516A1E27BC7795000EC432 /* UIViewExtension.swift */,
-				FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */,
 			);
 			path = Menus;
+			sourceTree = "<group>";
+		};
+		FA2E8C1F27D0FEBF00FA5E4E /* PopUps */ = {
+			isa = PBXGroup;
+			children = (
+				FA2E8C2027D0FED300FA5E4E /* PopUpsInteractor.swift */,
+				FA2E8C2427D1017600FA5E4E /* PopUpsPresenting.swift */,
+				FA2E8C2227D1002F00FA5E4E /* PopUpsProtocols.swift */,
+				FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */,
+				FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */,
+			);
+			path = PopUps;
 			sourceTree = "<group>";
 		};
 		FACFE1DD27D03FFE001F5342 /* Ranking */ = {
@@ -218,7 +246,8 @@
 		FACFE1DE27D0420E001F5342 /* Ads */ = {
 			isa = PBXGroup;
 			children = (
-				FACFE1DF27D04220001F5342 /* AdsInteractor.swift */,
+				FACFE1DF27D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift */,
+				FA2E8C1927D0F0F600FA5E4E /* RewardedAdsInteractor.swift */,
 				FACFE1E627D04422001F5342 /* AdsWorker.swift */,
 				FACFE1EA27D05A65001F5342 /* AdsPresenter.swift */,
 				FACFE1E827D0573F001F5342 /* AdsRouter.swift */,
@@ -375,10 +404,13 @@
 				FACFE1D027D015F4001F5342 /* ShopInteractor.swift in Sources */,
 				56662D2327A8528F00E4D27A /* SKNodeExtension.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
+				FA2E8C2B27D106A200FA5E4E /* PopUpFactory.swift in Sources */,
 				FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelHandler.swift in Sources */,
 				FACFE1EB27D05A65001F5342 /* AdsPresenter.swift in Sources */,
 				FA06AE3227B5620E00B6CFA6 /* LevelSelectionCell.swift in Sources */,
+				FA2E8C2D27D10B8500FA5E4E /* GetMoreTimePopup.swift in Sources */,
+				FA2E8C2327D1002F00FA5E4E /* PopUpsProtocols.swift in Sources */,
 				FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
@@ -389,14 +421,18 @@
 				FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */,
 				FACFE1D427D01A0D001F5342 /* LevelSelectionMenu.swift in Sources */,
 				FACFE1D627D01FB5001F5342 /* RankingInteractor.swift in Sources */,
+				FA2E8C1A27D0F0F600FA5E4E /* RewardedAdsInteractor.swift in Sources */,
+				FA2E8C2127D0FED300FA5E4E /* PopUpsInteractor.swift in Sources */,
 				562DC4F127A9B1B6004268B2 /* Bola.swift in Sources */,
 				FA260C2327BE7E6E002C3614 /* StringExtension.swift in Sources */,
 				FACFE1E327D04277001F5342 /* RankingProtocols.swift in Sources */,
 				56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */,
 				FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */,
 				FACFE1D227D01670001F5342 /* ShopPresenter.swift in Sources */,
-				FACFE1E027D04220001F5342 /* AdsInteractor.swift in Sources */,
+				FACFE1E027D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift in Sources */,
 				FACFE1E927D0573F001F5342 /* AdsRouter.swift in Sources */,
+				FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */,
+				FA2E8C2527D1017700FA5E4E /* PopUpsPresenting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

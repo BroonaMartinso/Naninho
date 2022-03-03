@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import GoogleMobileAds
 
-class AdsInteractor: NSObject, AdsInteracting, GADFullScreenContentDelegate {
+class BannerAndInterstitialAdsInteractor: NSObject, NonRewardingAdsInteracting, GADFullScreenContentDelegate {
     
     private var presenter: AdsPresenting?
     private var worker: AdsWorking?
@@ -44,5 +44,6 @@ class AdsInteractor: NSObject, AdsInteracting, GADFullScreenContentDelegate {
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         worker?.requestInterstitial()
+        presenter?.endInterstitial()
     }
 }

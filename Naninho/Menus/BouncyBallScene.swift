@@ -19,10 +19,18 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     private var bar: SKSpriteNode!
     private var screenWidth: CGFloat!
     private var screenHeight: CGFloat!
+    var router: PopUpRouting?
+    private var hasShownRewardAd: Bool = false
     static var topBound: CGFloat!
     
     private var lastUpdate: TimeInterval = 0
-    private var levelTime: TimeInterval = 0
+    private var levelTime: TimeInterval = 0 {
+        didSet {
+            if levelTime <= 0 {
+                handleTimeEnd()
+            }
+        }
+    }
     
     private var status: Status = .intro
     weak var del: BouncyBallSceneDelegate?
@@ -47,6 +55,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         getScreenSize()
         setupBall()
         setupSpike()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -78,6 +87,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     }
     
     func startGame() {
+        hasShownRewardAd = false
         status = .transition
         let shadow = childNode(withName: "shadow")!
         shadow.removeAllActions()
@@ -153,9 +163,12 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         if status == .play {
             levelTime -= deltaTime
             updateTimeBar()
-            if levelTime <= 0 {
-                perform(transition: .gameToLose)
-            }
+//            if levelTime <= 0 {
+//                status = .pause
+//                router?.show()
+////                adsInteractor?.showRewardedAd(for: .lose)
+////                perform(transition: .gameToLose)
+//            }
         }
     }
     
@@ -173,12 +186,28 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
     func handleWrongTap() {
         levelTime -= LevelHandler.shared.timePenalty
         animateBarColor()
-        if levelTime <= 0 {
-            perform(transition: .gameToLose)
-        } else {
+        if levelTime >= 0 {
             spike.madspike()
             ball.bravo()
         }
+//        if levelTime <= 0 {
+//            router?.show()
+////            perform(transition: .gameToLose)
+//        } else {
+//
+//        }
+    }
+    
+    func setTime(_ time: TimeInterval) {
+        levelTime = time
+        router?.hide()
+        hasShownRewardAd = true
+        perform(transition: .gameToPause)
+    }
+    
+    func dontAddTime() {
+        router?.hide()
+        perform(transition: .gameToLose)
     }
     
     func perform(transition: Transition) {
@@ -242,6 +271,14 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate {
         }
     }
 
+    func handleTimeEnd() {
+        if !hasShownRewardAd {
+            router?.show()
+            status = .showingAd
+        } else {
+            perform(transition: .gameToLose)
+        }
+    }
 }
 
 enum Status{
@@ -252,6 +289,7 @@ enum Status{
     case pause
     case win
     case lose
+    case showingAd
 }
 
 protocol BouncyBallSceneDelegate: AnyObject {

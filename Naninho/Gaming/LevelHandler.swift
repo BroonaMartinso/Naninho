@@ -108,8 +108,8 @@ class LevelHandler {
     
     }
     
-    func getStarsFor(level: Int) -> Int? {
-        return completedLevels[level]
+    func getStarsFor(level: Int) -> Int {
+        return completedLevels[level] ?? 0
     }
     
     func updateScore(with value:Int)

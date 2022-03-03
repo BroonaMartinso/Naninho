@@ -1,38 +1,24 @@
 //
-//  BeginLevelPopup.swift
+//  GetMoreTimePopup.swift
 //  Naninho
 //
-//  Created by Marco Zulian on 12/02/22.
+//  Created by Marco Zulian on 03/03/22.
 //
 
 import Foundation
 import UIKit
 import AVFAudio
 
-class BeginLevelPopup: UIView, LevelChangeListener, PopUp {
+class GetMoreTimePopup: UIView, PopUp {
     
-    private var levelLabel = UILabel()
-    private var starsImage = UIImageView()
+    private var messageLabel = UILabel()
     private var acceptButton: UIButton!
     private var declineButton = UIButton()
-    weak var delegate: BeginLevelPopupDelegate?
-    
-    private var level: Int = 0 {
-        didSet {
-            configureLevelLabel()
-        }
-    }
-    
-    private var stars: Int = 0 {
-        didSet {
-            configureStars()
-        }
-    }
+    weak var delegate: GetMoreTimePopupDelegate?
     
     override var bounds: CGRect {
         didSet {
             setupLevelLabel()
-            setupStarsImage()
             setupDeclineButton()
             setupAcceptButton()
         }
@@ -44,7 +30,6 @@ class BeginLevelPopup: UIView, LevelChangeListener, PopUp {
         
         layer.cornerRadius = 25
         
-        LevelHandler.shared.addListener(self)
     }
     
     required init?(coder: NSCoder) {
@@ -52,36 +37,22 @@ class BeginLevelPopup: UIView, LevelChangeListener, PopUp {
     }
     
     func setupLevelLabel() {
-        levelLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(levelLabel)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(messageLabel)
         
         NSLayoutConstraint.activate(
-            [ levelLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-              levelLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            [ messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+              messageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
 //              levelLabel.bottomAnchor.constraint(equalTo: centerYAnchor)
-              levelLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -20)
+              messageLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -20)
             ]
         )
         
-//        levelLabel.text = "LEVEL ?"
-        levelLabel.textAlignment = .center
-        levelLabel.textColor = UIColor(named: "bege")
-        levelLabel.font = .systemFont(ofSize: 36, weight: .light)
-    }
-    
-    func setupStarsImage() {
-        starsImage.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(starsImage)
-        
-        NSLayoutConstraint.activate(
-            [ starsImage.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
-              starsImage.heightAnchor.constraint(equalTo: starsImage.widthAnchor, multiplier: 0.25),
-              starsImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-              starsImage.topAnchor.constraint(equalTo: levelLabel.bottomAnchor)
-            ]
-        )
-        
-//        starsImage.image = UIImage(named: "1star")
+        messageLabel.text = "Watch a short video to receive more 30s"
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.textColor = UIColor(named: "bege")
+        messageLabel.font = .systemFont(ofSize: 18, weight: .light)
     }
     
     func setupDeclineButton() {
@@ -114,7 +85,7 @@ class BeginLevelPopup: UIView, LevelChangeListener, PopUp {
     @objc
     func declineButtonTapped() {
         if let delegate = delegate {
-            delegate.handleDenial()
+            delegate.dontPlayVideo()
         }
     }
     
@@ -153,34 +124,12 @@ class BeginLevelPopup: UIView, LevelChangeListener, PopUp {
     @objc
     func acceptButtonTapped() {
         if let delegate = delegate {
-            delegate.handleAcceptance()
-        }
-    }
-    
-    func configureLevelLabel() {
-        if level == 0 {
-            levelLabel.text = "TUTORIAL"
-        } else {
-            levelLabel.text = "LEVEL \(level)"
-        }
-    }
-    
-    func configureStars() {
-        starsImage.image = UIImage(named: "\(stars)star")
-    }
-    
-    func handleLevelChange(to newLevel: Int) {
-        level = newLevel
-        
-        if let stars = LevelHandler.shared.completedLevels[newLevel] {
-            self.stars = stars
-        } else {
-            stars = 0
+            delegate.playVideo()
         }
     }
 }
 
-protocol BeginLevelPopupDelegate: AnyObject {
-    func handleAcceptance()
-    func handleDenial()
+protocol GetMoreTimePopupDelegate: AnyObject {
+    func playVideo()
+    func dontPlayVideo()
 }
