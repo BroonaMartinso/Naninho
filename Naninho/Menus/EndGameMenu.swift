@@ -236,7 +236,7 @@ class EndGameMenu: UIViewController {
         }
         
         if let delegate = delegate {
-            delegate.replayLevel()
+            delegate.startNewGame()
         }
         dismiss(animated: true)
     }
@@ -244,7 +244,7 @@ class EndGameMenu: UIViewController {
     @objc
     func nextLevelButtonTapped() {
         if let delegate = delegate {
-            delegate.goToNextLevel()
+            delegate.startNewGame()
         }
         dismiss(animated: true)
     }
@@ -265,7 +265,6 @@ enum EndGameStatus {
 }
 
 protocol EndGameMenuDelegate: AnyObject {
-    func replayLevel()
-    func goToNextLevel()
+    func startNewGame()
     func goToMenu()
 }

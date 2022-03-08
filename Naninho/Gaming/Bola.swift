@@ -43,6 +43,30 @@ class Bola {
         }
     }
     
+    func startGame(withSpeed speed: Double, completion: @escaping () -> Void = {}) {
+        bola.run(SKAction.wait(forDuration: 0.2)) {
+            self.bola.physicsBody?.affectedByGravity = false
+            self.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            self.bola.texture = SKTexture(image: UIImage(named: "expandir")!)
+            self.bola.run(SKAction.sequence(
+                [
+                    SKAction.scale(by: 0.5, duration: 0.2),
+                    SKAction.repeat(
+                        SKAction.sequence([
+                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
+                            SKAction.rotate(byAngle: Double.pi/5, duration: 0.12),
+                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06)
+                        ]), count: 3),
+                    SKAction.scale(by: 2, duration: 0.0)
+                ])
+            ) {
+                self.bola.texture = SKTexture(image: UIImage(named: "Naninho")!)
+                self.pula(velocidade: speed)
+                completion()
+            }
+        }
+    }
+    
     private func timeUntilReachZeroOnYAxis() -> Double {
         let v0 = bola.physicsBody!.velocity.dy / 150
         let s0 = bola.position.y / 150
@@ -69,7 +93,7 @@ class Bola {
         return 0
     }
     
-    func pula(velocidade: Double){
+    private func pula(velocidade: Double){
         let velocidadex = Double.random (in: -1 ... 1)
         let velocidadey = sqrt(1-pow(velocidadex, 2))
         

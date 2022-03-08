@@ -8,9 +8,37 @@
 import Foundation
 import GameKit
 
-class LevelHandler {
+class LevelHandler: LevelInteracting {
+    
+    func startLevel() {
+        if let configuration = worker?.getConfiguration(forLevel: currentLevel) {
+            presenter?.startLevel(with: configuration)
+        }
+    }
+    
+    func completeLevel(timeRemaining: Double) {
+        let previouslyObtainedStars = completedLevels[currentLevel] ?? 0
+        let gameStatus: EndGameStatus = timeRemaining >= 0 ? .win : .lose
+        let stars = worker?.getStars(forLevel: currentLevel, timeRemaining: timeRemaining) ?? 0
+        
+        let result = LevelEndStatus(level: currentLevel,
+                                    status: gameStatus,
+                                    stars: max(stars, previouslyObtainedStars))
+        presenter?.showEndScreen(for: result)
+        
+        if timeRemaining >= 0 {
+            currentLevel += 1
+            if  maxLevel < currentLevel {
+                maxLevel =  currentLevel
+            }
+        }
+    }
+    
     
     static var shared: LevelHandler = LevelHandler()
+    private var presenter: LevelPresenting?
+    private var worker: LevelWorking?
+    
     private(set) var currentLevel: Int = 0 {
         didSet {
             for listener in listeners {
@@ -68,9 +96,26 @@ class LevelHandler {
         5 + 0.05 * Double(currentLevel)
     }
     
-    private init() {
+    init() {
         rankingInteractor = RankingInteractor(worker: RankingWorker())
         persistenceInteractor = PersistenceInteractor(worker: UserDefaultsWorker())
+        
+        if let completed = persistenceInteractor.retrieveCompletedLevels() {
+            completedLevels = completed
+        }
+        if let maxLevel = persistenceInteractor.retrieveMaxLevel() {
+            self.maxLevel = maxLevel
+        }
+        if let currLevel = persistenceInteractor.retrieveCurrentLevel() {
+            self.currentLevel = currLevel
+        }
+    }
+    
+    init(worker: LevelWorking, presenter: LevelPresenting) {
+        rankingInteractor = RankingInteractor(worker: RankingWorker())
+        persistenceInteractor = PersistenceInteractor(worker: UserDefaultsWorker())
+        self.worker = worker
+        self.presenter = presenter
         
         if let completed = persistenceInteractor.retrieveCompletedLevels() {
             completedLevels = completed
