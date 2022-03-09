@@ -17,14 +17,20 @@ class RewardedAdsInteractor: NSObject, RewardingAdsInteracting, GADFullScreenCon
         self.worker = worker
     }
     
-    func showRewardedAd(for status: EndGameStatus) {
+    func showRewardedAd(for reward: RewardedAdsCases) {
         if let rewardedAd = worker?.getRewardedAd() {
             rewardedAd.fullScreenContentDelegate = self
-            presenter?.presentRewardedAd(rewardedAd)
+            presenter?.presentRewardedAd(rewardedAd, for: reward)
         }
     }
     
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         worker?.requestRewardedAd()
     }
+}
+
+enum RewardedAdsCases {
+    case moreTime
+    case doubleCoins
+    case moreCoins
 }

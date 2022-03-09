@@ -16,7 +16,7 @@ protocol NonRewardingAdsInteracting: AnyObject {
 }
 
 protocol RewardingAdsInteracting: AnyObject {
-    func showRewardedAd(for status: EndGameStatus)
+    func showRewardedAd(for reward: RewardedAdsCases)
 }
 
 protocol AdsWorking: AnyObject {
@@ -32,7 +32,7 @@ protocol AdsWorking: AnyObject {
 protocol AdsPresenting: AnyObject {
     func presentBanner(_ bannerView: GADBannerView)
     func presentIntestitial(_ interstitial: GADInterstitialAd)
-    func presentRewardedAd(_ rewardedAd: GADRewardedAd)
+    func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases)
     func endInterstitial()
     func endRewardedAd(withPrize completed: Bool)
 }
@@ -40,7 +40,7 @@ protocol AdsPresenting: AnyObject {
 protocol AdsViewControlling: AnyObject {
     func presentBanner(_ bannerView: GADBannerView)
     func presentIntestitial(_ intestitial: GADInterstitialAd)
-    func presentRewardedAd(_ rewardedAd: GADRewardedAd)
+    func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases)
     func endInterstitial()
 }
 

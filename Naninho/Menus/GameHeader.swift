@@ -14,21 +14,17 @@ class GameHeader: UIView {
     private var rankingButton: UIButton!
     private var starButton: UIButton!
     private var buttonsContainer : UIView!
+    private var rankingButtonContainer: UIView!
     var rankingInteractor: RankingInteracting?
-    
-    override var bounds: CGRect { didSet {
-        setupbox()
-        setupMoneyButton()
-        setupStarButton()
-        setupranking()
-    }}
+    var delegate: GameHeaderDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupbox()
-//        setupMoneyButton()
-//        setupStarButton()
-//        setupranking()
+        setupbox()
+        setupMoneyButton()
+        setupStarButton()
+        setupRankingButtonContainer()
+        setupranking()
         backgroundColor = UIColor (named: "black")
     }
     
@@ -65,23 +61,51 @@ class GameHeader: UIView {
         )
         
         
-        moneyButton.addTarget(self, action: #selector(rankingButtonTapped), for: .touchUpInside)
+        moneyButton.addTarget(self, action: #selector(moneyButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    func moneyButtonTapped() {
+        if let delegate = delegate {
+            delegate.skins()
+        }
+    }
+    
+    func setupRankingButtonContainer() {
+        rankingButtonContainer = UIView()
+        buttonsContainer.addSubview(rankingButtonContainer)
+        rankingButtonContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            rankingButtonContainer.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor),
+            rankingButtonContainer.trailingAnchor.constraint(equalTo: starButton.leadingAnchor),
+            rankingButtonContainer.heightAnchor.constraint(equalTo: buttonsContainer.heightAnchor),
+            rankingButtonContainer.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)
+        ])
+        
     }
     
     func setupranking(){
-        let distance = moneyButton.layer.frame.maxX - starButton.layer.frame.minX
-        let image = UIImage(systemName: "list.bullet.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 21))
+        
+        var image: UIImage?
+        if #available(iOS 15, *) {
+            image = UIImage(systemName: "list.bullet.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 21))
+        } else {
+            image = UIImage(systemName: "flag.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 21))
+        }
         rankingButton = ImageTextButton(label: "ranking",
                                         image: image,
                                         imagePosition: .trailing,
                                         foregroundColor: UIColor(named: "bege"),
                                         backgroundColor: UIColor(named: "black"))
         
-        buttonsContainer.addSubview(rankingButton)
-        rankingButton.translatesAutoresizingMaskIntoConstraints = false
+
+        rankingButtonContainer.addSubview(rankingButton)
         
+        rankingButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate(
-            [rankingButton.centerXAnchor.constraint(equalTo: moneyButton.trailingAnchor, constant: distance),
+            [rankingButton.centerXAnchor.constraint(equalTo: rankingButtonContainer.centerXAnchor),
              rankingButton.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)]
         )
         
@@ -122,4 +146,10 @@ class GameHeader: UIView {
     func starsButtonTapped() {
         rankingInteractor?.handleStarsButtonTapped()
     }
+}
+
+protocol GameHeaderDelegate {
+    
+    func skins()
+    
 }

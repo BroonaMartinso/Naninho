@@ -32,13 +32,13 @@ extension SKNode {
                  completion()
              }
     }
-    
+
     func slideHorizontally(distance: CGFloat, completion: @escaping ()->Void = {}) {
         self.run(SKAction.moveBy(x: distance, y: 0, duration: 1)) {
             completion()
         }
     }
-    
+
     func tilt(byAngle angle: Double, completion: @escaping ()->Void = {}) {
         self.run(SKAction.sequence([
             SKAction.rotate(byAngle: angle / 2, duration: 0.05),

@@ -111,15 +111,11 @@ class EndGameMenu: UIViewController {
     }
     
     func setupFirstButton() {
-        var configuration = UIButton.Configuration.filled() // 1
-        configuration.baseForegroundColor = UIColor(named: status == .win ? "verde" : "red")
-        configuration.baseBackgroundColor = UIColor(named: "bege")
-        configuration.attributedTitle = AttributedString(status == .win ? "NEXT LEVEL" : "TRY AGAIN", attributes: AttributeContainer([
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold),
-        ]))
-        configuration.cornerStyle = .capsule
-        
-        firstButton = UIButton(configuration: configuration, primaryAction: nil)
+        firstButton = ImageTextButton(label: status == .win ? "NEXT LEVEL" : "TRY AGAIN",
+                                      font: UIFont.systemFont(ofSize: 18, weight: .bold),
+                                      image: nil,
+                                      foregroundColor: UIColor(named: status == .win ? "verde" : "red"),
+                                      backgroundColor: UIColor(named: "bege"))
         
         firstButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(firstButton)
@@ -139,17 +135,11 @@ class EndGameMenu: UIViewController {
     }
 
     func setupSecondButton() {
-        var configuration = UIButton.Configuration.filled() // 1
-        configuration.baseForegroundColor = UIColor(named: "bege")
-        configuration.baseBackgroundColor = UIColor(named: status == .win ? "verde" : "red")
-        configuration.attributedTitle = AttributedString(status == .win ? "MAKE BETTER" : "MENU", attributes: AttributeContainer([
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold),
-        ]))
-        configuration.cornerStyle = .capsule
-        configuration.background.strokeWidth = 1
-        configuration.background.strokeColor = UIColor(named: "bege")
-        
-        secondButton = UIButton(configuration: configuration, primaryAction: nil)
+        secondButton = ImageTextButton(label: status == .win ? "MAKE BETTER" : "MENU",
+                                      font: UIFont.systemFont(ofSize: 18, weight: .bold),
+                                      image: nil,
+                                      foregroundColor: UIColor(named: "bege") ,
+                                      backgroundColor: UIColor(named: status == .win ? "verde" : "red"))
         
         secondButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(secondButton)
@@ -170,17 +160,11 @@ class EndGameMenu: UIViewController {
     }
     
     func setupThirdButton() {
-        var configuration = UIButton.Configuration.filled() // 1
-        configuration.baseForegroundColor = UIColor(named: "bege")
-        configuration.baseBackgroundColor = UIColor(named: "verde")
-        configuration.attributedTitle = AttributedString("MENU", attributes: AttributeContainer([
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold),
-        ]))
-        configuration.cornerStyle = .capsule
-        configuration.background.strokeWidth = 1
-        configuration.background.strokeColor = UIColor(named: "bege")
-        
-        thirdButton = UIButton(configuration: configuration, primaryAction: nil)
+        thirdButton = ImageTextButton(label: "MENU",
+                                      font: UIFont.systemFont(ofSize: 18, weight: .bold),
+                                      image: nil,
+                                      foregroundColor: UIColor(named: "bege") ,
+                                      backgroundColor: UIColor(named: status == .win ? "verde" : "red"))
         
         thirdButton.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(thirdButton)

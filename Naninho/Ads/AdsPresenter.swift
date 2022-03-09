@@ -27,8 +27,8 @@ class AdsPresenter: AdsPresenting {
         viewController?.endInterstitial()
     }
     
-    func presentRewardedAd(_ rewardedAd: GADRewardedAd) {
-        viewController?.presentRewardedAd(rewardedAd)
+    func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases) {
+        viewController?.presentRewardedAd(rewardedAd, for: reward)
     }
     
     func endRewardedAd(withPrize completed: Bool) {

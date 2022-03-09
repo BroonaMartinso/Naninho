@@ -8,7 +8,7 @@
 import Foundation
 import GameKit
 
-class LevelHandler: LevelInteracting {
+class LevelHandler: NSObject, LevelInteracting {
     
     func startLevel() {
         if let configuration = worker?.getConfiguration(forLevel: currentLevel) {
@@ -96,7 +96,7 @@ class LevelHandler: LevelInteracting {
         5 + 0.05 * Double(currentLevel)
     }
     
-    init() {
+    override init() {
         rankingInteractor = RankingInteractor(worker: RankingWorker())
         persistenceInteractor = PersistenceInteractor(worker: UserDefaultsWorker())
         
@@ -188,4 +188,22 @@ class LevelHandler: LevelInteracting {
 
 protocol LevelChangeListener: AnyObject {
     func handleLevelChange(to newLevel: Int)
+}
+
+extension LevelHandler: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        max(2, maxLevel + 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
+        let currLevel = max(1, maxLevel) - indexPath.row
+        
+        cell.star = completedLevels[currLevel] ?? 0
+        cell.nivel = currLevel
+        if currLevel != currentLevel {
+            cell.deselect()
+        }
+        return cell
+    }
 }

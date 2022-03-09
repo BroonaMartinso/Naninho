@@ -19,9 +19,16 @@
 		56662D2D27A8529000E4D27A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */; };
 		56662D3427A85AA300E4D27A /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56662D3327A85AA300E4D27A /* Spike.swift */; };
 		FA06AE3227B5620E00B6CFA6 /* LevelSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AE3127B5620E00B6CFA6 /* LevelSelectionCell.swift */; };
-		FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */; };
+		FA180FE827D78E15006370C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180FE727D78E15006370C7 /* User.swift */; };
+		FA180FEA27D78E39006370C7 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180FE927D78E39006370C7 /* Skin.swift */; };
+		FA180FEC27D78E9C006370C7 /* SkinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180FEB27D78E9C006370C7 /* SkinRepository.swift */; };
+		FA180FEE27D7CD3E006370C7 /* SkinsMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180FED27D7CD3E006370C7 /* SkinsMenuDelegate.swift */; };
+		FA180FF027D7DF25006370C7 /* LevelMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180FEF27D7DF25006370C7 /* LevelMenuDelegate.swift */; };
+		FA1C553C27D8023A007BE353 /* TouchableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C553B27D8023A007BE353 /* TouchableSpriteNode.swift */; };
+		FA1C553E27D8029E007BE353 /* SkinProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C553D27D8029E007BE353 /* SkinProtocols.swift */; };
+		FA1C554227D80917007BE353 /* BuySkinPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C554127D80917007BE353 /* BuySkinPopup.swift */; };
+		FA1C554427D809DE007BE353 /* PriceTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C554327D809DE007BE353 /* PriceTagView.swift */; };
 		FA1E1BAA27AD674000837CDB /* LevelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BA927AD674000837CDB /* LevelInteractor.swift */; };
-		FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */; };
 		FA260C2327BE7E6E002C3614 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA260C2227BE7E6E002C3614 /* StringExtension.swift */; };
 		FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA267B7027B6CB7200191017 /* GameHeader.swift */; };
 		FA267B7327B6D05C00191017 /* BouncyBall.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA267B7227B6D05C00191017 /* BouncyBall.sks */; };
@@ -32,12 +39,11 @@
 		FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4327B2CD810039A575 /* PausePopup.swift */; };
 		FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29AD4527B2CF260039A575 /* TopBar.swift */; };
 		FA2A758627C9582E0043DE4E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */; };
+		FA2BDA5327D8E8F700F15698 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2BDA5227D8E8F700F15698 /* PopUp.swift */; };
 		FA2E8C1A27D0F0F600FA5E4E /* RewardedAdsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C1927D0F0F600FA5E4E /* RewardedAdsInteractor.swift */; };
 		FA2E8C2127D0FED300FA5E4E /* PopUpsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2027D0FED300FA5E4E /* PopUpsInteractor.swift */; };
 		FA2E8C2327D1002F00FA5E4E /* PopUpsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2227D1002F00FA5E4E /* PopUpsProtocols.swift */; };
-		FA2E8C2527D1017700FA5E4E /* PopUpsPresenting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2427D1017600FA5E4E /* PopUpsPresenting.swift */; };
 		FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */; };
-		FA2E8C2B27D106A200FA5E4E /* PopUpFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */; };
 		FA2E8C2D27D10B8500FA5E4E /* GetMoreTimePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */; };
 		FA2E8C3027D11F4C00FA5E4E /* PersistenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */; };
 		FA2E8C3227D11F8000FA5E4E /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */; };
@@ -49,13 +55,11 @@
 		FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */; };
 		FA40FE9527D671DA00A80855 /* SideMenuProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA40FE9427D671DA00A80855 /* SideMenuProtocols.swift */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
-		FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA516A1E27BC7795000EC432 /* UIViewExtension.swift */; };
+		FA43918527D8200A001A06B0 /* SkinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43918427D8200A001A06B0 /* SkinPresenter.swift */; };
 		FA5B5E6C27D6DECA00A6C999 /* LevelEndStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B5E6B27D6DECA00A6C999 /* LevelEndStatus.swift */; };
+		FA5B5E6F27D6F04D00A6C999 /* AnalyticsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B5E6E27D6F04D00A6C999 /* AnalyticsProtocols.swift */; };
 		FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */; };
 		FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */; };
-		FACFE1D027D015F4001F5342 /* ShopInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1CF27D015F4001F5342 /* ShopInteractor.swift */; };
-		FACFE1D227D01670001F5342 /* ShopPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D127D01670001F5342 /* ShopPresenter.swift */; };
-		FACFE1D427D01A0D001F5342 /* LevelSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */; };
 		FACFE1D627D01FB5001F5342 /* RankingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */; };
 		FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D727D02ADB001F5342 /* RankingWorker.swift */; };
 		FACFE1DA27D0378A001F5342 /* RankingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACFE1D927D0378A001F5342 /* RankingPresenter.swift */; };
@@ -83,9 +87,16 @@
 		C7BE5D056CF9C3FD353F7FC8 /* Pods-Naninho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Naninho.release.xcconfig"; path = "Target Support Files/Pods-Naninho/Pods-Naninho.release.xcconfig"; sourceTree = "<group>"; };
 		D8533A3A5B84ED2A1DD05909 /* Pods-Naninho.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Naninho.debug.xcconfig"; path = "Target Support Files/Pods-Naninho/Pods-Naninho.debug.xcconfig"; sourceTree = "<group>"; };
 		FA06AE3127B5620E00B6CFA6 /* LevelSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionCell.swift; sourceTree = "<group>"; };
-		FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesManager.swift; sourceTree = "<group>"; };
+		FA180FE727D78E15006370C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FA180FE927D78E39006370C7 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
+		FA180FEB27D78E9C006370C7 /* SkinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinRepository.swift; sourceTree = "<group>"; };
+		FA180FED27D7CD3E006370C7 /* SkinsMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinsMenuDelegate.swift; sourceTree = "<group>"; };
+		FA180FEF27D7DF25006370C7 /* LevelMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenuDelegate.swift; sourceTree = "<group>"; };
+		FA1C553B27D8023A007BE353 /* TouchableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSpriteNode.swift; sourceTree = "<group>"; };
+		FA1C553D27D8029E007BE353 /* SkinProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinProtocols.swift; sourceTree = "<group>"; };
+		FA1C554127D80917007BE353 /* BuySkinPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuySkinPopup.swift; sourceTree = "<group>"; };
+		FA1C554327D809DE007BE353 /* PriceTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTagView.swift; sourceTree = "<group>"; };
 		FA1E1BA927AD674000837CDB /* LevelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInteractor.swift; sourceTree = "<group>"; };
-		FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableSpriteNode.swift; sourceTree = "<group>"; };
 		FA260C2227BE7E6E002C3614 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		FA267B7027B6CB7200191017 /* GameHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeader.swift; sourceTree = "<group>"; };
 		FA267B7227B6D05C00191017 /* BouncyBall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BouncyBall.sks; sourceTree = "<group>"; };
@@ -97,12 +108,11 @@
 		FA29AD4527B2CF260039A575 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA2B660127BBDABB00CE3486 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FA2BDA5227D8E8F700F15698 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FA2E8C1927D0F0F600FA5E4E /* RewardedAdsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAdsInteractor.swift; sourceTree = "<group>"; };
 		FA2E8C2027D0FED300FA5E4E /* PopUpsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsInteractor.swift; sourceTree = "<group>"; };
 		FA2E8C2227D1002F00FA5E4E /* PopUpsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsProtocols.swift; sourceTree = "<group>"; };
-		FA2E8C2427D1017600FA5E4E /* PopUpsPresenting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsPresenting.swift; sourceTree = "<group>"; };
 		FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpsRouter.swift; sourceTree = "<group>"; };
-		FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpFactory.swift; sourceTree = "<group>"; };
 		FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMoreTimePopup.swift; sourceTree = "<group>"; };
 		FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceInteractor.swift; sourceTree = "<group>"; };
 		FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
@@ -114,13 +124,11 @@
 		FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		FA40FE9427D671DA00A80855 /* SideMenuProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuProtocols.swift; sourceTree = "<group>"; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
-		FA516A1E27BC7795000EC432 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		FA43918427D8200A001A06B0 /* SkinPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinPresenter.swift; sourceTree = "<group>"; };
 		FA5B5E6B27D6DECA00A6C999 /* LevelEndStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEndStatus.swift; sourceTree = "<group>"; };
+		FA5B5E6E27D6F04D00A6C999 /* AnalyticsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyticsProtocols.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/AnalyticsProtocols.swift"; sourceTree = "<group>"; };
 		FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameMenu.swift; sourceTree = "<group>"; };
 		FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginLevelPopup.swift; sourceTree = "<group>"; };
-		FACFE1CF27D015F4001F5342 /* ShopInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopInteractor.swift; sourceTree = "<group>"; };
-		FACFE1D127D01670001F5342 /* ShopPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopPresenter.swift; sourceTree = "<group>"; };
-		FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionMenu.swift; sourceTree = "<group>"; };
 		FACFE1D527D01FB5001F5342 /* RankingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingInteractor.swift; sourceTree = "<group>"; };
 		FACFE1D727D02ADB001F5342 /* RankingWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingWorker.swift; sourceTree = "<group>"; };
 		FACFE1D927D0378A001F5342 /* RankingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingPresenter.swift; sourceTree = "<group>"; };
@@ -163,9 +171,8 @@
 				56662D3327A85AA300E4D27A /* Spike.swift */,
 				562DC4F027A9B1B6004268B2 /* Bola.swift */,
 				FA428E0127AC2CFF00E29593 /* Transition.swift */,
-				FA1E1BB127AD9D5A00837CDB /* TouchableSpriteNode.swift */,
-				FA06AE3327B5871E00B6CFA6 /* SpritesManager.swift */,
 				FA260C2227BE7E6E002C3614 /* StringExtension.swift */,
+				FA180FE727D78E15006370C7 /* User.swift */,
 			);
 			path = Gaming;
 			sourceTree = "<group>";
@@ -191,8 +198,10 @@
 		56662D1B27A8528F00E4D27A /* Naninho */ = {
 			isa = PBXGroup;
 			children = (
-				FA30805927D6B844001583E0 /* Game */,
-				FA30805427D6B0D6001583E0 /* Levels */,
+				FA5B5E6D27D6F03600A6C999 /* Analytics */,
+				FA30805427D6B0D6001583E0 /* Game */,
+				FA1C553A27D80116007BE353 /* Levels */,
+				FA1C553927D8010C007BE353 /* Skins */,
 				FA284C7827D3A0A40086D19E /* SideMenu */,
 				FA2E8C2E27D11F3800FA5E4E /* Persistence */,
 				FA2E8C1F27D0FEBF00FA5E4E /* PopUps */,
@@ -205,8 +214,6 @@
 				562DC4F227A9B1BC004268B2 /* Gaming */,
 				FA29AD3827B2BAF80039A575 /* Menus */,
 				56662D2427A8528F00E4D27A /* GameViewController.swift */,
-				FACFE1CF27D015F4001F5342 /* ShopInteractor.swift */,
-				FACFE1D127D01670001F5342 /* ShopPresenter.swift */,
 				56662D2627A8528F00E4D27A /* Main.storyboard */,
 				56662D2927A8529000E4D27A /* Assets.xcassets */,
 				56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */,
@@ -225,11 +232,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		FA284C7827D3A0A40086D19E /* SideMenu */ = {
+		FA1C553927D8010C007BE353 /* Skins */ = {
+			isa = PBXGroup;
+			children = (
+				FA180FE927D78E39006370C7 /* Skin.swift */,
+				FA284C7927D3A15A0086D19E /* SkinSelectionCell.swift */,
+				FA180FED27D7CD3E006370C7 /* SkinsMenuDelegate.swift */,
+				FA180FEB27D78E9C006370C7 /* SkinRepository.swift */,
+				FA43918427D8200A001A06B0 /* SkinPresenter.swift */,
+				FA1C553D27D8029E007BE353 /* SkinProtocols.swift */,
+			);
+			path = Skins;
+			sourceTree = "<group>";
+		};
+		FA1C553A27D80116007BE353 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
 				FA06AE3127B5620E00B6CFA6 /* LevelSelectionCell.swift */,
-				FA284C7927D3A15A0086D19E /* SkinSelectionCell.swift */,
+				FA180FEF27D7DF25006370C7 /* LevelMenuDelegate.swift */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		FA284C7827D3A0A40086D19E /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
 				FA40FE9427D671DA00A80855 /* SideMenuProtocols.swift */,
 			);
 			path = SideMenu;
@@ -240,14 +267,13 @@
 			children = (
 				FA29AD3B27B2BB1A0039A575 /* MenuProtocol.swift */,
 				FA29AD4327B2CD810039A575 /* PausePopup.swift */,
-				FACFE1D327D01A0D001F5342 /* LevelSelectionMenu.swift */,
 				FA29AD4527B2CF260039A575 /* TopBar.swift */,
 				FA267B7027B6CB7200191017 /* GameHeader.swift */,
-				FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */,
-				FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */,
 				FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */,
-				FA516A1E27BC7795000EC432 /* UIViewExtension.swift */,
 				FA284C7B27D3B6160086D19E /* ImageTextButton.swift */,
+				FA1C553B27D8023A007BE353 /* TouchableSpriteNode.swift */,
+				FA1C554327D809DE007BE353 /* PriceTagView.swift */,
+				FA2BDA5227D8E8F700F15698 /* PopUp.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -256,10 +282,11 @@
 			isa = PBXGroup;
 			children = (
 				FA2E8C2027D0FED300FA5E4E /* PopUpsInteractor.swift */,
-				FA2E8C2427D1017600FA5E4E /* PopUpsPresenting.swift */,
 				FA2E8C2227D1002F00FA5E4E /* PopUpsProtocols.swift */,
 				FA2E8C2827D1041100FA5E4E /* PopUpsRouter.swift */,
-				FA2E8C2A27D106A200FA5E4E /* PopUpFactory.swift */,
+				FAC1091827B83C8800A462F5 /* BeginLevelPopup.swift */,
+				FA2E8C2C27D10B8500FA5E4E /* GetMoreTimePopup.swift */,
+				FA1C554127D80917007BE353 /* BuySkinPopup.swift */,
 			);
 			path = PopUps;
 			sourceTree = "<group>";
@@ -274,24 +301,25 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		FA30805427D6B0D6001583E0 /* Levels */ = {
+		FA30805427D6B0D6001583E0 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				FA267B7427B6D3F400191017 /* BouncyBallScene.swift */,
 				FA1E1BA927AD674000837CDB /* LevelInteractor.swift */,
 				FA30805727D6B3BB001583E0 /* LevelWorker.swift */,
 				FA30805527D6B2C9001583E0 /* LevelConfiguration.swift */,
 				FA30805227D6B046001583E0 /* LevelProtocols.swift */,
 				FA5B5E6B27D6DECA00A6C999 /* LevelEndStatus.swift */,
 			);
-			path = Levels;
+			path = Game;
 			sourceTree = "<group>";
 		};
-		FA30805927D6B844001583E0 /* Game */ = {
+		FA5B5E6D27D6F03600A6C999 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				FA267B7427B6D3F400191017 /* BouncyBallScene.swift */,
+				FA5B5E6E27D6F04D00A6C999 /* AnalyticsProtocols.swift */,
 			);
-			path = Game;
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		FACFE1DD27D03FFE001F5342 /* Ranking */ = {
@@ -457,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1C553E27D8029E007BE353 /* SkinProtocols.swift in Sources */,
 				FACFE1DA27D0378A001F5342 /* RankingPresenter.swift in Sources */,
 				FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */,
 				FACFE1E527D042B6001F5342 /* AdsProtocols.swift in Sources */,
@@ -464,32 +493,34 @@
 				FA30805827D6B3BB001583E0 /* LevelWorker.swift in Sources */,
 				FA5B5E6C27D6DECA00A6C999 /* LevelEndStatus.swift in Sources */,
 				FA267B7527B6D3F400191017 /* BouncyBallScene.swift in Sources */,
-				FA06AE3427B5871E00B6CFA6 /* SpritesManager.swift in Sources */,
-				FACFE1D027D015F4001F5342 /* ShopInteractor.swift in Sources */,
+				FA180FEE27D7CD3E006370C7 /* SkinsMenuDelegate.swift in Sources */,
+				FA180FF027D7DF25006370C7 /* LevelMenuDelegate.swift in Sources */,
+				FA5B5E6F27D6F04D00A6C999 /* AnalyticsProtocols.swift in Sources */,
 				56662D2327A8528F00E4D27A /* SKNodeExtension.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
-				FA2E8C2B27D106A200FA5E4E /* PopUpFactory.swift in Sources */,
-				FA516A1F27BC7795000EC432 /* UIViewExtension.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelInteractor.swift in Sources */,
 				FACFE1EB27D05A65001F5342 /* AdsPresenter.swift in Sources */,
 				FA06AE3227B5620E00B6CFA6 /* LevelSelectionCell.swift in Sources */,
 				FA2E8C2D27D10B8500FA5E4E /* GetMoreTimePopup.swift in Sources */,
 				FA284C7A27D3A15A0086D19E /* SkinSelectionCell.swift in Sources */,
 				FA2E8C2327D1002F00FA5E4E /* PopUpsProtocols.swift in Sources */,
+				FA1C554227D80917007BE353 /* BuySkinPopup.swift in Sources */,
 				FACFE1D827D02ADB001F5342 /* RankingWorker.swift in Sources */,
 				FA2E8C3427D11F8D00FA5E4E /* PersistenceProtocols.swift in Sources */,
 				FA29AD3C27B2BB1A0039A575 /* MenuProtocol.swift in Sources */,
+				FA180FEA27D78E39006370C7 /* Skin.swift in Sources */,
 				56662D3427A85AA300E4D27A /* Spike.swift in Sources */,
 				FA30805327D6B046001583E0 /* LevelProtocols.swift in Sources */,
-				FA1E1BB227AD9D5A00837CDB /* TouchableSpriteNode.swift in Sources */,
 				FA267B7127B6CB7200191017 /* GameHeader.swift in Sources */,
 				FA2E8C3027D11F4C00FA5E4E /* PersistenceInteractor.swift in Sources */,
+				FA180FE827D78E15006370C7 /* User.swift in Sources */,
 				FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */,
 				FACFE1E727D04422001F5342 /* AdsWorker.swift in Sources */,
 				FA30805627D6B2C9001583E0 /* LevelConfiguration.swift in Sources */,
+				FA1C554427D809DE007BE353 /* PriceTagView.swift in Sources */,
 				FA29AD4427B2CD810039A575 /* PausePopup.swift in Sources */,
-				FACFE1D427D01A0D001F5342 /* LevelSelectionMenu.swift in Sources */,
 				FACFE1D627D01FB5001F5342 /* RankingInteractor.swift in Sources */,
+				FA180FEC27D78E9C006370C7 /* SkinRepository.swift in Sources */,
 				FA2E8C1A27D0F0F600FA5E4E /* RewardedAdsInteractor.swift in Sources */,
 				FA284C7C27D3B6160086D19E /* ImageTextButton.swift in Sources */,
 				FA2E8C2127D0FED300FA5E4E /* PopUpsInteractor.swift in Sources */,
@@ -499,12 +530,13 @@
 				FACFE1E327D04277001F5342 /* RankingProtocols.swift in Sources */,
 				56662D1D27A8528F00E4D27A /* AppDelegate.swift in Sources */,
 				FA29AD4627B2CF260039A575 /* TopBar.swift in Sources */,
-				FACFE1D227D01670001F5342 /* ShopPresenter.swift in Sources */,
+				FA2BDA5327D8E8F700F15698 /* PopUp.swift in Sources */,
 				FACFE1E027D04220001F5342 /* BannerAndInterstitialAdsInteractor.swift in Sources */,
+				FA43918527D8200A001A06B0 /* SkinPresenter.swift in Sources */,
 				FA2E8C3227D11F8000FA5E4E /* UserDefaultsWorker.swift in Sources */,
+				FA1C553C27D8023A007BE353 /* TouchableSpriteNode.swift in Sources */,
 				FACFE1E927D0573F001F5342 /* AdsRouter.swift in Sources */,
 				FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */,
-				FA2E8C2527D1017700FA5E4E /* PopUpsPresenting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +613,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -636,7 +668,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -666,7 +698,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -699,7 +731,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

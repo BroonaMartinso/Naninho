@@ -66,8 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func requestDataPermission() {
             if #available(iOS 14, *) {
-                
-                
                 ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                     switch status {
                     case .authorized:
