@@ -21,7 +21,7 @@ class GameHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupbox()
-        setupMoneyButton()
+//        setupMoneyButton()
         setupStarButton()
         setupRankingButtonContainer()
         setupranking()
@@ -37,7 +37,8 @@ class GameHeader: UIView {
         buttonsContainer.translatesAutoresizingMaskIntoConstraints = false
         addSubview(buttonsContainer)
 
-        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.85).isActive = true
+//        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.85).isActive = true
+        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.76).isActive = true
         buttonsContainer.heightAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.1).isActive = true
         buttonsContainer.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         buttonsContainer.topAnchor.constraint(equalTo: centerYAnchor, constant: -5).isActive = true
@@ -77,7 +78,8 @@ class GameHeader: UIView {
         rankingButtonContainer.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            rankingButtonContainer.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor),
+//            rankingButtonContainer.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor),
+            rankingButtonContainer.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
             rankingButtonContainer.trailingAnchor.constraint(equalTo: starButton.leadingAnchor),
             rankingButtonContainer.heightAnchor.constraint(equalTo: buttonsContainer.heightAnchor),
             rankingButtonContainer.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)
@@ -104,7 +106,9 @@ class GameHeader: UIView {
         rankingButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate(
-            [rankingButton.centerXAnchor.constraint(equalTo: rankingButtonContainer.centerXAnchor),
+            [
+//                rankingButton.centerXAnchor.constraint(equalTo: rankingButtonContainer.centerXAnchor),
+                rankingButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
              rankingButton.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)]
         )
         
