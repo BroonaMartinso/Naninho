@@ -12,7 +12,7 @@ protocol NonRewardingAdsInteracting: AnyObject {
     func insertBanner(withSize: CGSize)
     func hideBanner()
     func showBanner()
-    func showInterstitial()
+    func showInterstitial(for adCase: IntersticialAdsCases)
 }
 
 protocol RewardingAdsInteracting: AnyObject {
@@ -33,7 +33,7 @@ protocol AdsPresenting: AnyObject {
     func presentBanner(_ bannerView: GADBannerView)
     func presentIntestitial(_ interstitial: GADInterstitialAd)
     func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases)
-    func endInterstitial()
+    func endInterstitial(for adCase: IntersticialAdsCases)
     func endRewardedAd(withPrize completed: Bool)
 }
 
@@ -41,7 +41,7 @@ protocol AdsViewControlling: AnyObject {
     func presentBanner(_ bannerView: GADBannerView)
     func presentIntestitial(_ intestitial: GADInterstitialAd)
     func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases)
-    func endInterstitial()
+    func endInterstitial(for adCase: IntersticialAdsCases)
 }
 
 protocol AdsRouting: AnyObject {

@@ -11,7 +11,7 @@ import SpriteKit
 protocol Menu {
     var representation: SKNode { get }
     var respondableState: Status { get }
-    func handleTap(atPos pos: CGPoint) -> Transition?
+    func handleTap(atPos pos: CGPoint)
 }
 
 extension Menu {

@@ -20,25 +20,24 @@ class PersistenceInteractor: PersistenceInteracting {
         self.worker = worker
     }
     
-    internal func saveCurrentLevel() {
-        let currLevel = LevelHandler.shared.currentLevel
-        worker?.persist(currLevel, atKey: UserDefaultKeys.currLevel.rawValue)
+    internal func save(currentLevel: Int) {
+        worker?.persist(currentLevel, atKey: UserDefaultKeys.currLevel.rawValue)
     }
     
-    internal func saveMaxLevel() {
-        let maxLevel = LevelHandler.shared.maxLevel
+    internal func save(maxLevel: Int) {
         worker?.persist(maxLevel, atKey: UserDefaultKeys.maxLevel.rawValue)
     }
     
-    internal func saveCompletedLevels() {
-        let completedLevels = LevelHandler.shared.completedLevels
+    internal func save(completedLevels: [Int:Int]) {
         worker?.persist(completedLevels, atKey: UserDefaultKeys.completedLevels.rawValue)
     }
     
-    func saveCurrentState() {
-        saveCurrentLevel()
-        saveMaxLevel()
-        saveCompletedLevels()
+    func saveCurrentState(currentLevel: Int,
+                          maxLevel: Int,
+                          completedLevels: [Int:Int]) {
+        save(currentLevel: currentLevel)
+        save(maxLevel: maxLevel)
+        save(completedLevels: completedLevels)
     }
     
     func retrieveCurrentLevel() -> Int? {

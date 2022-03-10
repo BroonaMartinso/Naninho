@@ -86,7 +86,6 @@ class GameHeader: UIView {
     }
     
     func setupranking(){
-        
         var image: UIImage?
         if #available(iOS 15, *) {
             image = UIImage(systemName: "list.bullet.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 21))
@@ -120,7 +119,8 @@ class GameHeader: UIView {
     
     func setupStarButton() {
         // Setup label and image
-        let label = "star \(LevelHandler.shared.obtainedStars) | \(LevelHandler.shared.maxAchieavableStars)"
+        // TODO: ARRUMAR BOTAO DE ESTRELAS
+        let label = "star 7 | 10"
         let image = UIImage(systemName: "star.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 21))
         
         // Init button

@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol PopUpPresenting {
-    func preparePopUp(forLevel level: Int, andStars stars: Int)
-}
-
 protocol PopUpRouting {
     func show()
     func hide()

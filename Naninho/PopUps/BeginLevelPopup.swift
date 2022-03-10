@@ -27,7 +27,7 @@ class BeginLevelPopup: PopUpView, LevelChangeListener, PopUp {
         configureAcceptButton(with: "let's gooo!")
         acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
         declineButton.addTarget(self, action: #selector(declineButtonTapped), for: .touchUpInside)
-        LevelHandler.shared.addListener(self)
+//        LevelHandler.shared.addListener(self)
     }
     
     required init?(coder: NSCoder) {
@@ -61,14 +61,9 @@ class BeginLevelPopup: PopUpView, LevelChangeListener, PopUp {
         configureSubtitle(with: starsImage)
     }
     
-    func handleLevelChange(to newLevel: Int) {
+    func handleLevelChange(to newLevel: Int, stars: Int) {
         level = newLevel
-        
-        if let stars = LevelHandler.shared.completedLevels[newLevel] {
-            self.stars = stars
-        } else {
-            stars = 0
-        }
+        self.stars = stars
     }
 }
 

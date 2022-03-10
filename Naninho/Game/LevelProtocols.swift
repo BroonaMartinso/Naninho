@@ -9,9 +9,18 @@ import Foundation
 
 protocol LevelInteracting {
     
-    func startLevel()
-    func completeLevel(timeRemaining: Double)
+    var maxLevel: Int { get }
+    var currentLevel: Int { get }
+    var completedLevels: [Int:Int] { get }
     
+    func startCurrentLevel()
+    func playNextLevel()
+    func replayLevel()
+    func completeLevel(timeRemaining: Double)
+    func getStarsFor(level: Int) -> Int
+    func setLevel(to level: Int)
+    
+    func addListener(_ listener: LevelChangeListener)
 }
 
 protocol LevelPresenting {

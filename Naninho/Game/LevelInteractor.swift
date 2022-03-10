@@ -10,47 +10,21 @@ import GameKit
 
 class LevelHandler: NSObject, LevelInteracting {
     
-    func startLevel() {
-        if let configuration = worker?.getConfiguration(forLevel: currentLevel) {
-            presenter?.startLevel(with: configuration)
-        }
-    }
-    
-    func completeLevel(timeRemaining: Double) {
-        let previouslyObtainedStars = completedLevels[currentLevel] ?? 0
-        let gameStatus: EndGameStatus = timeRemaining >= 0 ? .win : .lose
-        let stars = worker?.getStars(forLevel: currentLevel, timeRemaining: timeRemaining) ?? 0
-        
-        let result = LevelEndStatus(level: currentLevel,
-                                    status: gameStatus,
-                                    stars: max(stars, previouslyObtainedStars))
-        presenter?.showEndScreen(for: result)
-        
-        if timeRemaining >= 0 {
-            currentLevel += 1
-            if  maxLevel < currentLevel {
-                maxLevel =  currentLevel
-            }
-        }
-    }
-    
-    
-    static var shared: LevelHandler = LevelHandler()
     private var presenter: LevelPresenting?
     private var worker: LevelWorking?
+    private var rankingInteractor: RankingInteracting
+    private var persistenceInteractor: PersistenceInteracting
     
+    private(set) var maxLevel: Int = 0
+    private var listeners: [LevelChangeListener] = []
+    private(set) var completedLevels: [Int: Int] = [:]
     private(set) var currentLevel: Int = 0 {
         didSet {
             for listener in listeners {
-                listener.handleLevelChange(to: currentLevel)
+                listener.handleLevelChange(to: currentLevel, stars: getStarsFor(level: currentLevel))
             }
         }
     }
-    var maxLevel: Int = 0
-    private var rankingInteractor: RankingInteracting
-    private var persistenceInteractor: PersistenceInteracting
-    private var listeners: [LevelChangeListener] = []
-    private(set) var completedLevels: [Int: Int] = [:]
     
     var maxAchieavableStars: Int {
         return (maxLevel) * 3
@@ -64,83 +38,24 @@ class LevelHandler: NSObject, LevelInteracting {
         return totalStars
     }
     
-    var levelSpeed: Double {
-        if currentLevel == 0 {
-            return 0
-        }
-        else {
-            let minSpeed = 100 + 25 * currentLevel / 4
-            let deltaSpeed = max(0, 200 - 20 * currentLevel / 4)
-            return Double(minSpeed) + Double(deltaSpeed) * sigmoid(x: Double(currentLevel / 4), beta: 0.5)
-        }
-    }
-    
-    var numberOfSpikes: Int {
-        if currentLevel == 0 {
-            return 4
-        }
-        else {
-            return min(8, 5 + (currentLevel / 4))
-        }
-    }
-    
-    var timeNeededForAFullCircle: Double {
-        max(1, 10 - 0.25 * (Double(currentLevel.quotientAndRemainder(dividingBy: 4).quotient)))
-    }
-    
-    var timeToCompleteCurrLevel: Double {
-        50 + 0.15 * Double(currentLevel)
-    }
-    
-    var timePenalty: Double {
-        5 + 0.05 * Double(currentLevel)
-    }
-    
-    override init() {
-        rankingInteractor = RankingInteractor(worker: RankingWorker())
-        persistenceInteractor = PersistenceInteractor(worker: UserDefaultsWorker())
-        
-        if let completed = persistenceInteractor.retrieveCompletedLevels() {
-            completedLevels = completed
-        }
-        if let maxLevel = persistenceInteractor.retrieveMaxLevel() {
-            self.maxLevel = maxLevel
-        }
-        if let currLevel = persistenceInteractor.retrieveCurrentLevel() {
-            self.currentLevel = currLevel
-        }
-    }
-    
-    init(worker: LevelWorking, presenter: LevelPresenting) {
+    init(worker: LevelWorking? = nil, presenter: LevelPresenting? = nil) {
         rankingInteractor = RankingInteractor(worker: RankingWorker())
         persistenceInteractor = PersistenceInteractor(worker: UserDefaultsWorker())
         self.worker = worker
         self.presenter = presenter
         
         if let completed = persistenceInteractor.retrieveCompletedLevels() {
-            completedLevels = completed
+            self.completedLevels = completed
+            print(completedLevels)
         }
         if let maxLevel = persistenceInteractor.retrieveMaxLevel() {
             self.maxLevel = maxLevel
+            print(maxLevel)
         }
         if let currLevel = persistenceInteractor.retrieveCurrentLevel() {
             self.currentLevel = currLevel
+            print(currentLevel)
         }
-    }
-    
-    func nextLevel(timeRemaining: Double) {
-        if currentLevel != 0 {
-            let startsGained = getStarsForCurrentLevel(timeRemaining: timeRemaining)
-            registerStarsForCurrentLevel(amount: startsGained)
-        }
-        
-        currentLevel += 1
-        if  maxLevel < currentLevel {
-            maxLevel =  currentLevel
-        }
-    
-        persistenceInteractor.saveCurrentState()
-        rankingInteractor.updateRecords()
     }
     
     func getStarsFor(level: Int) -> Int {
@@ -158,52 +73,43 @@ class LevelHandler: NSObject, LevelInteracting {
         listeners.append(listener)
     }
     
-    private func getStarsForCurrentLevel(timeRemaining: Double) -> Int{
-        var starsGained: Int = 0
-        
-        if timeRemaining > timeToCompleteCurrLevel * 0.5 {
-            starsGained = 3
-        } else if timeRemaining > timeToCompleteCurrLevel * 0.25 {
-            starsGained = 2
-        } else {
-            starsGained = 1
-        }
-        
-        return starsGained
-    }
-    
-    private func registerStarsForCurrentLevel(amount stars: Int) {
-        if let previousStars = completedLevels[currentLevel] {
-            completedLevels[currentLevel] = max(previousStars, stars)
-        } else {
-            completedLevels[currentLevel] = stars
+    func startCurrentLevel() {
+        if let configuration = worker?.getConfiguration(forLevel: currentLevel) {
+            presenter?.startLevel(with: configuration)
         }
     }
     
-    func sigmoid(x: Double, beta: Double = 1.0) -> Double {
-        let eulerConstant = 0.577
-        return 1.0 / (1.0 + pow(eulerConstant, beta*x))
+    func replayLevel() {
+        startCurrentLevel()
+    }
+    
+    func playNextLevel() {
+        currentLevel += 1
+        startCurrentLevel()
+    }
+    
+    func completeLevel(timeRemaining: Double) {
+        let previouslyObtainedStars = completedLevels[currentLevel] ?? 0
+        let stars = worker?.getStars(forLevel: currentLevel, timeRemaining: timeRemaining) ?? 0
+        completedLevels[currentLevel] = max(stars, previouslyObtainedStars)
+        
+        let gameStatus: EndGameStatus = timeRemaining >= 0 ? .win : .lose
+            
+        let result = LevelEndStatus(level: currentLevel,
+                                    status: gameStatus,
+                                    stars: max(stars, previouslyObtainedStars))
+        presenter?.showEndScreen(for: result)
+        
+        if gameStatus == .win {
+            maxLevel = max(maxLevel, currentLevel + 1)
+            if gameStatus == .win {
+                persistenceInteractor.saveCurrentState(currentLevel: currentLevel, maxLevel: maxLevel, completedLevels: completedLevels)
+                rankingInteractor.updateRecords(levelRecord: maxLevel, starsRecord: obtainedStars)
+            }
+        }
     }
 }
 
 protocol LevelChangeListener: AnyObject {
-    func handleLevelChange(to newLevel: Int)
-}
-
-extension LevelHandler: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        max(2, maxLevel + 1)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
-        let currLevel = max(1, maxLevel) - indexPath.row
-        
-        cell.star = completedLevels[currLevel] ?? 0
-        cell.nivel = currLevel
-        if currLevel != currentLevel {
-            cell.deselect()
-        }
-        return cell
-    }
+    func handleLevelChange(to newLevel: Int, stars: Int)
 }

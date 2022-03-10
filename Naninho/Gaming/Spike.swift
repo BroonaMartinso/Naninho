@@ -9,12 +9,13 @@ import SpriteKit
 class Spike {
     
     var spikeParent: ScreenStateHandler
-    var radius: CGFloat {bola.frame.width/2}
+    var radius: CGFloat { bola.frame.width/2 }
     var spikeArray: [SKShapeNode] = []
     var rotation: CGFloat = 0
     var bola: SKNode
     var streakCount: Int = 0
     var lastCorrectTap: TimeInterval = 0
+    var timeNeededForAFullCircle: Double?
     
     init (Parent: ScreenStateHandler, Ball: SKNode) {
         self.spikeParent = Parent
@@ -27,7 +28,10 @@ class Spike {
             return
         }
         
-        rotation = CGFloat(deltaTime)/LevelHandler.shared.timeNeededForAFullCircle*2*Double.pi
+        // TODO: Fix Rotation
+        if let timeNeededForAFullCircle = timeNeededForAFullCircle {
+            rotation = CGFloat(deltaTime)/timeNeededForAFullCircle*2*Double.pi
+        }
         
         for spike in spikeArray {
             spike.zRotation -= rotation
@@ -42,7 +46,8 @@ class Spike {
         }
     }
     
-    func radial(quantidade: Int){
+    func radial(quantidade: Int, timeForAFullCircle: Double){
+        timeNeededForAFullCircle = timeForAFullCircle
         removeAllspikes()
         let passo: Double = 360 / Double(quantidade)
         let passoRadianos = passo * Double.pi / 180
@@ -161,6 +166,7 @@ class Spike {
         
         return false
     }
+    
     func madspike () {
         for spike in spikeArray {
             spike.fillColor = UIColor(named: "red")!
@@ -170,7 +176,7 @@ class Spike {
         }
     }
 
-    func queda (spike : SKShapeNode) {
+    private func queda (spike : SKShapeNode) {
         
         spike.physicsBody?.affectedByGravity = true
         spike.run(SKAction.wait(forDuration: 3), completion: {

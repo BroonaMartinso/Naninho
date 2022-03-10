@@ -9,6 +9,7 @@ import Foundation
 
 struct LevelConfiguration {
     
+    let level: Int
     let speed: Double
     let numberOfSpikes: Int
     let timeNeededForAFullCircle: Double

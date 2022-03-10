@@ -19,7 +19,8 @@ class LevelWorker: LevelWorking {
         let timeForLevel = 50 + 0.15 * Double(level)
         let penalty = 5 + 0.05 * Double(level)
         
-        return LevelConfiguration(speed: speed,
+        return LevelConfiguration(level: level,
+                                  speed: speed,
                                   numberOfSpikes: numberOfSpikes,
                                   timeNeededForAFullCircle: timeToCompleteAFullCicle,
                                   time: timeForLevel,

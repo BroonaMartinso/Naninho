@@ -11,18 +11,24 @@ import UIKit
 class LevelMenuDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var delegate: LevelSelectionDelegate?
+    var levelInteractor: LevelInteracting
+    
+    init(levelInteractor: LevelInteracting, delegate: LevelSelectionDelegate? = nil) {
+        self.levelInteractor = levelInteractor
+        self.delegate = delegate
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        max(2, LevelHandler.shared.maxLevel + 1)
+        max(2, levelInteractor.maxLevel + 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LevelSelectionCell
-        let currLevel = max(1, LevelHandler.shared.maxLevel) - indexPath.row
+        let currLevel = max(1, levelInteractor.maxLevel) - indexPath.row
         
-        cell.star = LevelHandler.shared.getStarsFor(level: currLevel)
+        cell.star = levelInteractor.getStarsFor(level: currLevel)
         cell.nivel = currLevel
-        if currLevel != LevelHandler.shared.currentLevel {
+        if currLevel != levelInteractor.currentLevel {
             cell.deselect()
         }
         return cell
@@ -37,7 +43,7 @@ class LevelMenuDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDat
         cell.select()
         
         if let delegate = delegate {
-            delegate.handleLevelSelection()
+            delegate.handleLevelSelection(levelSelected: cell.nivel)
         }
     }
     
@@ -48,5 +54,5 @@ class LevelMenuDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDat
 }
 
 protocol LevelSelectionDelegate {
-    func handleLevelSelection()
+    func handleLevelSelection(levelSelected: Int)
 }

@@ -15,10 +15,12 @@ protocol PersistenceWorking {
 }
 
 protocol PersistenceInteracting {
-    func saveCurrentLevel()
-    func saveMaxLevel()
-    func saveCompletedLevels()
-    func saveCurrentState()
+    func save(currentLevel: Int)
+    func save(maxLevel: Int)
+    func save(completedLevels: [Int:Int])
+    func saveCurrentState(currentLevel: Int,
+                          maxLevel: Int,
+                          completedLevels: [Int:Int])
     func retrieveCurrentLevel() -> Int?
     func retrieveMaxLevel() -> Int?
     func retrieveCompletedLevels() -> [Int:Int]?

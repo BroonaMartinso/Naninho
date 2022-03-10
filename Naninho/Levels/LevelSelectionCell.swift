@@ -92,7 +92,7 @@ class LevelSelectionCell: UICollectionViewCell {
         backgroundColor = UIColor(named: "verde")
         label.textColor = UIColor(named: "bege")
         
-        LevelHandler.shared.setLevel(to: nivel)
+//        LevelHandler.shared.setLevel(to: nivel)
     }
     
     func deselect() {

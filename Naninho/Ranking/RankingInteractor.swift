@@ -38,18 +38,18 @@ class RankingInteractor: RankingInteracting {
         }
     }
     
-    internal func registerLevelRecord() {
-        let maxLevel = LevelHandler.shared.maxLevel
-        worker?.setRecord(value: maxLevel, toLeaderbordWithId: GameViewControllerLeaderboards.MAIOR_NIVEL.rawValue)
+    internal func registerLevelRecord(_ record: Int) {
+//        let maxLevel = LevelHandler.shared.maxLevel
+        worker?.setRecord(value: record, toLeaderbordWithId: GameViewControllerLeaderboards.MAIOR_NIVEL.rawValue)
     }
     
-    internal func registerStarRecord() {
-        let totalStars = LevelHandler.shared.obtainedStars
-        worker?.setRecord(value: totalStars, toLeaderbordWithId: GameViewControllerLeaderboards.MAIS_ESTRELAS.rawValue)
+    internal func registerStarRecord(_ record: Int) {
+//        let totalStars = LevelHandler.shared.obtainedStars
+        worker?.setRecord(value: record, toLeaderbordWithId: GameViewControllerLeaderboards.MAIS_ESTRELAS.rawValue)
     }
     
-    func updateRecords() {
-        registerLevelRecord()
-        registerStarRecord()
+    func updateRecords(levelRecord: Int, starsRecord: Int) {
+        registerLevelRecord(levelRecord)
+        registerStarRecord(starsRecord)
     }
 }

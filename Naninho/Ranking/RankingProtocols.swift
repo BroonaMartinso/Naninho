@@ -11,9 +11,9 @@ import GameKit
 protocol RankingInteracting: AnyObject {
     func handleRankingButtonTapped()
     func handleStarsButtonTapped()
-    func registerLevelRecord()
-    func registerStarRecord()
-    func updateRecords()
+    func registerLevelRecord(_ record: Int)
+    func registerStarRecord(_ record: Int)
+    func updateRecords(levelRecord: Int, starsRecord: Int)
 }
 
 protocol RankingPresenting: AnyObject {

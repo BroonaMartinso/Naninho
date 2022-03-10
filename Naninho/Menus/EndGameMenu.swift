@@ -20,7 +20,7 @@ class EndGameMenu: UIViewController {
     private var thirdButton: UIButton!
     private var starImage: UIImageView!
     private var levelLabel: UILabel!
-    private var status: EndGameStatus
+    private(set) var status: EndGameStatus
     weak var delegate: EndGameMenuDelegate?
     private var level: Int
     private var stars: Int
@@ -215,14 +215,13 @@ class EndGameMenu: UIViewController {
 
     @objc
     func replayButtonTapped() {
-        if status == .win {
-            LevelHandler.shared.setLevel(to: LevelHandler.shared.currentLevel - 1)
-        }
-        
         if let delegate = delegate {
-            delegate.startNewGame()
+            dismiss(animated: true) {
+                delegate.replay()
+            }
+        } else {
+            dismiss(animated: true)
         }
-        dismiss(animated: true)
     }
     
     @objc
@@ -251,4 +250,5 @@ enum EndGameStatus {
 protocol EndGameMenuDelegate: AnyObject {
     func startNewGame()
     func goToMenu()
+    func replay()
 }

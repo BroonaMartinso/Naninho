@@ -11,6 +11,7 @@ import SpriteKit
 class TopBar: Menu {
     var representation: SKNode
     var respondableState: Status
+    var delegate: PauseHandlerDelegate?
     
     init(representation: SKNode, respondableState: Status) {
         self.representation = representation
@@ -22,11 +23,11 @@ class TopBar: Menu {
         pauseButton?.texture = SKTexture(image: pauseImage)
     }
     
-    func handleTap(atPos pos: CGPoint) -> Transition? {
+    func handleTap(atPos pos: CGPoint) {
         if representation.childNode(withName: "pause")!.contains(pos) {
-            return .gameToPause
+            if let delegate = delegate {
+                delegate.pause()
+            }
         }
-        
-        return nil
     }
 }

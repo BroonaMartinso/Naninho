@@ -13,37 +13,15 @@ class Bola {
     var bolaParent: SKNode
     var delegate: BallDelegate?
     var velocityCache: CGVector?
+    var levelSpeed: Double?
     
     init(Ball: SKSpriteNode, Parent: SKNode){
         bola = Ball
         bolaParent = Parent
     }
     
-    func startGame(completion: @escaping () -> Void = {}) {        
-        bola.run(SKAction.wait(forDuration: timeUntilReachZeroOnYAxis())) {
-            self.bola.physicsBody?.affectedByGravity = false
-            self.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            self.bola.texture = SKTexture(image: UIImage(named: "expandir")!)
-            self.bola.run(SKAction.sequence(
-                [
-                    SKAction.scale(by: 0.5, duration: 0.2),
-                    SKAction.repeat(
-                        SKAction.sequence([
-                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
-                            SKAction.rotate(byAngle: Double.pi/5, duration: 0.12),
-                            SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06)
-                        ]), count: 3),
-                    SKAction.scale(by: 2, duration: 0.0)
-                ])
-            ) {
-                self.bola.texture = SKTexture(image: UIImage(named: "Naninho")!)
-                self.pula(velocidade: LevelHandler.shared.levelSpeed)
-                completion()
-            }
-        }
-    }
-    
     func startGame(withSpeed speed: Double, completion: @escaping () -> Void = {}) {
+        levelSpeed = speed
         bola.run(SKAction.wait(forDuration: 0.2)) {
             self.bola.physicsBody?.affectedByGravity = false
             self.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -67,32 +45,6 @@ class Bola {
         }
     }
     
-    private func timeUntilReachZeroOnYAxis() -> Double {
-        let v0 = bola.physicsBody!.velocity.dy / 150
-        let s0 = bola.position.y / 150
-        let g = 2.5
-        let velocidadeNoSolo = sqrt(2*g*240/150)
-        let velocidadeNoCentro = sqrt(2*g)
-        
-        if v0 > 0 && s0 > 0 {
-            print(v0/g + sqrt(2*s0/g))
-            return max(0, v0/g + sqrt(2*s0/g))
-        } else if v0 > 0 && s0 < 0 {
-            print((v0 - velocidadeNoCentro) / g)
-            return max(0, (v0 - velocidadeNoCentro) / g)
-        } else if v0 < 0 && s0 > 0 {
-            print((velocidadeNoCentro + v0) / g)
-            return max(0, (velocidadeNoCentro + v0) / g)
-        } else if v0 < 0 && s0 < 0 {
-            let tempoAteChao = (velocidadeNoSolo + v0) / g
-            let tempoDeSubida = (velocidadeNoCentro - v0) / g
-            print(tempoAteChao + tempoDeSubida)
-            return max(0, tempoAteChao + tempoDeSubida)
-        }
-        
-        return 0
-    }
-    
     private func pula(velocidade: Double){
         let velocidadex = Double.random (in: -1 ... 1)
         let velocidadey = sqrt(1-pow(velocidadex, 2))
@@ -111,7 +63,8 @@ class Bola {
         if let velocityCache = velocityCache {
             bola.physicsBody?.velocity = velocityCache
         } else {
-            pula(velocidade: LevelHandler.shared.levelSpeed)
+            //TODO: Corrigir, precisa ser a velocidade da fase
+            pula(velocidade: levelSpeed ?? 10)
         }
     }
     

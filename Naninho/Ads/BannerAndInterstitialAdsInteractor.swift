@@ -13,6 +13,7 @@ class BannerAndInterstitialAdsInteractor: NSObject, NonRewardingAdsInteracting, 
     
     private var presenter: AdsPresenting?
     private var worker: AdsWorking?
+    private var currentAdCase: IntersticialAdsCases = .replay
     
     init(presenter: AdsPresenting, worker: AdsWorking) {
         self.presenter = presenter
@@ -34,16 +35,27 @@ class BannerAndInterstitialAdsInteractor: NSObject, NonRewardingAdsInteracting, 
         worker?.showBanner()
     }
     
-    func showInterstitial() {
+    func showInterstitial(for adCase: IntersticialAdsCases) {
         if let interstitial = worker?.getInterstitial() {
+            self.currentAdCase = adCase
             interstitial.fullScreenContentDelegate = self
             presenter?.presentIntestitial(interstitial)
         }
     }
     
-    /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        worker?.requestInterstitial()
-        presenter?.endInterstitial()
+        self.worker?.requestInterstitial()
+        self.presenter?.endInterstitial(for: self.currentAdCase)
     }
+    
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        self.worker?.requestInterstitial()
+        self.presenter?.endInterstitial(for: self.currentAdCase)
+    }
+}
+
+
+enum IntersticialAdsCases {
+    case replay
+    case win
 }

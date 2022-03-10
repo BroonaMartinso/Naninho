@@ -9,6 +9,7 @@ import Foundation
 import GoogleMobileAds
 
 class AdsPresenter: AdsPresenting {
+    
     private weak var viewController: AdsViewControlling?
     
     init(viewController: AdsViewControlling) {
@@ -23,8 +24,8 @@ class AdsPresenter: AdsPresenting {
         viewController?.presentIntestitial(interstitial)
     }
     
-    func endInterstitial() {
-        viewController?.endInterstitial()
+    func endInterstitial(for adCase: IntersticialAdsCases) {
+        viewController?.endInterstitial(for: adCase)
     }
     
     func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases) {
