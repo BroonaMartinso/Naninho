@@ -86,6 +86,7 @@ class GameViewController: UIViewController {
         skinsDelegate.skinInteractor = user
 
         levelInteractor?.addListener(levelPopup)
+        header.update(coins: user.coins, starsObtained: levelInteractor?.starsObtained ?? 0, maxObtainableStars: levelInteractor?.maxObtainableStars ?? 0)
     }
     
     func setupHeader() {
@@ -386,6 +387,7 @@ extension GameViewController: EndGameMenuDelegate {
     func goToMenu() {
         self.disableBackgroundInteractions()
         adsInteractor?.showBanner()
+        header.update(coins: user.coins, starsObtained: levelInteractor?.starsObtained ?? 0, maxObtainableStars: levelInteractor?.maxObtainableStars ?? 0)
         
         UIView.animate(withDuration: 0, delay: 0, animations: {
             self.animatableLevelSelectionMenuConstraint.constant = 0

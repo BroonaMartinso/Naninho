@@ -150,10 +150,22 @@ class GameHeader: UIView {
     func starsButtonTapped() {
         rankingInteractor?.handleStarsButtonTapped()
     }
+    
+    func update(coins: Int, starsObtained: Int, maxObtainableStars: Int) {
+        if #available(iOS 15, *) {
+//            moneyButton.configuration?.attributedTitle = AttributedString("\(coins)", attributes: AttributeContainer([
+//                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light)
+//            ]))
+            starButton.configuration?.attributedTitle = AttributedString("\(starsObtained) | \(maxObtainableStars)", attributes: AttributeContainer([
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light)
+            ]))
+        } else {
+//            moneyButton.setTitle("\(coins)", for: .normal)
+            starButton.setTitle("stars \(starsObtained) | \(maxObtainableStars)", for: .normal)
+        }
+    }
 }
 
 protocol GameHeaderDelegate {
-    
     func skins()
-    
 }

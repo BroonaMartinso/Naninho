@@ -12,6 +12,8 @@ protocol LevelInteracting {
     var maxLevel: Int { get }
     var currentLevel: Int { get }
     var completedLevels: [Int:Int] { get }
+    var starsObtained: Int { get }
+    var maxObtainableStars: Int { get }
     
     func startCurrentLevel()
     func playNextLevel()

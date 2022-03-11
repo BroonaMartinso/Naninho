@@ -85,6 +85,18 @@ class ImageTextButton: UIButton {
             contentEdgeInsets = UIEdgeInsets(top: 5, left: 1, bottom: 5, right: 15)
         }
     }
+    
+    open func changeLabel(to text: String, font: UIFont = UIFont.systemFont(ofSize: 15, weight: .light)) {
+        
+        if #available(iOS 15, *) {
+            configuration?.attributedTitle = AttributedString(text, attributes: AttributeContainer([
+                NSAttributedString.Key.font: font
+            ]))
+        } else {
+            setTitle(text, for: .normal)
+            titleLabel?.font = font
+        }
+    }
 
 }
 

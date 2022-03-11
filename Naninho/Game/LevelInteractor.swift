@@ -26,11 +26,11 @@ class LevelHandler: NSObject, LevelInteracting {
         }
     }
     
-    var maxAchieavableStars: Int {
+    var maxObtainableStars: Int {
         return (maxLevel) * 3
     }
     
-    var obtainedStars: Int {
+    var starsObtained: Int {
         var totalStars = 0
         for level in completedLevels {
             totalStars += level.value
@@ -104,7 +104,7 @@ class LevelHandler: NSObject, LevelInteracting {
             maxLevel = max(maxLevel, currentLevel + 1)
             if gameStatus == .win {
                 persistenceInteractor.saveCurrentState(currentLevel: currentLevel, maxLevel: maxLevel, completedLevels: completedLevels)
-                rankingInteractor.updateRecords(levelRecord: maxLevel, starsRecord: obtainedStars)
+                rankingInteractor.updateRecords(levelRecord: maxLevel, starsRecord: starsObtained)
             }
         }
     }
