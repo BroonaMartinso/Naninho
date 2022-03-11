@@ -201,12 +201,12 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
         levelTime = time
         router?.hide()
         hasShownRewardAd = true
-        perform(transition: .gameToPause)
+        pause()
     }
     
     func dontAddTime() {
         router?.hide()
-        perform(transition: .gameToLose)
+        handleTimeEnd()
     }
     
     func perform(transition: Transition) {
@@ -247,6 +247,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
         if !hasShownRewardAd {
             router?.show()
             status = .showingAd
+            hasShownRewardAd = true
         } else {
             Analytics.logEvent("perdeu", parameters: ["level": configuration.level as NSObject])
             animateGameEnd()

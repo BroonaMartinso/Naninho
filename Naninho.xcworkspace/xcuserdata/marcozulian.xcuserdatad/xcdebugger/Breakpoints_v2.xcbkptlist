@@ -1045,22 +1045,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CB72DA7D-A7DA-43B9-A041-4FA974A5B00E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "showInterstitial(for:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E5CE635E-D399-4837-A2D8-A73E191A5BA4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1068,9 +1052,9 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "showInterstitial(for:_:)"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "showInterstitial(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1084,9 +1068,9 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "showInterstitial(for:_:)"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "showInterstitial(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1100,9 +1084,9 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "showInterstitial(for:_:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "showInterstitial(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1260,41 +1244,9 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "adDidDismissFullScreenContent(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5D541687-1AA6-44E0-B17C-97F89933599E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "ad(_:didFailToPresentFullScreenContentWithError:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AC515855-1FBD-4438-BEC6-60A26267C0D1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "ad(_:didFailToPresentFullScreenContentWithError:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1324,10 +1276,10 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "adDidDismissFullScreenContent(_:)"
-            landmarkType = "7">
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "BannerAndInterstitialAdsInteractor"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1344,6 +1296,22 @@
             endingLineNumber = "15"
             landmarkName = "Transition"
             landmarkType = "13">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48DA38A0-1034-40FD-B8F0-925EB9C48603"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Naninho/GameViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "presentRewardedAd(_:for:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
