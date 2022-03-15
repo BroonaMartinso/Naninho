@@ -9,10 +9,17 @@ import Foundation
 
 class User: SkinInteracting {
     
-    private(set) var coins: Int = 0
+    private(set) var coins: Int = 1500
     private(set) var skins: [Skin] = SkinRepository.skins
-    private(set) var selectedSkin: Skin = Skin(imageName: "feliz", isObtained: true)
+    private(set) var selectedSkin: Skin = Skin(imageName: "feliz", isObtained: true) {
+        didSet {
+            for listener in listeners {
+                listener.handleChangeTo(skin: selectedSkin)
+            }
+        }
+    }
     var skinPresenter: SkinPresenting?
+    private var listeners: [SkinChangeListener] = []
     
     func buy(skin: Skin) {
         if coins >= skin.price {
@@ -34,4 +41,12 @@ class User: SkinInteracting {
     func getCoins(_ value: Int) {
         coins += value
     }
+    
+    func addListener(_ listener: SkinChangeListener) {
+        listeners.append(listener)
+    }
+}
+
+protocol SkinChangeListener {
+    func handleChangeTo(skin: Skin)
 }

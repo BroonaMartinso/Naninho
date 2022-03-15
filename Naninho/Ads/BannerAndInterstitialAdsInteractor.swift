@@ -20,19 +20,18 @@ class BannerAndInterstitialAdsInteractor: NSObject, NonRewardingAdsInteracting, 
         self.worker = worker
     }
     
-    func insertBanner(withSize size: CGSize) {
-        if let banner = worker?.getBanner(withSize: size) {
-            presenter?.presentBanner(banner)
+    func insertBanner(withSize size: CGSize, case bannerType: BannerCases) {
+        if let banner = worker?.getBanner(withSize: size, case: bannerType) {
+            presenter?.presentBanner(banner, case: bannerType)
         }
     }
     
-    //TODO: Rever implementação de hide e show
-    func hideBanner() {
-        worker?.hideBanner()
+    func hideBanner(case bannerType: BannerCases) {
+        worker?.hideBanner(case: bannerType)
     }
     
-    func showBanner() {
-        worker?.showBanner()
+    func showBanner(case bannerType: BannerCases) {
+        worker?.showBanner(case: bannerType)
     }
     
     func showInterstitial(for adCase: IntersticialAdsCases) {
@@ -58,4 +57,9 @@ class BannerAndInterstitialAdsInteractor: NSObject, NonRewardingAdsInteracting, 
 enum IntersticialAdsCases {
     case replay
     case win
+}
+
+enum BannerCases {
+    case menuBanner
+    case gameBanner
 }

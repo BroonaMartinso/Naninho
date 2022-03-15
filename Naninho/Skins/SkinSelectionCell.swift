@@ -14,6 +14,7 @@ class SkinSelectionCell: UICollectionViewCell {
     var buyButton: UIButton!
     
     var skin : Skin = Skin(imageName: "feliz") { didSet{ makeCell() } }
+    var delegate: SkinSelectionDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,7 +49,7 @@ class SkinSelectionCell: UICollectionViewCell {
             ]
         )
         
-        skinImage.image = UIImage(named: skin.imageName)
+        skinImage.image = UIImage(named: skin.imageName + "_feliz")
     }
     
     private func setupSkinImageWithButton() {
@@ -64,7 +65,7 @@ class SkinSelectionCell: UICollectionViewCell {
             ]
         )
         
-        skinImage.image = UIImage(named: skin.imageName)
+        skinImage.image = UIImage(named: skin.imageName + "_feliz")
     }
     
     private func setupButton() {
@@ -84,10 +85,17 @@ class SkinSelectionCell: UICollectionViewCell {
     }
     
     func select() {
-        backgroundColor = UIColor(named: "verde")
+        backgroundColor = UIColor(named: "pink")
+        if let delegate = delegate {
+            delegate.select(skin: skin)
+        }
     }
     
     func deselect() {
         backgroundColor = UIColor(named: "bege")
     }
+}
+
+protocol SkinSelectionDelegate {
+    func select(skin: Skin)
 }

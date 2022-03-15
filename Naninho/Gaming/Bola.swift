@@ -9,15 +9,21 @@ import Foundation
 import SpriteKit
 
 class Bola {
+    var skinName: String {
+        didSet {
+            configureNaninho()
+        }
+    }
     var bola: SKSpriteNode
     var bolaParent: SKNode
     var delegate: BallDelegate?
     var velocityCache: CGVector?
     var levelSpeed: Double?
     
-    init(Ball: SKSpriteNode, Parent: SKNode){
+    init(Ball: SKSpriteNode, Parent: SKNode, Naninho: String){
         bola = Ball
         bolaParent = Parent
+        skinName = Naninho
     }
     
     func startGame(withSpeed speed: Double, completion: @escaping () -> Void = {}) {
@@ -38,7 +44,7 @@ class Bola {
                     SKAction.scale(by: 2, duration: 0.0)
                 ])
             ) {
-                self.bola.texture = SKTexture(image: UIImage(named: "Naninho")!)
+                self.bola.texture = SKTexture(image: UIImage(named: self.skinName + "_feliz")!)
                 self.pula(velocidade: speed)
                 completion()
             }
@@ -112,26 +118,30 @@ class Bola {
     }
     
     func bravo(voltar : Bool = true){
-        bola.texture = SKTexture (imageNamed: "Bravo")
+        bola.texture = SKTexture (imageNamed: skinName + "_bravo")
         if voltar {
-            bola.run(SKAction.wait(forDuration: 1), completion: {self.bola.texture = SKTexture (imageNamed: "feliz")})
+            bola.run(SKAction.wait(forDuration: 1), completion: {self.bola.texture = SKTexture (imageNamed: self.skinName + "_feliz")})
         }
     }
     
     func handleTapDuringMenu(atPos pos: CGPoint) {
         if bola.contains(pos) {
             bolaParent.isUserInteractionEnabled = false
-            bola.texture = SKTexture(imageNamed: "Naninho")
+            bola.texture = SKTexture(imageNamed: skinName + "_crazy")
             bola.run(SKAction.repeat(
                 SKAction.sequence(
                     [SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06),
                      SKAction.rotate(byAngle: Double.pi/5, duration: 0.12),
                      SKAction.rotate(byAngle: -Double.pi/10, duration: 0.06)]
                 ), count: 4)) {
-                    self.bola.texture = SKTexture(imageNamed: "feliz")
+                    self.bola.texture = SKTexture(imageNamed: self.skinName + "_feliz")
                     self.bolaParent.isUserInteractionEnabled = true
                 }
         }
+    }
+    
+    func configureNaninho() {
+        bola.texture = SKTexture(imageNamed: skinName + "_feliz")
     }
 }
 

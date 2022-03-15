@@ -59,11 +59,11 @@ class ImageTextButton: UIButton {
             configuration.cornerStyle = .capsule
             configuration.background.strokeColor = foregroundColor
             configuration.background.strokeWidth = 1
-            configuration.imagePadding = 10
+            configuration.imagePadding = 8
             configuration.contentInsets = NSDirectionalEdgeInsets(top: 5,
-                                                                  leading: imagePosition == .leading ? 1 : 15,
+                                                                  leading: imagePosition == .leading ? 1 : 10,
                                                                   bottom: 5,
-                                                                  trailing: imagePosition == .leading ? 15 : 1)
+                                                                  trailing: imagePosition == .leading ? 10 : 1)
             
             self.configuration = configuration
             self.sizeToFit()

@@ -47,6 +47,10 @@
 		FA2E8C3027D11F4C00FA5E4E /* PersistenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */; };
 		FA2E8C3227D11F8000FA5E4E /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */; };
 		FA2E8C3427D11F8D00FA5E4E /* PersistenceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2E8C3327D11F8D00FA5E4E /* PersistenceProtocols.swift */; };
+		FA2ECA1A27DBDB1B0095BE47 /* Naninho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2ECA1927DBDB1B0095BE47 /* Naninho.swift */; };
+		FA2ECA1C27DBDFC30095BE47 /* BBS2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2ECA1B27DBDFC30095BE47 /* BBS2.swift */; };
+		FA2ECA1E27DD4A990095BE47 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2ECA1D27DD4A990095BE47 /* Configurator.swift */; };
+		FA2ECA2027DD65B60095BE47 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2ECA1F27DD65B60095BE47 /* SideMenu.swift */; };
 		FA30805327D6B046001583E0 /* LevelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30805227D6B046001583E0 /* LevelProtocols.swift */; };
 		FA30805627D6B2C9001583E0 /* LevelConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30805527D6B2C9001583E0 /* LevelConfiguration.swift */; };
 		FA30805827D6B3BB001583E0 /* LevelWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA30805727D6B3BB001583E0 /* LevelWorker.swift */; };
@@ -54,6 +58,7 @@
 		FA34D53527C0182E001069EF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */; };
 		FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA428E0127AC2CFF00E29593 /* Transition.swift */; };
 		FA43918527D8200A001A06B0 /* SkinPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43918427D8200A001A06B0 /* SkinPresenter.swift */; };
+		FA56F62627DFB9EE0035C657 /* ChangeMenuContextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA56F62527DFB9EE0035C657 /* ChangeMenuContextCell.swift */; };
 		FA5B5E6C27D6DECA00A6C999 /* LevelEndStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B5E6B27D6DECA00A6C999 /* LevelEndStatus.swift */; };
 		FA5B5E6F27D6F04D00A6C999 /* AnalyticsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5B5E6E27D6F04D00A6C999 /* AnalyticsProtocols.swift */; };
 		FA5DEED527B977FD00B861A8 /* EndGameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */; };
@@ -114,6 +119,10 @@
 		FA2E8C2F27D11F4C00FA5E4E /* PersistenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceInteractor.swift; sourceTree = "<group>"; };
 		FA2E8C3127D11F8000FA5E4E /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
 		FA2E8C3327D11F8D00FA5E4E /* PersistenceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceProtocols.swift; sourceTree = "<group>"; };
+		FA2ECA1927DBDB1B0095BE47 /* Naninho.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Naninho.swift; sourceTree = "<group>"; };
+		FA2ECA1B27DBDFC30095BE47 /* BBS2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBS2.swift; sourceTree = "<group>"; };
+		FA2ECA1D27DD4A990095BE47 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
+		FA2ECA1F27DD65B60095BE47 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		FA30805227D6B046001583E0 /* LevelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProtocols.swift; sourceTree = "<group>"; };
 		FA30805527D6B2C9001583E0 /* LevelConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelConfiguration.swift; sourceTree = "<group>"; };
 		FA30805727D6B3BB001583E0 /* LevelWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelWorker.swift; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		FA34D53427C0182E001069EF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		FA428E0127AC2CFF00E29593 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		FA43918427D8200A001A06B0 /* SkinPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinPresenter.swift; sourceTree = "<group>"; };
+		FA56F62527DFB9EE0035C657 /* ChangeMenuContextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMenuContextCell.swift; sourceTree = "<group>"; };
 		FA5B5E6B27D6DECA00A6C999 /* LevelEndStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEndStatus.swift; sourceTree = "<group>"; };
 		FA5B5E6E27D6F04D00A6C999 /* AnalyticsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyticsProtocols.swift; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/AnalyticsProtocols.swift"; sourceTree = "<group>"; };
 		FA5DEED427B977FD00B861A8 /* EndGameMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameMenu.swift; sourceTree = "<group>"; };
@@ -163,12 +173,15 @@
 		562DC4F227A9B1BC004268B2 /* Gaming */ = {
 			isa = PBXGroup;
 			children = (
+				FA267B7427B6D3F400191017 /* BouncyBallScene.swift */,
 				56662D2227A8528F00E4D27A /* SKNodeExtension.swift */,
 				56662D3327A85AA300E4D27A /* Spike.swift */,
 				562DC4F027A9B1B6004268B2 /* Bola.swift */,
 				FA428E0127AC2CFF00E29593 /* Transition.swift */,
 				FA260C2227BE7E6E002C3614 /* StringExtension.swift */,
 				FA180FE727D78E15006370C7 /* User.swift */,
+				FA2ECA1927DBDB1B0095BE47 /* Naninho.swift */,
+				FA2ECA1B27DBDFC30095BE47 /* BBS2.swift */,
 			);
 			path = Gaming;
 			sourceTree = "<group>";
@@ -214,6 +227,7 @@
 				56662D2B27A8529000E4D27A /* LaunchScreen.storyboard */,
 				FA2A758527C9582E0043DE4E /* GoogleService-Info.plist */,
 				FA2B660127BBDABB00CE3486 /* Info.plist */,
+				FA2ECA1D27DD4A990095BE47 /* Configurator.swift */,
 			);
 			path = Naninho;
 			sourceTree = "<group>";
@@ -261,6 +275,8 @@
 				FA1C553B27D8023A007BE353 /* TouchableSpriteNode.swift */,
 				FA1C554327D809DE007BE353 /* PriceTagView.swift */,
 				FA2BDA5227D8E8F700F15698 /* PopUp.swift */,
+				FA2ECA1F27DD65B60095BE47 /* SideMenu.swift */,
+				FA56F62527DFB9EE0035C657 /* ChangeMenuContextCell.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -290,7 +306,6 @@
 		FA30805427D6B0D6001583E0 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				FA267B7427B6D3F400191017 /* BouncyBallScene.swift */,
 				FA1E1BA927AD674000837CDB /* LevelInteractor.swift */,
 				FA30805727D6B3BB001583E0 /* LevelWorker.swift */,
 				FA30805527D6B2C9001583E0 /* LevelConfiguration.swift */,
@@ -474,15 +489,19 @@
 				FA1C553E27D8029E007BE353 /* SkinProtocols.swift in Sources */,
 				FACFE1DA27D0378A001F5342 /* RankingPresenter.swift in Sources */,
 				FAC1091927B83C8800A462F5 /* BeginLevelPopup.swift in Sources */,
+				FA2ECA2027DD65B60095BE47 /* SideMenu.swift in Sources */,
 				FACFE1E527D042B6001F5342 /* AdsProtocols.swift in Sources */,
+				FA2ECA1A27DBDB1B0095BE47 /* Naninho.swift in Sources */,
 				FA428E0227AC2CFF00E29593 /* Transition.swift in Sources */,
 				FA30805827D6B3BB001583E0 /* LevelWorker.swift in Sources */,
 				FA5B5E6C27D6DECA00A6C999 /* LevelEndStatus.swift in Sources */,
 				FA267B7527B6D3F400191017 /* BouncyBallScene.swift in Sources */,
+				FA56F62627DFB9EE0035C657 /* ChangeMenuContextCell.swift in Sources */,
 				FA180FEE27D7CD3E006370C7 /* SkinsMenuDelegate.swift in Sources */,
 				FA180FF027D7DF25006370C7 /* LevelMenuDelegate.swift in Sources */,
 				FA5B5E6F27D6F04D00A6C999 /* AnalyticsProtocols.swift in Sources */,
 				56662D2327A8528F00E4D27A /* SKNodeExtension.swift in Sources */,
+				FA2ECA1E27DD4A990095BE47 /* Configurator.swift in Sources */,
 				56662D2527A8528F00E4D27A /* GameViewController.swift in Sources */,
 				FA1E1BAA27AD674000837CDB /* LevelInteractor.swift in Sources */,
 				FACFE1EB27D05A65001F5342 /* AdsPresenter.swift in Sources */,
@@ -520,6 +539,7 @@
 				FA2E8C3227D11F8000FA5E4E /* UserDefaultsWorker.swift in Sources */,
 				FA1C553C27D8023A007BE353 /* TouchableSpriteNode.swift in Sources */,
 				FACFE1E927D0573F001F5342 /* AdsRouter.swift in Sources */,
+				FA2ECA1C27DBDFC30095BE47 /* BBS2.swift in Sources */,
 				FA2E8C2927D1041100FA5E4E /* PopUpsRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,7 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8KLVK79M3G;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -688,7 +708,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.broomartinso.marcozulian.Naninho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -705,7 +725,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8KLVK79M3G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Naninho/Info.plist;
@@ -722,7 +742,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.broomartinso.marcozulian.Naninho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

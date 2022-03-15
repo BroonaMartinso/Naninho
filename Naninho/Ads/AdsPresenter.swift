@@ -16,8 +16,8 @@ class AdsPresenter: AdsPresenting {
         self.viewController = viewController
     }
     
-    func presentBanner(_ bannerView: GADBannerView) {
-        viewController?.presentBanner(bannerView)
+    func presentBanner(_ bannerView: GADBannerView, case bannerType: BannerCases) {
+        viewController?.presentBanner(bannerView, case: bannerType)
     }
     
     func presentIntestitial(_ interstitial: GADInterstitialAd) {

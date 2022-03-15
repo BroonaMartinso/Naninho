@@ -10,7 +10,21 @@ import UIKit
 import SpriteKit
 import FirebaseAnalytics
 
-class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, LevelPresenting {
+class BouncyBallScene: SKScene,
+                        TouchableSpriteNodeDelegate,
+                        BallDelegate,
+                        LevelPresenting,
+                       SkinChangeListener {
+    
+    func handleChangeTo(skin: Skin) {
+        naninhoName = skin.imageName
+    }
+    
+    var naninhoName: String? {
+        didSet {
+            configureNaninho()
+        }
+    }
     private var ball: Bola!
     private var spike: Spike!
     private var pausePopup: PausePopup!
@@ -45,7 +59,6 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
         scaleMode = .aspectFill
         backgroundColor = UIColor(named: "bege")!
 
-//        ball = childNode(withName: "ball") as? SKSpriteNode
         pausePopup = PausePopup(representation: childNode(withName: "Pause")!, respondableState: .pause)
         pausePopup.delegate = self
         
@@ -61,6 +74,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
         getScreenSize()
         setupBall()
         setupSpike()
+        
         
     }
     
@@ -133,7 +147,6 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
         
         ball.bola.position = CGPoint(x: 0, y: 160)
         ball.bola.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-        ball.bola.texture = SKTexture(imageNamed: "bola")
         ball.bola.physicsBody?.affectedByGravity = true
         
         topBar.representation.alpha = 0
@@ -151,7 +164,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
     func setupBall() {
         let ballNode = childNode(withName: "ball") as! SKSpriteNode
         ballNode.size = CGSize(width: screenWidth * 0.3, height: screenWidth * 0.3)
-        ball = Bola (Ball: ballNode, Parent: self)
+        ball = Bola (Ball: ballNode, Parent: self, Naninho: naninhoName ?? "Naninho")
         ball.delegate = self
     }
 
@@ -212,8 +225,8 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
     func perform(transition: Transition) {
         if transition == .gameToWin {
             status = .pause
-//            LevelHandler.shared.nextLevel(timeRemaining: levelTime)
-//            if let stars = LevelHandler.shared.completedLevels[LevelHandler.shared.currentLevel-1] {
+//            LevelInteractor.shared.nextLevel(timeRemaining: levelTime)
+//            if let stars = LevelInteractor.shared.completedLevels[LevelInteractor.shared.currentLevel-1] {
 //                Analytics.logEvent("ganhou", parameters:
 //                                    ["level": configuration.level as NSObject,
 //                                     "estrelas": stars as NSObject])
@@ -232,7 +245,8 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
         childNode(withName: "tutorialText")!.alpha = 0
         ball.bola.run(SKAction.scale(by: 30, duration: 0.4)) {
             if let delegate = self.del {
-                delegate.endGame(timeRemaining: self.levelTime)
+                delegate.endGame(result: GameResult(timeRemaining: self.levelTime,
+                                                    coins: self.levelTime > 0 ? self.spike.coins : 0))
             }
             self.ball.bola.run(SKAction.wait(forDuration: 0.5)) {
                 self.ball.bola.run(SKAction.scale(by: 1/30, duration: 0))
@@ -242,6 +256,7 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
             }
         }
     }
+    
 
     func handleTimeEnd() {
         if !hasShownRewardAd {
@@ -252,6 +267,10 @@ class BouncyBallScene: SKScene, TouchableSpriteNodeDelegate, BallDelegate, Level
             Analytics.logEvent("perdeu", parameters: ["level": configuration.level as NSObject])
             animateGameEnd()
         }
+    }
+    
+    func configureNaninho() {
+        ball.skinName = naninhoName ?? "Naninho"
     }
 }
 
@@ -294,7 +313,7 @@ enum Status {
 
 protocol BouncyBallSceneDelegate: AnyObject {
     func goToMenu()
-    func endGame(timeRemaining: Double)
+    func endGame(result: GameResult)
 }
 
 protocol PauseHandlerDelegate {
@@ -302,4 +321,9 @@ protocol PauseHandlerDelegate {
     func goToMenu()
     func resume()
     func replay()
+}
+
+struct GameResult {
+    let timeRemaining: Double
+    let coins: Int
 }

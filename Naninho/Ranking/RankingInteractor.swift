@@ -39,12 +39,12 @@ class RankingInteractor: RankingInteracting {
     }
     
     internal func registerLevelRecord(_ record: Int) {
-//        let maxLevel = LevelHandler.shared.maxLevel
+//        let maxLevel = LevelInteractor.shared.maxLevel
         worker?.setRecord(value: record, toLeaderbordWithId: GameViewControllerLeaderboards.MAIOR_NIVEL.rawValue)
     }
     
     internal func registerStarRecord(_ record: Int) {
-//        let totalStars = LevelHandler.shared.obtainedStars
+//        let totalStars = LevelInteractor.shared.obtainedStars
         worker?.setRecord(value: record, toLeaderbordWithId: GameViewControllerLeaderboards.MAIS_ESTRELAS.rawValue)
     }
     

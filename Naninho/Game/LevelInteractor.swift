@@ -8,7 +8,7 @@
 import Foundation
 import GameKit
 
-class LevelHandler: NSObject, LevelInteracting {
+class LevelInteractor: NSObject, LevelInteracting {
     
     private var presenter: LevelPresenting?
     private var worker: LevelWorking?

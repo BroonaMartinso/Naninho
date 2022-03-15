@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if let game = AppDelegate.game,
            game.shouldPauseWhenGoingToBg {
-            game.perform(transition: .gameToPause)
+            game.pause()
         }
     }
 

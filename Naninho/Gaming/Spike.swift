@@ -15,6 +15,7 @@ class Spike {
     var bola: SKNode
     var streakCount: Int = 0
     var lastCorrectTap: TimeInterval = 0
+    var coins = 0
     var timeNeededForAFullCircle: Double?
     
     init (Parent: ScreenStateHandler, Ball: SKNode) {
@@ -47,6 +48,7 @@ class Spike {
     }
     
     func radial(quantidade: Int, timeForAFullCircle: Double){
+        coins = 0
         timeNeededForAFullCircle = timeForAFullCircle
         removeAllspikes()
         let passo: Double = 360 / Double(quantidade)
@@ -160,6 +162,8 @@ class Spike {
                     let generator = UIImpactFeedbackGenerator(style: .heavy)
                     generator.impactOccurred()
                 }
+                
+                coins += streakCount
                 return true
             }
         }

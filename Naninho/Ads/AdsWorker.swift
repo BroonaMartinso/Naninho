@@ -11,13 +11,15 @@ import GoogleMobileAds
 class AdsWorker: AdsWorking {
     enum AdsUnitIds: String {
         case interstitial = "ca-app-pub-5315052887814879/9011485006"
-        case banner = "ca-app-pub-5315052887814879/5865435151"
+        case menuBanner = "ca-app-pub-5315052887814879/5865435151"
+        case gameBanner = "ca-app-pub-5315052887814879/7453684692"
         case rewarded = "ca-app-pub-5315052887814879/3494771730"
     }
     
     private var rewardedAd: GADRewardedAd?
     private var interstitial: GADInterstitialAd?
-    private var banner: GADBannerView!
+    private var menuBanner: GADBannerView!
+    private var gameBanner: GADBannerView!
     
     init() {
         requestInterstitial()
@@ -28,9 +30,15 @@ class AdsWorker: AdsWorking {
         return interstitial
     }
     
-    func getBanner(withSize size: CGSize) -> GADBannerView {
-        loadBanner(withSize: size)
-        return banner
+    func getBanner(withSize size: CGSize, case bannerType: BannerCases) -> GADBannerView {
+        loadBanner(withSize: size, case: bannerType)
+        
+        switch bannerType {
+        case .menuBanner:
+            return menuBanner
+        case .gameBanner:
+            return gameBanner
+        }
     }
     
     func getRewardedAd() -> GADRewardedAd? {
@@ -63,18 +71,36 @@ class AdsWorker: AdsWorking {
         })
     }
     
-    private func loadBanner(withSize size: CGSize) {
+    private func loadBanner(withSize size: CGSize, case bannerType: BannerCases) {
         let adSize = GADAdSizeFromCGSize(size)
-        banner = GADBannerView(adSize: adSize)
-        banner.adUnitID = AdsUnitIds.banner.rawValue
-        banner.load(GADRequest())
+        
+        switch bannerType {
+        case .menuBanner:
+            menuBanner = GADBannerView(adSize: adSize)
+            menuBanner.adUnitID = AdsUnitIds.menuBanner.rawValue
+            menuBanner.load(GADRequest())
+        case .gameBanner:
+            gameBanner = GADBannerView(adSize: adSize)
+            gameBanner.adUnitID = AdsUnitIds.gameBanner.rawValue
+            gameBanner.load(GADRequest())
+        }
     }
     
-    func hideBanner() {
-        banner.alpha = 0
+    func hideBanner(case bannerType: BannerCases) {
+        switch bannerType {
+        case .menuBanner:
+            menuBanner.alpha = 0
+        case .gameBanner:
+            gameBanner.alpha = 0
+        }
     }
     
-    func showBanner() {
-        banner.alpha = 1
+    func showBanner(case bannerType: BannerCases) {
+        switch bannerType {
+        case .menuBanner:
+            menuBanner.alpha = 1
+        case .gameBanner:
+            gameBanner.alpha = 1
+        }
     }
 }

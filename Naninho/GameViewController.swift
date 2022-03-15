@@ -16,7 +16,6 @@ class GameViewController: UIViewController {
     private var adsRouter: AdsRouting?
     private var adsInteractor: NonRewardingAdsInteracting?
     private var rewardedAdsInteractor: RewardingAdsInteracting?
-    private var rankingInteractor: RankingInteracting?
     private var levelInteractor: LevelInteracting?
     private var levelsWon: Int = 0
     private var header: GameHeader!
@@ -57,11 +56,12 @@ class GameViewController: UIViewController {
         rewardedAdsInteractor = RewardedAdsInteractor(presenter: adsPresenter, worker: adsWorker)
         let scene = bouncyCharView.scene as! BouncyBallScene
         scene.gameViewController = self
-        levelInteractor = LevelHandler(worker: LevelWorker(), presenter: scene)
+        levelInteractor = LevelInteractor(worker: LevelWorker(), presenter: scene)
         
         skinsDelegate = SkinsMenuDelegate()
         levelDelegate = LevelMenuDelegate(levelInteractor: levelInteractor!)
         levelDelegate.delegate = self
+        skinsDelegate.delegate = self
         
         setupLevelSelectionMenu()
         setupLevelPopup()
@@ -70,8 +70,11 @@ class GameViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: "bege")
         
-        let freeSpace = view.frame.width * 0.575
-        adsInteractor?.insertBanner(withSize: CGSize(width: freeSpace, height: 50))
+        let menuBannerWidth = view.frame.width * 0.575
+        let gameBannerWidth = view.frame.width * 0.78
+        adsInteractor?.insertBanner(withSize: CGSize(width: menuBannerWidth, height: 50), case: .menuBanner)
+        adsInteractor?.insertBanner(withSize: CGSize(width: gameBannerWidth, height: 50), case: .gameBanner)
+        adsInteractor?.hideBanner(case: .gameBanner)
         
         beginLevelPopUpsRouter = PopUpsRouter(source: self, constraint: animatablePopupConstraint)
         rewardAdPopUpRouter = PopUpsRouter(source: self, constraint: animatableRewardAdConstraint)
@@ -79,6 +82,7 @@ class GameViewController: UIViewController {
         
         if let scene = bouncyCharView.scene as? BouncyBallScene {
             scene.router = rewardAdPopUpRouter
+            user.addListener(scene)
         }
         
         let skinPresenter = SkinPresenter(popUp: buySkinPopup, vc: self)
@@ -87,29 +91,31 @@ class GameViewController: UIViewController {
 
         levelInteractor?.addListener(levelPopup)
         header.update(coins: user.coins, starsObtained: levelInteractor?.starsObtained ?? 0, maxObtainableStars: levelInteractor?.maxObtainableStars ?? 0)
+        
+        levelDelegate.beginLevelPopUpsRouter = beginLevelPopUpsRouter
     }
     
     func setupHeader() {
         header = GameHeader()
-        
+
         header.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(header)
-        
+
         animatableHeaderConstraint = header.topAnchor.constraint(equalTo: view.topAnchor)
-        
+
         NSLayoutConstraint.activate([
             animatableHeaderConstraint,
             header.heightAnchor.constraint(equalToConstant: view.frame.height * 0.13),
             header.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
-        
+
         let rankingPresenter = RankingPresenter(viewController: self)
         let rankingWorker = RankingWorker()
-        rankingInteractor = RankingInteractor(presenter: rankingPresenter, worker: rankingWorker)
+        let rankingInteractor = RankingInteractor(presenter: rankingPresenter, worker: rankingWorker)
         header.rankingInteractor = rankingInteractor
         header.delegate = self
-        
+
     }
     
     func setupLevelSelectionMenu() {
@@ -134,21 +140,22 @@ class GameViewController: UIViewController {
         levelSelectionMenu.showsVerticalScrollIndicator = false
         levelSelectionMenu.register(LevelSelectionCell.self, forCellWithReuseIdentifier: "Cell")
         levelSelectionMenu.register(SkinSelectionCell.self, forCellWithReuseIdentifier: "SkinCell")
+        levelSelectionMenu.register(ChangeMenuContextCell.self, forCellWithReuseIdentifier: "ChangeContext")
         levelSelectionMenu.allowsSelection = true
         levelSelectionMenu.backgroundColor = UIColor(named: "black")
         
         levelSelectionMenu.delegate = levelDelegate
         levelSelectionMenu.dataSource = levelDelegate
     }
-    
+
     func setupBouncyCharView() {
         bouncyCharView = SKView()
-        
+
         bouncyCharView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bouncyCharView)
-        
+
         animatableGameSceneConstraint = bouncyCharView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width * 0.375 / 2)
-        
+
         NSLayoutConstraint.activate([
             bouncyCharView.topAnchor.constraint(equalTo: header.bottomAnchor),
             bouncyCharView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -156,22 +163,24 @@ class GameViewController: UIViewController {
             bouncyCharView.widthAnchor.constraint(equalTo: view.widthAnchor),
             animatableGameSceneConstraint
         ])
-        
+
         let aspectRatio = (view.frame.height / view.frame.width)
         if aspectRatio > 2 {
             if let scene = SKScene(fileNamed: "BouncyBall") as? BouncyBallScene {
                 scene.scaleMode = .aspectFill
                 scene.backgroundColor = UIColor(named: "bege")!
                 scene.del = self
-                
+
                 bouncyCharView.presentScene(scene)
             }
         } else {
             if let scene = SKScene(fileNamed: "GameScene") as? BouncyBallScene {
+                scene.naninhoName = user.selectedSkin.imageName
                 scene.scaleMode = .aspectFill
                 scene.backgroundColor = UIColor(named: "bege")!
                 scene.del = self
                 scene.router = self.rewardAdPopUpRouter
+                scene.naninhoName = user.selectedSkin.imageName
                 
                 bouncyCharView.presentScene(scene)
             }
@@ -271,14 +280,6 @@ class GameViewController: UIViewController {
     }
 }
 
-extension GameViewController: LevelSelectionDelegate {
-    func handleLevelSelection(levelSelected: Int) {
-        levelInteractor?.setLevel(to: levelSelected)
-        beginLevelPopUpsRouter?.show()
-        disableBackgroundInteractions()
-    }
-}
-
 extension GameViewController: GKGameCenterControllerDelegate {
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated:true)
@@ -293,9 +294,9 @@ extension GameViewController: RankingViewControlling {
 }
 
 extension GameViewController: AdsViewControlling {
-    func presentBanner(_ bannerView: GADBannerView) {
+    func presentBanner(_ bannerView: GADBannerView, case bannerType: BannerCases) {
         bannerView.rootViewController = self
-        adsRouter?.insertBanner(bannerView)
+        adsRouter?.insertBanner(bannerView, case: bannerType)
     }
     
     func presentIntestitial(_ intestitial: GADInterstitialAd) {
@@ -303,7 +304,7 @@ extension GameViewController: AdsViewControlling {
     }
     
     func presentRewardedAd(_ rewardedAd: GADRewardedAd, for reward: RewardedAdsCases) {
-        rewardedAd.present(fromRootViewController: self) {
+        rewardedAd.present(fromRootViewController: self) { [self] in
             switch reward {
             case .moreTime:
                 if let scene = self.bouncyCharView.scene as? BouncyBallScene {
@@ -312,7 +313,8 @@ extension GameViewController: AdsViewControlling {
             case .doubleCoins:
                 break
             case .moreCoins:
-                self.user.getCoins(50)
+                self.user.getCoins(20)
+                self.header.update(coins: user.coins, starsObtained: levelInteractor?.starsObtained ?? 0, maxObtainableStars: levelInteractor?.maxObtainableStars ?? 0)
             }
         }
     }
@@ -320,6 +322,7 @@ extension GameViewController: AdsViewControlling {
     func endInterstitial(for adCase: IntersticialAdsCases) {
         switch adCase {
         case .replay:
+            adsInteractor?.showBanner(case: .gameBanner)
             levelInteractor?.replayLevel()
         case .win:
             levelInteractor?.completeLevel(timeRemaining: timeRemainingCache)
@@ -330,7 +333,8 @@ extension GameViewController: AdsViewControlling {
 extension GameViewController: BeginLevelPopupDelegate {
     func handleAcceptance() {
         beginLevelPopUpsRouter?.hide()
-        adsInteractor?.hideBanner()
+        adsInteractor?.hideBanner(case: .menuBanner)
+        adsInteractor?.showBanner(case: .gameBanner)
         
         self.disableBackgroundInteractions()
         UIView.animate(withDuration: 1, delay: 0, animations: {
@@ -362,31 +366,35 @@ extension GameViewController: GetMoreTimePopupDelegate {
     }
 }
 
-extension GameViewController: BouncyBallSceneDelegate {    
-    func endGame(timeRemaining: Double) {
-        if timeRemaining >= 0 {
+extension GameViewController: BouncyBallSceneDelegate {
+    func endGame(result: GameResult) {
+        adsInteractor?.hideBanner(case: .gameBanner)
+        if result.timeRemaining >= 0 {
             levelsWon += 1
             
             if levelsWon == 3 {
-                timeRemainingCache = timeRemaining
+                timeRemainingCache = result.timeRemaining
                 adsInteractor?.showInterstitial(for: .win)
                 levelsWon = 0
                 return
             }
         }
         
-        levelInteractor?.completeLevel(timeRemaining: timeRemaining)
+        levelInteractor?.completeLevel(timeRemaining: result.timeRemaining)
+        user.getCoins(result.coins)
     }
+    
 }
 
 extension GameViewController: EndGameMenuDelegate {
     func startNewGame() {
         levelInteractor?.playNextLevel()
+        adsInteractor?.showBanner(case: .gameBanner)
     }
     
     func goToMenu() {
         self.disableBackgroundInteractions()
-        adsInteractor?.showBanner()
+        adsInteractor?.showBanner(case: .menuBanner)
         header.update(coins: user.coins, starsObtained: levelInteractor?.starsObtained ?? 0, maxObtainableStars: levelInteractor?.maxObtainableStars ?? 0)
         
         UIView.animate(withDuration: 0, delay: 0, animations: {
@@ -396,7 +404,6 @@ extension GameViewController: EndGameMenuDelegate {
             self.animatableGameSceneConstraint.constant = self.view.frame.width * 0.375 / 2
             self.view.layoutIfNeeded()
         }) {_ in self.enableInteractions() }
-        
         if let scene = bouncyCharView.scene as? BouncyBallScene {
             scene.resetScene()
         }
@@ -409,19 +416,46 @@ extension GameViewController: EndGameMenuDelegate {
 
 extension GameViewController: GameHeaderDelegate {
     func skins() {
+
+    }
+}
+
+extension GameViewController: SideMenuDelegate {
+    func changeContextTo(_ context: MenuContext) {
         disableBackgroundInteractions()
         UIView.animate(withDuration: 1, delay: 0, animations: {
             self.animatableLevelSelectionMenuConstraint.constant = -self.view.frame.width * 0.375
             self.view.layoutIfNeeded()
         }) {_ in
-            self.levelSelectionMenu.delegate = self.skinsDelegate
-            self.levelSelectionMenu.dataSource = self.skinsDelegate
+            self.levelSelectionMenu.dataSource = nil
+            switch context {
+            case .levels:
+                self.levelSelectionMenu.delegate = self.levelDelegate
+                self.levelSelectionMenu.dataSource = self.levelDelegate
+            case .skins:
+                self.levelSelectionMenu.delegate = self.skinsDelegate
+                self.levelSelectionMenu.dataSource = self.skinsDelegate
+            }
             UIView.animate(withDuration: 1, delay: 0, animations: {
                 self.animatableLevelSelectionMenuConstraint.constant = 0
                 self.view.layoutIfNeeded()
             }) { _ in
                 self.enableInteractions()
+                self.levelSelectionMenu.reloadData()
             }
+        }
+    }
+    
+    func handleLevelSelection(levelSelected: Int) {
+//        levelInteractor?.setLevel(to: levelSelected)
+//        beginLevelPopUpsRouter?.show()
+        disableBackgroundInteractions()
+    }
+    
+    func select(skin: Skin) {
+        user.select(skin)
+        if let scene = bouncyCharView.scene as? BouncyBallScene {
+            scene.naninhoName = skin.imageName
         }
     }
 }
@@ -438,6 +472,10 @@ extension GameViewController: BuySkinPopupDelegate {
         user.buy(skin: skin)
         buySkinPopupRouter?.hide()
         enableInteractions()
+        user.select(skin)
+        if let scene = bouncyCharView.scene as? BouncyBallScene {
+            scene.naninhoName = skin.imageName
+        }
     }
     
     func dontBuySkin() {

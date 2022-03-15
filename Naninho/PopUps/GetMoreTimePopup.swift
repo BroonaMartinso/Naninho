@@ -16,7 +16,7 @@ class GetMoreTimePopup: PopUpView, PopUp {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(named: "verde")
+        backgroundColor = UIColor(named: "red")
         
         layer.cornerRadius = 25
         

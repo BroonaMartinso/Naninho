@@ -27,7 +27,6 @@ class BeginLevelPopup: PopUpView, LevelChangeListener, PopUp {
         configureAcceptButton(with: "let's gooo!")
         acceptButton.addTarget(self, action: #selector(acceptButtonTapped), for: .touchUpInside)
         declineButton.addTarget(self, action: #selector(declineButtonTapped), for: .touchUpInside)
-//        LevelHandler.shared.addListener(self)
     }
     
     required init?(coder: NSCoder) {

@@ -21,7 +21,7 @@ class GameHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupbox()
-//        setupMoneyButton()
+        setupMoneyButton()
         setupStarButton()
         setupRankingButtonContainer()
         setupranking()
@@ -37,8 +37,8 @@ class GameHeader: UIView {
         buttonsContainer.translatesAutoresizingMaskIntoConstraints = false
         addSubview(buttonsContainer)
 
-//        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.85).isActive = true
-        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.76).isActive = true
+        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.85).isActive = true
+//        buttonsContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.76).isActive = true
         buttonsContainer.heightAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.1).isActive = true
         buttonsContainer.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         buttonsContainer.topAnchor.constraint(equalTo: centerYAnchor, constant: -5).isActive = true
@@ -78,8 +78,8 @@ class GameHeader: UIView {
         rankingButtonContainer.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            rankingButtonContainer.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor),
-            rankingButtonContainer.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
+            rankingButtonContainer.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor),
+//            rankingButtonContainer.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
             rankingButtonContainer.trailingAnchor.constraint(equalTo: starButton.leadingAnchor),
             rankingButtonContainer.heightAnchor.constraint(equalTo: buttonsContainer.heightAnchor),
             rankingButtonContainer.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)
@@ -105,10 +105,9 @@ class GameHeader: UIView {
         
         rankingButton.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate(
-            [
-//                rankingButton.centerXAnchor.constraint(equalTo: rankingButtonContainer.centerXAnchor),
-                rankingButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
+        NSLayoutConstraint.activate([
+             rankingButton.centerXAnchor.constraint(equalTo: rankingButtonContainer.centerXAnchor),
+//                rankingButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor),
              rankingButton.centerYAnchor.constraint(equalTo: buttonsContainer.centerYAnchor)]
         )
         
@@ -153,14 +152,14 @@ class GameHeader: UIView {
     
     func update(coins: Int, starsObtained: Int, maxObtainableStars: Int) {
         if #available(iOS 15, *) {
-//            moneyButton.configuration?.attributedTitle = AttributedString("\(coins)", attributes: AttributeContainer([
-//                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light)
-//            ]))
+            moneyButton.configuration?.attributedTitle = AttributedString("\(coins)", attributes: AttributeContainer([
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light)
+            ]))
             starButton.configuration?.attributedTitle = AttributedString("\(starsObtained) | \(maxObtainableStars)", attributes: AttributeContainer([
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .light)
             ]))
         } else {
-//            moneyButton.setTitle("\(coins)", for: .normal)
+            moneyButton.setTitle("\(coins)", for: .normal)
             starButton.setTitle("stars \(starsObtained) | \(maxObtainableStars)", for: .normal)
         }
     }

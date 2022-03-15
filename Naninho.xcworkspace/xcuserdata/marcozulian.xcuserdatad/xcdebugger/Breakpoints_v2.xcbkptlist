@@ -247,54 +247,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1DE301D5-531E-4B7E-967C-6AC99991594C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "setupBouncyCharView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "83CF5E06-C8D9-47AA-8C39-21A4F3BEE483"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "setupBouncyCharView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F9E4415F-9670-4BC2-97DD-960B989B5FE5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "setupBouncyCharView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "719BA499-8F63-45F3-984B-32FEBBA83B88"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -336,7 +288,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
             endingLineNumber = "19"
-            landmarkName = "presentBanner(_:)"
+            landmarkName = "presentBanner(_:case:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -352,7 +304,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
             endingLineNumber = "20"
-            landmarkName = "presentBanner(_:)"
+            landmarkName = "presentBanner(_:case:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -366,9 +318,9 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
-            landmarkName = "presentBanner(_:)"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "presentBanner(_:case:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -382,9 +334,9 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "presentBanner(_:)"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "presentBanner(_:case:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -400,7 +352,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
             endingLineNumber = "20"
-            landmarkName = "insertBanner(_:)"
+            landmarkName = "insertBanner(_:case:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -448,7 +400,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "insertBanner(_:)"
+            landmarkName = "insertBanner(_:case:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -487,22 +439,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "80B3DB17-1571-4CA4-9B23-AF9E7323FA4F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/GameViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "109724B7-408B-4964-A5E1-C5CCC6AA35CF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -510,8 +446,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "presentRewardedAd(_:for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -558,8 +494,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "playVideo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -766,8 +702,8 @@
             filePath = "Naninho/Game/BouncyBallScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "animateGameEnd()"
             landmarkType = "7">
          </BreakpointContent>
@@ -782,8 +718,8 @@
             filePath = "Naninho/Game/BouncyBallScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "showEndScreen(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -798,8 +734,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "showEndVC(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -814,8 +750,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "endInterstitial(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -844,8 +780,8 @@
             filePath = "Naninho/PopUps/BeginLevelPopup.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "configureStars()"
             landmarkType = "7">
          </BreakpointContent>
@@ -940,8 +876,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "showAdsForCoins()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1036,8 +972,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "replay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1046,6 +982,22 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "E5CE635E-D399-4837-A2D8-A73E191A5BA4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "showInterstitial(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5355F269-A991-4223-9123-DC8BEF32EBC3"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1061,22 +1013,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5355F269-A991-4223-9123-DC8BEF32EBC3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "showInterstitial(for:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "9AE2B66D-DF93-4FF0-AB0B-B7E9A8D6DE1F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1084,8 +1020,8 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "showInterstitial(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1116,8 +1052,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "presentIntestitial(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1132,8 +1068,8 @@
             filePath = "Naninho/Ads/AdsRouter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "presentIntestitial(_:)"
             landmarkType = "7">
             <Locations>
@@ -1180,8 +1116,8 @@
             filePath = "Naninho/Ads/AdsRouter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "presentIntestitial(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1196,8 +1132,8 @@
             filePath = "Naninho/Ads/AdsRouter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "presentIntestitial(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1212,8 +1148,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "endInterstitial(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1244,8 +1180,8 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "adDidDismissFullScreenContent(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1260,8 +1196,8 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "replay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1276,8 +1212,8 @@
             filePath = "Naninho/Ads/BannerAndInterstitialAdsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "BannerAndInterstitialAdsInteractor"
             landmarkType = "3">
          </BreakpointContent>
@@ -1308,9 +1244,57 @@
             filePath = "Naninho/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "presentRewardedAd(_:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B099BEF5-B1A5-4BA6-A23C-696BF63AE957"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Naninho/Ads/AdsRouter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "insertBanner(_:case:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E1E89DA4-D45E-4C87-A2D1-4431D3EE6FFF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Naninho/Menus/ChangeMenuContextCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "configureLabel()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13E6BE97-242E-4313-84F6-C924E2E98722"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Naninho/Menus/ChangeMenuContextCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "configureLabel()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
